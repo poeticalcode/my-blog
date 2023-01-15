@@ -16,7 +16,7 @@ func (a articleRouter) InitArticleRouter(router *gin.RouterGroup) {
 		// 注册获取文章详情的路由
 		group.GET("/:id", clientApi.FetchArticleDetail)
 		// 注册分页获取文章的路由
-		group.GET("/list", clientApi.FetchArticleListByPaging)
+		group.POST("/list", clientApi.FetchArticleListByPaging)
 		// 注册创建文章的路由
 		group.POST("", clientApi.CreateArticle)
 	}

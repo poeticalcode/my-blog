@@ -12,7 +12,7 @@ import {ElementPlusResolver} from "unplugin-vue-components/resolvers";
 // https://vitejs.dev/config/
 export default defineConfig((config) => {
     // 编程式配置
-    const {command: command, mode: mode, ssrBuild: ssrBuild} = config;
+    const {command: command, mode: mode} = config;
 
     // 加载环境 环境中不以 VITE_ 开头的不会注入 import.meta.env
     const env = loadEnv(mode, __dirname)

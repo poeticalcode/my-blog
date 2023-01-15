@@ -2,11 +2,10 @@ package client
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/he-wen-yao/my-blog/server/db"
 	"github.com/he-wen-yao/my-blog/server/model/do"
 	"github.com/he-wen-yao/my-blog/server/model/dto"
+	"github.com/he-wen-yao/my-blog/server/model/vo"
 	"github.com/he-wen-yao/my-blog/server/service"
-	"net/http"
 	"strconv"
 	"strings"
 )
@@ -46,39 +45,17 @@ func (ArticleApi) FetchArticleDetail(c *gin.Context) {
 		dto.ResponseGen.OkWithDetailed(article, "获取成功", c)
 		return
 	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"code": 4000,
-		"msg":  "文章 ID 填写有误",
-	})
+	dto.ResponseGen.FailWithMessage("文章 ID 填写有误", c)
 }
 
 // FetchArticleListByPaging 分页获取文章列表
 func (ArticleApi) FetchArticleListByPaging(c *gin.Context) {
-	page := c.Query("page")
-	pageSize := c.Query("pageSize")
-
-	page_, err := strconv.ParseInt(page, 10, 64)
+	param := vo.PagingParam{}
+	err := c.ShouldBindJSON(&param)
 	if err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"code": 4000,
-			"msg":  "page 参数填写有误",
-		})
+		dto.ResponseGen.FailWithMessage("提交的格式有误", c)
+		return
 	}
-	pageSize_, err := strconv.ParseInt(pageSize, 10, 64)
-	if err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"code": 4000,
-			"msg":  "pageSize 参数填写有误",
-		})
-	}
-	var article do.Article
-	db := db.DB()
-	db.Find(&article).Limit(int((page_ - 1) * pageSize_)).Offset(int(pageSize_))
-	c.JSON(http.StatusOK, gin.H{
-		"code": 2000,
-		"msg":  "success",
-		"do":   article,
-	})
-	return
+	list, _ := service.AppService.ArticleService.ArticleList(&param)
+	dto.ResponseGen.OkWithData(list, c)
 }
