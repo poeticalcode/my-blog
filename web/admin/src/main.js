@@ -13,7 +13,6 @@ const app = createApp(App);
 app.use(ElementPlus)
 app.use(router)
 
-
 //全局注册 element-plus icon
 Object.keys(ElementPlusIconsVue).forEach((key) => {
     app.component(key, ElementPlusIconsVue[key]);
