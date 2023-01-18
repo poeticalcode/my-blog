@@ -30,3 +30,11 @@ func (articleService) ArticleList(param *vo.PagingParam) ([]do.Article, error) {
 	}
 	return articleList, nil
 }
+
+func (articleService) UpdateArticle(article *do.Article) (bool, error) {
+	res := db.DB().Updates(article)
+	if res.Error != nil {
+		return false, res.Error
+	}
+	return res.RowsAffected != 0, nil
+}
