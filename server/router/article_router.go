@@ -1,4 +1,4 @@
-package client
+package router
 
 import (
 	"github.com/gin-gonic/gin"
@@ -11,13 +11,13 @@ type articleRouter struct {
 // InitArticleRouter 初始化客户端文章相关路由
 func (a articleRouter) InitArticleRouter(router *gin.RouterGroup) {
 	group := router.Group("/article")
-	clientApi := api.AppApiGroup.ClientApi
+	articleApi := api.V1.ArticleApi
 	{
 		// 注册获取文章详情的路由
-		group.GET("/:id", clientApi.FetchArticleDetail)
+		group.GET("/:id", articleApi.FetchArticleDetail)
 		// 注册分页获取文章的路由
-		group.POST("/list", clientApi.FetchArticleListByPaging)
+		group.POST("/list", articleApi.FetchArticleListByPaging)
 		// 注册创建文章的路由
-		group.POST("", clientApi.CreateArticle)
+		group.POST("", articleApi.CreateArticle)
 	}
 }

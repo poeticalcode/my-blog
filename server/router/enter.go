@@ -1,9 +1,7 @@
 package router
 
-import "github.com/he-wen-yao/my-blog/server/router/client"
-
-type appRouterGroup struct {
-	ClientRouter client.RouterGroup
+type routerGroup struct {
+	articleRouter
 }
 
-var AppRouterGroup = new(appRouterGroup)
+var Router = new(routerGroup)

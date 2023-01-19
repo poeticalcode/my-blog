@@ -1,11 +1,5 @@
 package api
 
-import "github.com/he-wen-yao/my-blog/server/api/client"
+import v1_ "github.com/he-wen-yao/my-blog/server/api/v1"
 
-type appApiGroup struct {
-	// 客户端 API
-	ClientApi client.ApiGroup
-}
-
-// AppApiGroup 博客系统的 APi
-var AppApiGroup = new(appApiGroup)
+var V1 = v1_.V1

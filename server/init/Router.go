@@ -10,9 +10,9 @@ import (
 func RouterInit() *gin.Engine {
 	app := gin.Default()
 	apiGroup := app.Group("/api")
-	appRouterGroup := router.AppRouterGroup
+	appRouterGroup := router.Router
 	{
-		appRouterGroup.ClientRouter.InitArticleRouter(apiGroup)
+		appRouterGroup.InitArticleRouter(apiGroup)
 	}
 
 	app.NoRoute(func(c *gin.Context) {

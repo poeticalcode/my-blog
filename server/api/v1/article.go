@@ -1,4 +1,4 @@
-package client
+package v1
 
 import (
 	"github.com/gin-gonic/gin"
@@ -30,18 +30,41 @@ func (ArticleApi) CreateArticle(c *gin.Context) {
 		return
 	}
 
-	if res := service.AppService.ArticleService.CreateArticle(&article); !res {
+	if res := service.ArticleService.CreateArticle(&article); !res {
 		dto.ResponseGen.FailWithMessage("插入失败", c)
 		return
 	}
 	dto.ResponseGen.OkWithDetailed(article, "插入成功", c)
 }
 
+func (ArticleApi) UpdateArticle(c *gin.Context) {
+	var article do.Article
+	err := c.ShouldBindJSON(&article)
+	if err != nil {
+		dto.ResponseGen.FailWithMessage("提交的格式有误", c)
+		return
+	}
+	if len(strings.Trim(article.Title, "")) == 0 {
+		dto.ResponseGen.FailWithMessage("标题不能为空", c)
+		return
+	}
+	if len(strings.Trim(article.MdText, "")) == 0 {
+		dto.ResponseGen.FailWithMessage("内容不你能为空", c)
+		return
+	}
+
+	if res, _ := service.ArticleService.UpdateArticle(&article); !res {
+		dto.ResponseGen.FailWithMessage("更新失败", c)
+		return
+	}
+	dto.ResponseGen.OkWithDetailed(article, "更新成功", c)
+}
+
 // FetchArticleDetail 获取文章详情
 func (ArticleApi) FetchArticleDetail(c *gin.Context) {
 	id := c.Param("id")
 	if id, err := strconv.ParseInt(id, 10, 64); err == nil {
-		article := service.AppService.ArticleService.FetchArticleById(id)
+		article := service.ArticleService.FetchArticleById(id)
 		dto.ResponseGen.OkWithDetailed(article, "获取成功", c)
 		return
 	}
@@ -56,6 +79,6 @@ func (ArticleApi) FetchArticleListByPaging(c *gin.Context) {
 		dto.ResponseGen.FailWithMessage("提交的格式有误", c)
 		return
 	}
-	list, _ := service.AppService.ArticleService.ArticleList(&param)
+	list, _ := service.ArticleService.ArticleList(&param)
 	dto.ResponseGen.OkWithData(list, c)
 }
