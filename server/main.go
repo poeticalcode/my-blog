@@ -10,6 +10,7 @@ import (
 //go:generate go mod download
 
 func main() {
+
 	app := init_.RouterInit()
 	err := app.Run(":8080")
 	if err != nil {
