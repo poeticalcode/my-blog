@@ -8,6 +8,7 @@ import (
 
 // RouterInit 初始化一个 gin 的路由
 func RouterInit() *gin.Engine {
+
 	app := gin.Default()
 	apiGroup := app.Group("/api")
 	appRouterGroup := router.Router

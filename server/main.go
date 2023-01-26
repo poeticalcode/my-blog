@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"github.com/he-wen-yao/my-blog/server/config"
 	init_ "github.com/he-wen-yao/my-blog/server/init"
 )
 
@@ -10,9 +12,9 @@ import (
 //go:generate go mod download
 
 func main() {
-
+	c := config.GlobalConfig
 	app := init_.RouterInit()
-	err := app.Run(":8080")
+	err := app.Run(fmt.Sprintf(":%s", c.Port))
 	if err != nil {
 		return
 	}

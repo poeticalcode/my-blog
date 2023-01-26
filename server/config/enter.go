@@ -15,5 +15,9 @@ func readConfig() error {
 }
 
 func init() {
-
+	err := readConfig()
+	if err != nil {
+		return
+	}
+	GlobalConfig.Port = viper.GetString("server.port")
 }
