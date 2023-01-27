@@ -13,7 +13,7 @@ type mysqlConfig struct {
 
 func (db mysqlConfig) Dsn() (dsn string) {
 	//"utf8mb4"
-	fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=True&loc=Local",
+	dsn = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=True&loc=Local",
 		db.UserName, db.Password, db.Host, db.Port, db.DataBase, db.Charset)
 	return
 }
