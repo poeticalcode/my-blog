@@ -8,18 +8,18 @@ import (
 func readConfig() error {
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
-	viper.AddConfigPath(".")
+	viper.AddConfigPath("./config")
 	return viper.ReadInConfig()
 }
 
 func init() {
 	err := readConfig()
 	if err != nil {
+		panic(err)
 		return
 	}
 
 	GlobalConfig.Port = viper.GetString("server.port")
-
 	GlobalConfig.MySQL.Host = viper.GetString("mysql.host")
 	GlobalConfig.MySQL.Port = viper.GetString("mysql.port")
 	GlobalConfig.MySQL.UserName = viper.GetString("mysql.userName")
