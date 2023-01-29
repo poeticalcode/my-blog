@@ -83,3 +83,19 @@ func (ArticleApi) FetchArticleListByPaging(c *gin.Context) {
 	list, _ := service.ArticleService.ArticleList(&param)
 	dto.ResponseGen.OkWithData(list, c)
 }
+
+// DeleteArticleById 删除文章
+func (ArticleApi) DeleteArticleById(c *gin.Context) {
+	// 获取 ID
+	id := c.Param("id")
+	if id, err := strconv.ParseInt(id, 10, 64); err == nil {
+		res, _ := service.ArticleService.DeleteArticleById(id)
+		if res {
+			dto.ResponseGen.OkWithMessage("删除成功", c)
+		} else {
+			dto.ResponseGen.FailWithMessage("删除失败", c)
+		}
+		return
+	}
+	dto.ResponseGen.FailWithMessage("文章 ID 填写有误", c)
+}

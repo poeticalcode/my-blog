@@ -38,3 +38,12 @@ func (articleService) UpdateArticle(article *do.Article) (bool, error) {
 	}
 	return res.RowsAffected != 0, nil
 }
+
+func (articleService) DeleteArticleById(id int64) (bool, error) {
+	// 根据主键删除
+	res := db.DB().Delete(&do.Article{}, id)
+	if res.Error != nil {
+		return false, res.Error
+	}
+	return res.RowsAffected != 0, nil
+}

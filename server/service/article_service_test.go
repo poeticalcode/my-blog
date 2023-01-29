@@ -11,3 +11,7 @@ func TestArticleList(t *testing.T) {
 	list, _ := service.ArticleList(&vo.PagingParam{PageNum: 1, PageSize: 5})
 	fmt.Println(list)
 }
+
+func TestArticleService_DeleteArticleById(t *testing.T) {
+
+}
