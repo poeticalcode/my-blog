@@ -14,8 +14,6 @@ import (
 func main() {
 	c := config.GlobalConfig
 
-	fmt.Println(c)
-
 	app := init_.RouterInit()
 	err := app.Run(fmt.Sprintf(":%s", c.Port))
 	if err != nil {

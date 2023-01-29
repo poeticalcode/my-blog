@@ -37,6 +37,7 @@ func (ArticleApi) CreateArticle(c *gin.Context) {
 	dto.ResponseGen.OkWithDetailed(article, "插入成功", c)
 }
 
+// UpdateArticle 更新文章
 func (ArticleApi) UpdateArticle(c *gin.Context) {
 	var article do.Article
 	err := c.ShouldBindJSON(&article)
