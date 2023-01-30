@@ -8,5 +8,4 @@ const request = axios.create({
     headers: {'X-Custom-Header': 'zuiyu'}
 });
 
-
 export default request;
