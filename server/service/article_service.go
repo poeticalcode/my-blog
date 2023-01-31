@@ -15,11 +15,13 @@ func (articleService) FetchArticleById(id int64) *do.Article {
 	return article
 }
 
+// CreateArticle 创建文章
 func (articleService) CreateArticle(article *do.Article) bool {
 	res := db.DB().Create(article).RowsAffected
 	return res != 0
 }
 
+// ArticleList 分页获取文章信息
 func (articleService) ArticleList(param *vo.PagingParam) ([]do.Article, error) {
 	pageNum := param.PageNum
 	pageSize := param.PageSize
@@ -31,6 +33,7 @@ func (articleService) ArticleList(param *vo.PagingParam) ([]do.Article, error) {
 	return articleList, nil
 }
 
+// UpdateArticle 更新文章
 func (articleService) UpdateArticle(article *do.Article) (bool, error) {
 	res := db.DB().Updates(article)
 	if res.Error != nil {
@@ -39,6 +42,7 @@ func (articleService) UpdateArticle(article *do.Article) (bool, error) {
 	return res.RowsAffected != 0, nil
 }
 
+// DeleteArticleById 删除文章
 func (articleService) DeleteArticleById(id int64) (bool, error) {
 	// 根据主键删除
 	res := db.DB().Delete(&do.Article{}, id)
