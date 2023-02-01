@@ -51,3 +51,17 @@ func (articleService) DeleteArticleById(id int64) (bool, error) {
 	}
 	return res.RowsAffected != 0, nil
 }
+
+// SwitchArticleStatusById  切换文章状态
+func (articleService) SwitchArticleStatusById(id int64) (bool, error) {
+	// SwitchArticleStatusById
+	// todo
+	return false, nil
+}
+
+// StickyArticleById  置顶文章
+func (articleService) StickyArticleById(id int64) (bool, error) {
+	// 根据主键置顶文章
+	// todo
+	return false, nil
+}
