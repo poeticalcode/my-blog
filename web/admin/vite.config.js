@@ -6,6 +6,7 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import {ElementPlusResolver} from "unplugin-vue-components/resolvers";
+import {viteMockServe} from 'vite-plugin-mock'
 
 // 这里属于 node 端运行
 
@@ -21,6 +22,10 @@ export default defineConfig((config) => {
         optimizeDeps: {},
         plugins: [
             vue(),
+            viteMockServe({
+                mockPath: "./src/mock/", // 指向mock下的文件
+                localEnabled: true // 是否开启开发环境
+            }),
             AutoImport({
                 resolvers: [
                     ElementPlusResolver()

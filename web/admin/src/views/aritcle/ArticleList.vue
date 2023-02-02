@@ -12,11 +12,11 @@
 
 <script setup>
 
-
+import {articleList} from "@/api/aritcle"
 import {onMounted} from "vue";
 
 onMounted(() => {
-  
+  articleList()
 })
 
 
