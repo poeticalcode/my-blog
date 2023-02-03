@@ -1,4 +1,4 @@
-package do
+package entity
 
 type Article struct {
 	baseModel

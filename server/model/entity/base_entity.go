@@ -1,8 +1,9 @@
-package do
+package entity
 
 import (
-	"gorm.io/gorm"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 type baseModel struct {

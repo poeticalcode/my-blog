@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/he-wen-yao/my-blog/server/model/do"
 	"github.com/he-wen-yao/my-blog/server/model/dto"
+	"github.com/he-wen-yao/my-blog/server/model/entity"
 	"github.com/he-wen-yao/my-blog/server/model/vo"
 	"github.com/he-wen-yao/my-blog/server/service"
 )
@@ -16,7 +16,7 @@ type ArticleApi struct{}
 
 // CreateArticle 添加文章
 func (ArticleApi) CreateArticle(c *gin.Context) {
-	var article do.Article
+	var article entity.Article
 	err := c.ShouldBindJSON(&article)
 	if err != nil {
 		dto.ResponseGen.FailWithMessage("提交的格式有误", c)
@@ -40,7 +40,7 @@ func (ArticleApi) CreateArticle(c *gin.Context) {
 
 // UpdateArticle 更新文章
 func (ArticleApi) UpdateArticle(c *gin.Context) {
-	var article do.Article
+	var article entity.Article
 	err := c.ShouldBindJSON(&article)
 	if err != nil {
 		dto.ResponseGen.FailWithMessage("提交的格式有误", c)
