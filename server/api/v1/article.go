@@ -1,13 +1,14 @@
 package v1
 
 import (
+	"strconv"
+	"strings"
+
 	"github.com/gin-gonic/gin"
 	"github.com/he-wen-yao/my-blog/server/model/do"
 	"github.com/he-wen-yao/my-blog/server/model/dto"
 	"github.com/he-wen-yao/my-blog/server/model/vo"
 	"github.com/he-wen-yao/my-blog/server/service"
-	"strconv"
-	"strings"
 )
 
 // ArticleApi 文章相关 api 集合
@@ -74,8 +75,8 @@ func (ArticleApi) FetchArticleDetail(c *gin.Context) {
 
 // FetchArticleListByPaging 分页获取文章列表
 func (ArticleApi) FetchArticleListByPaging(c *gin.Context) {
-	param := vo.PagingParam{}
-	err := c.ShouldBindJSON(&param)
+	var param vo.PagingParam
+	err := c.ShouldBindQuery(&param)
 	if err != nil {
 		dto.ResponseGen.FailWithMessage("提交的格式有误", c)
 		return

@@ -1,6 +1,8 @@
 package service
 
 import (
+	"log"
+
 	"github.com/he-wen-yao/my-blog/server/db"
 	"github.com/he-wen-yao/my-blog/server/model/do"
 	"github.com/he-wen-yao/my-blog/server/model/vo"
@@ -23,6 +25,7 @@ func (articleService) CreateArticle(article *do.Article) bool {
 
 // ArticleList 分页获取文章信息
 func (articleService) ArticleList(param *vo.PagingParam) ([]do.Article, error) {
+	log.Printf("param = %v", param)
 	pageNum := param.PageNum
 	pageSize := param.PageSize
 	articleList := make([]do.Article, 0)

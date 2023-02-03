@@ -15,8 +15,10 @@ func (a articleRouter) InitArticleRouter(router *gin.RouterGroup) {
 	{
 		// 注册获取文章详情的路由
 		group.GET("/:id", articleApi.FetchArticleDetail)
+		// 注册删除文章的路由
+		group.DELETE("/:id", articleApi.DeleteArticleById)
 		// 注册分页获取文章的路由
-		group.POST("/list", articleApi.FetchArticleListByPaging)
+		group.GET("/list", articleApi.FetchArticleListByPaging)
 		// 注册创建文章的路由
 		group.POST("", articleApi.CreateArticle)
 	}
