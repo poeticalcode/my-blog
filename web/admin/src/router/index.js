@@ -1,24 +1,17 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
-
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-
-import Layout from '@/layout/Layout.vue';
-import Index from '@/views/Index.vue'
-
-import ArticleList from "@/views/aritcle/ArticleList.vue";
-import PostArticle from "@/views/aritcle/PostArticle.vue";
 
 
 // 路由映射表
 const routes = [
     {
         path: '/',
-        component: Layout,
+        component: () => import(/*webpackChunkName:"layout"*/ "@/layout/Layout.vue"),
         children: [
             {
                 path: '',
-                component: Index,
+                component: () => import(/*webpackChunkName:"index"*/ "@/views/Index.vue"),
                 // 任何人都可以阅读文章
                 meta: {
                     requiresAuth: false,
@@ -27,7 +20,7 @@ const routes = [
             },
             {
                 path: '/article/list',
-                component: ArticleList,
+                component: () => import(/*webpackChunkName:"article"*/ "@/views/aritcle/ArticleList.vue"),
                 // 任何人都可以阅读文章
                 meta: {
                     requiresAuth: false,
@@ -36,7 +29,7 @@ const routes = [
             },
             {
                 path: '/article/post',
-                component: PostArticle,
+                component: () => import(/*webpackChunkName:"article"*/ "@/views/aritcle/PostArticle.vue"),
                 // 任何人都可以阅读文章
                 meta: {
                     requiresAuth: false,
@@ -47,14 +40,14 @@ const routes = [
     },
     {
         path: '/post',
-        component: PostArticle,
+        component: () => import(/*webpackChunkName:"article"*/ "@/views/aritcle/PostArticle.vue"),
         // 任何人都可以阅读文章
         meta: {
             requiresAuth: false,
             title: '发表文章'
         }
     },
-    {path: '/index', component: Index},
+    {path: '/index', component: () => import(/*webpackChunkName:"index"*/ "@/views/Index.vue"),},
 ]
 
 
