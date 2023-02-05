@@ -9,9 +9,13 @@ import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 
+import Auth from "./directives/auth.js";
+
+
 const app = createApp(App);
 app.use(ElementPlus)
 app.use(router)
+app.use(Auth)
 
 //全局注册 element-plus icon
 Object.keys(ElementPlusIconsVue).forEach((key) => {

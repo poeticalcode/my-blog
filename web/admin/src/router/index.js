@@ -1,8 +1,8 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-
-
+import {findLast} from "lodash"
+import {check, isLogin} from "../util/auth.js"
 // 路由映射表
 const routes = [
     {
@@ -15,7 +15,8 @@ const routes = [
                 // 任何人都可以阅读文章
                 meta: {
                     requiresAuth: false,
-                    title: '首页'
+                    title: '首页',
+                    authority: ["admin"]
                 }
             },
             {
@@ -24,7 +25,8 @@ const routes = [
                 // 任何人都可以阅读文章
                 meta: {
                     requiresAuth: false,
-                    title: '文章列表'
+                    title: '文章列表',
+                    authority: ["admin"]
                 }
             },
             {
@@ -33,7 +35,8 @@ const routes = [
                 // 任何人都可以阅读文章
                 meta: {
                     requiresAuth: false,
-                    title: '图片列表'
+                    title: '图片列表',
+                    authority: ["admin"]
                 }
             }
         ]
@@ -44,10 +47,17 @@ const routes = [
         // 任何人都可以阅读文章
         meta: {
             requiresAuth: false,
-            title: '发表文章'
+            title: '发表文章',
+            authority: ["admin"]
         }
     },
-    {path: '/index', component: () => import(/*webpackChunkName:"index"*/ "@/views/Index.vue"),},
+    {
+        path: '/index', component: () => import(/*webpackChunkName:"index"*/ "@/views/Index.vue"), meta: {
+            requiresAuth: false,
+            title: '发表文章',
+            authority: ["admin"]
+        }
+    },
 ]
 
 
@@ -57,8 +67,20 @@ const router = createRouter({
     routes
 })
 
+
 router.beforeEach(async (to, from, next) => {
-    NProgress.start()
+    if (to.path !== from.path) { // 同页面变化就不显示加载进度条
+        NProgress.start()
+    }
+    const record = findLast(to.matched, record => record.meta.authority)
+    if (record && !check(record.meta.authority)) {
+        if (!isLogin() && to.path != "/login") {
+            next({path: "/login"})
+        } else {
+            next({path: "/403"})
+        }
+        NProgress.done()
+    }
     if (to.meta.title) {
         document.title = to.meta.title + " | 后台管理"
     }
