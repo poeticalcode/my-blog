@@ -1,6 +1,8 @@
 package service
 
 import (
+	"log"
+
 	"github.com/he-wen-yao/my-blog/server/db"
 	"github.com/he-wen-yao/my-blog/server/model/vo"
 
@@ -10,9 +12,10 @@ import (
 type articleService struct{}
 
 // FetchArticleById 通过 ID 获取文章
-func (articleService) FetchArticleById(id int64) *entity.Article {
-	var article *entity.Article
-	db.DB().First(article, "id = ?", id)
+func (articleService) FetchArticleById(id int64) entity.Article {
+	var article entity.Article
+	log.Printf("id = %d", id)
+	db.DB().First(&article, id)
 	return article
 }
 

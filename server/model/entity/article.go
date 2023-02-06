@@ -1,7 +1,7 @@
 package entity
 
 type Article struct {
-	baseModel
+	BaseModel
 	Title       string `json:"title"`       // 文章标题
 	Cover       string `json:"cover"`       // 文章封面
 	MdText      string `json:"md_text"`     // markdowm 文本

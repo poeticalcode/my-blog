@@ -16,3 +16,9 @@ func TestArticleList(t *testing.T) {
 func TestArticleService_DeleteArticleById(t *testing.T) {
 
 }
+
+func TestArticleService_FetchArticleById(t *testing.T) {
+	service := articleService{}
+	article := service.FetchArticleById(106)
+	fmt.Println(article)
+}
