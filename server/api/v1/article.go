@@ -27,7 +27,12 @@ func (ArticleApi) CreateArticle(c *gin.Context) {
 		return
 	}
 	if len(strings.Trim(article.MdText, "")) == 0 {
-		dto.ResponseGen.FailWithMessage("内容不你能为空", c)
+		dto.ResponseGen.FailWithMessage("内容不能为空", c)
+		return
+	}
+
+	if len(strings.Trim(article.Description, "")) == 0 {
+		dto.ResponseGen.FailWithMessage("简介不能为空", c)
 		return
 	}
 
@@ -80,6 +85,10 @@ func (ArticleApi) FetchArticleListByPaging(c *gin.Context) {
 	if err != nil {
 		dto.ResponseGen.FailWithMessage("提交的格式有误", c)
 		return
+	}
+	// 校验参数
+	if err := param.Check(); err != nil {
+		dto.ResponseGen.FailWithMessage(err.Error(), c)
 	}
 	list, _ := service.ArticleService.ArticleList(&param)
 	total := service.ArticleService.FetchTotalNum()

@@ -12,11 +12,14 @@ import (
 type articleService struct{}
 
 // FetchArticleById 通过 ID 获取文章
-func (articleService) FetchArticleById(id int64) entity.Article {
+func (articleService) FetchArticleById(id int64) *entity.Article {
 	var article entity.Article
 	log.Printf("id = %d", id)
-	db.DB().First(&article, id)
-	return article
+	res := db.DB().First(&article, id)
+	if res.RowsAffected == 0 {
+		return nil
+	}
+	return &article
 }
 
 // CreateArticle 创建文章
@@ -28,7 +31,10 @@ func (articleService) CreateArticle(article *entity.Article) bool {
 // ArticleList 分页获取文章信息
 func (articleService) ArticleList(param *vo.PagingParam) ([]entity.Article, error) {
 	articleList := make([]entity.Article, 0)
-	result := db.DB().Offset(param.PageNum).Limit(param.PageSize).Find(&articleList)
+
+	// 除了 md_text 字段之外都需要保留
+	result := db.DB().Omit("md_text").Offset(param.Offset()).Limit(param.Limit()).Find(&articleList)
+
 	if result.Error != nil {
 		return nil, result.Error
 	}
