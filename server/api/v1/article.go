@@ -82,7 +82,9 @@ func (ArticleApi) FetchArticleListByPaging(c *gin.Context) {
 		return
 	}
 	list, _ := service.ArticleService.ArticleList(&param)
-	dto.ResponseGen.OkWithData(list, c)
+	total := service.ArticleService.FetchTotalNum()
+	// 响应
+	dto.ResponseGen.OkWithData(dto.GenPagingResult(list, param, int(total)), c)
 }
 
 // DeleteArticleById 删除文章

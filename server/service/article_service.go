@@ -32,6 +32,12 @@ func (articleService) ArticleList(param *vo.PagingParam) ([]entity.Article, erro
 	return articleList, nil
 }
 
+// fetchTotalNum 获取文章总数
+func (articleService) FetchTotalNum() (res int64) {
+	db.DB().Model(entity.Article{}).Count(&res)
+	return res
+}
+
 // UpdateArticle 更新文章
 func (articleService) UpdateArticle(article *entity.Article) (bool, error) {
 	res := db.DB().Updates(article)
