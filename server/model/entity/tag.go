@@ -1,7 +1,7 @@
 package entity
 
 type Tag struct {
-	baseModel
+	BaseModel
 	Name string `json:"name"` // 标签名称
 }
 
