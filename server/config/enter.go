@@ -1,14 +1,21 @@
 package config
 
 import (
+	"fmt"
+	"log"
+
+	"github.com/he-wen-yao/my-blog/server/util"
 	"github.com/spf13/viper"
 )
 
 // 读取配置文件
 func readConfig() error {
+	path := util.GetProjectRootPath()
+	fmt.Printf("path =========== %s", path)
+	log.Printf("path =========== %s", path)
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
-	viper.AddConfigPath("./config")
+	viper.AddConfigPath(fmt.Sprintf("%s/config", path))
 	return viper.ReadInConfig()
 }
 

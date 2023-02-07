@@ -9,8 +9,13 @@ import (
 	"strings"
 )
 
+func GetProjectRootPath() string {
+	path := getCurrentAbPath()
+	return strings.ReplaceAll(path, "/util", "")
+}
+
 // GetCurrentAbPath 最终方案-全兼容
-func GetCurrentAbPath() string {
+func getCurrentAbPath() string {
 	dir := getCurrentAbPathByExecutable()
 	tmpDir, _ := filepath.EvalSymlinks(os.TempDir())
 	if strings.Contains(dir, tmpDir) {

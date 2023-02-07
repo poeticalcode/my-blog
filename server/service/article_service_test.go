@@ -2,8 +2,9 @@ package service_test
 
 import (
 	"fmt"
-	"github.com/he-wen-yao/my-blog/server/service"
 	"testing"
+
+	"github.com/he-wen-yao/my-blog/server/service"
 
 	"github.com/he-wen-yao/my-blog/server/model/vo"
 )
@@ -19,7 +20,7 @@ func TestArticleService_DeleteArticleById(t *testing.T) {
 }
 
 func TestArticleService_FetchArticleById(t *testing.T) {
-	service := articleService{}
+	service := service.ArticleService
 	article := service.FetchArticleById(106)
 	fmt.Println(article)
 }
