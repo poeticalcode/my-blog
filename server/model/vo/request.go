@@ -11,10 +11,10 @@ type PagingParam struct {
 // 校验参数
 func (parm *PagingParam) Check() error {
 	if parm.PageNum <= 0 {
-		return errors.New("PageNum 不能为空")
+		return errors.New("Page_num 不能为空或者为0")
 	}
 	if parm.PageSize <= 0 {
-		return errors.New("PageSize 不能为空")
+		return errors.New("Page_size 不能为空或者为0")
 	}
 	return nil
 }
