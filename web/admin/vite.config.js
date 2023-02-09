@@ -22,10 +22,6 @@ export default defineConfig((config) => {
         optimizeDeps: {},
         plugins: [
             vue(),
-            viteMockServe({
-                mockPath: "./src/mock/", // 指向mock下的文件
-                localEnabled: true // 是否开启开发环境
-            }),
             AutoImport({
                 resolvers: [
                     ElementPlusResolver()

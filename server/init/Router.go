@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/he-wen-yao/my-blog/server/middleware"
 	"github.com/he-wen-yao/my-blog/server/router"
 )
 
@@ -14,7 +14,7 @@ func RouterInit() *gin.Engine {
 
 	app := gin.Default()
 	// 解决跨域问题
-	app.Use(middleware.Cors())
+	app.Use(cors.Default())
 	// 定义路由日志的格式
 	gin.DebugPrintRouteFunc = func(httpMethod, absolutePath, handlerName string, nuHandlers int) {
 		log.Printf("my-blog-server %v %v %v %v\n", httpMethod, absolutePath, handlerName, nuHandlers)

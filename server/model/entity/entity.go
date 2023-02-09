@@ -18,6 +18,8 @@ type BaseModel struct {
 type Article struct {
 	BaseModel
 	Title       string `json:"title"`       // 文章标题
+	Status      uint16 `json:"status"`      // 文章状态
+	ViewNum     uint64 `json:"view_num"`    // 
 	Cover       string `json:"cover"`       // 文章封面
 	MdText      string `json:"md_text"`     // markdowm 文本
 	Description string `json:"description"` // 文章描述

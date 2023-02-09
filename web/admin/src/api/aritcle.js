@@ -4,9 +4,9 @@ const articleList = () => {
     return request({
         url: '/article/list',
         method: 'get',
-        data: {
+        params: {
             "page_num": 1,
-            "page_size": 100
+            "page_size": 1
         }
     })
 }
