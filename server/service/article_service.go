@@ -31,17 +31,15 @@ func (articleService) CreateArticle(article *entity.Article) bool {
 // ArticleList 分页获取文章信息
 func (articleService) ArticleList(param *vo.PagingParam) ([]entity.Article, error) {
 	articleList := make([]entity.Article, 0)
-
 	// 除了 md_text 字段之外都需要保留
-	result := db.DB().Omit("md_text").Offset(param.Offset()).Limit(param.Limit()).Find(&articleList)
-
+	result := db.DB().Omit("md_text").Scopes(db.Paginate(param)).Find(&articleList)
 	if result.Error != nil {
 		return nil, result.Error
 	}
 	return articleList, nil
 }
 
-// fetchTotalNum 获取文章总数
+// FetchTotalNum  获取文章总数
 func (articleService) FetchTotalNum() (res int64) {
 	db.DB().Model(entity.Article{}).Count(&res)
 	return res

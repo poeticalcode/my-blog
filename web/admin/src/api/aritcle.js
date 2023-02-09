@@ -1,13 +1,10 @@
 import request from "@/axios";
 
-const articleList = () => {
+const articleList = (pagingParam) => {
     return request({
         url: '/article/list',
         method: 'get',
-        params: {
-            "page_num": 1,
-            "page_size": 1
-        }
+        params: pagingParam
     })
 }
 
