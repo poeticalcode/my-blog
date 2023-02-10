@@ -11,19 +11,23 @@ const routes = [
         children: [
             {
                 path: '/',
-                component: () => import(/*webpackChunkName:"article"*/ "@/views/home/Index.vue"),
+                component: () => import(/*webpackChunkName:"home"*/ "@/views/home/Index.vue"),
                 // 任何人都可以阅读文章
                 meta: {
-                    requiresAuth: false,
                     title: '首页',
-                    authority: ["admin"]
+                }
+            },
+            {
+                path: '/article',
+                component: () => import(/*webpackChunkName:"article"*/ "@/views/article/Index.vue"),
+                // 任何人都可以阅读文章
+                meta: {
+                    title: '文章详情',
                 }
             }
         ]
     },
-    
 ]
-
 
 // 创建一个路由
 const router = createRouter({
@@ -33,18 +37,6 @@ const router = createRouter({
 
 
 router.beforeEach(async (to, from, next) => {
-    if (to.path !== from.path) { // 同页面变化就不显示加载进度条
-        NProgress.start()
-    }
-    const record = findLast(to.matched, record => record.meta.authority)
-    if (record && !check(record.meta.authority)) {
-        if (!isLogin() && to.path != "/login") {
-            next({path: "/login"})
-        } else {
-            next({path: "/403"})
-        }
-        NProgress.done()
-    }
     if (to.meta.title) {
         document.title = to.meta.title
     }

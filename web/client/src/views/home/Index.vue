@@ -4,7 +4,7 @@
       <!-- 下拉刷新 -->
       <div v-infinite-scroll="initTableData">
         <!-- 渲染文章 -->
-        <el-card :body-style="{ padding: '0px' }" v-for="item in articleList" :key="item.id">
+        <el-card :body-style="{ padding: '0px' }" v-for="item in articleList" :key="item.id" @click="toArticleDetail(item.id)">
           <div class="card-inner">
             <!-- 封面 -->
             <el-image style=" height: 240px" :src="item.cover" lazy />
@@ -55,6 +55,12 @@ const initTableData = async () => {
     return
   }
 };
+
+
+// 去文章详情页面
+const toArticleDetail = (id)=>{
+  window.open("/#/article?id="+id)
+}
 
 </script>
 
