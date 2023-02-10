@@ -10,7 +10,9 @@
       </el-header>
 
       <el-main>
-        <router-view></router-view>
+        <el-config-provider :locale="locale">
+          <router-view></router-view>
+        </el-config-provider>
       </el-main>
 
     </el-container>
@@ -20,7 +22,11 @@
 <script setup>
 import Aside from "./components/Aside.vue";
 import Header from "./components/Header.vue";
-import {provide, reactive, toRefs} from "vue";
+
+import {provide, reactive,} from "vue";
+
+import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+let  locale=zhCn
 
 const layoutConfig = reactive({
   isCollapse: true

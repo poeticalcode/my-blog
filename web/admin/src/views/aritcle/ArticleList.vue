@@ -1,4 +1,6 @@
 <template>
+
+  <!-- 面包屑 -->
   <el-breadcrumb separator="/">
     <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
     <el-breadcrumb-item>
@@ -7,21 +9,34 @@
     <el-breadcrumb-item>博文列表</el-breadcrumb-item>
   </el-breadcrumb>
 
+
+  <!-- 卡片 -->
   <el-card shadow="never">
-    <el-table :data="tableData.list" border style="width: 100%" height="600">
+    <!-- 检索表单 -->
+    <el-form :inline="true" :model="searchForm">
+      <el-form-item label="标题">
+        <el-input v-model="searchForm.title" placeholder="请输入需要检索的标题" />
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit">检索</el-button>
+      </el-form-item>
+    </el-form>
+
+    <el-divider />
+
+    <!-- 数据表格 -->
+    <el-table v-loading="tableDataLoading" :data="tableData.list" border style="width: 100%" height="600">
       <el-table-column type="index" label="#" width="50" align="center" />
       <el-table-column
         prop="title"
         label="标题"
         width="180"
-        align="center"
         :resizable="false"
       />
       <el-table-column
         prop="cover"
         label="封面"
         width="130"
-        align="center"
         :resizable="false"
       >
         <template #default="scope">
@@ -54,12 +69,11 @@
       <el-table-column
         prop="description"
         label="简介"
-        align="center"
-        width="300"
+        min-width="300"
         :resizable="false"
       >
         <template #default="scope">
-          <el-tooltip effect="light" placement="right">
+          <el-tooltip effect="light" placement="top-end">
             <template #content>
               <div style="width: 250px">
                 {{ scope.row.description }}
@@ -82,14 +96,12 @@
       <el-table-column
         prop="view_num"
         label="阅读次数"
-        align="center"
         width="90"
         :resizable="false"
       />
       <el-table-column
         prop="updated_at"
         label="状态"
-        align="center"
         width="85"
         :resizable="false"
       >
@@ -101,14 +113,12 @@
       <el-table-column
         prop="updated_at"
         label="更新时间"
-        align="center"
         width="160"
         :resizable="false"
       />
       <el-table-column
         prop="created_at"
         label="创建时间"
-        align="center"
         width="160"
         :resizable="false"
       />
@@ -116,8 +126,7 @@
       <el-table-column
         label="操作"
         fixed="right"
-        width="200"
-        align="center"
+        width="300"
         :resizable="false"
       >
         <template #default="scope">
@@ -143,34 +152,77 @@
             type="wanring"
             v-if="scope.row.status == 1"
             @click="handleCancelPublic(scope.row.id)"
-            >取消发布</el-button
+            >取消发布
+            </el-button
+          >
+
+          <el-button
+            size="small"
+            type="primary"
+            @click="handleCancelPublic(scope.row.id)"
+            >预览</el-button
           >
         </template>
       </el-table-column>
     </el-table>
+
+    <!-- 分页组件 -->
+    <el-pagination
+      style="margin: 18px 0;float: right;"
+      v-model:current-page="searchForm.page_num"
+      v-model:page-size="searchForm.page_size"
+      :small="false"
+      :hide-on-single-page="true"
+      :background="true"
+      :page-sizes="[10,20,50]"
+      layout="total,sizes, prev, pager, next, jumper"
+      :total="tableData.total"
+    />
+
   </el-card>
 </template>
 
 <script setup>
 import { articleList } from "@/api/aritcle";
-import { ref, reactive } from "vue";
+import { ref, reactive, watch } from "vue";
 
-const tableData = ref([]);
+// 表格数据
+const tableData = ref({});
 
-const pagingParam = reactive({
+// 表格数据加载状态
+const tableDataLoading = ref(false)
+
+// 检索表单
+const searchForm = reactive({
+  title: "",
   page_num: 1,
   page_size: 10,
 });
 
+// 监听页面参数
+watch(searchForm, (newVal, oldVal) => {
+   initTableData()
+})
+
 // 初始化表格数据
 const initTableData = async () => {
-  const res = await articleList(pagingParam);
+  tableDataLoading.value = true
+  const res = await articleList(searchForm);
   if (res.code === 2000) {
     tableData.value = res["data"];
+    tableDataLoading.value = false;
+    return 
   }
+  ElMessage({
+    message: '加载失败：' + res.msg,
+    type: 'error',
+  })
+  tableDataLoading.value = false;
 };
+
 // 初始化表格数据
 initTableData();
+
 // 编辑
 const handleEdit = (id) => {
   console.log(id);
@@ -185,6 +237,12 @@ const handleDelete = (id) => {
 const handlePublic = (id) => {};
 // 取消发布
 const handleCancelPublic = (id) => {};
+
+// 提交检索请求
+const onSubmit = ()=>{
+  initTableData()
+}
+
 </script>
 
 <style scoped>

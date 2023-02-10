@@ -16,13 +16,13 @@ func (tagService) FetchTagList(param *vo.PagingParam) {
 
 // AddTag 添加标签
 func (tagService) AddTag(tag *entity.Tag) bool {
-	return db.DB().Create(tag).RowsAffected != 0
+	return db.DB.Create(tag).RowsAffected != 0
 }
 
 // DeleteTagById 删除标签
 func (tagService) DeleteTagById(id int64) (bool, error) {
 	// 根据主键删除
-	res := db.DB().Delete(&entity.Article{}, id)
+	res := db.DB.Delete(&entity.Article{}, id)
 	if res.Error != nil {
 		return false, res.Error
 	}

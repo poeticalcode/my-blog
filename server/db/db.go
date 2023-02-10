@@ -7,13 +7,20 @@ import (
 	"gorm.io/gorm"
 )
 
-func DB() *gorm.DB {
+var DB *gorm.DB
+
+func InitDB() *gorm.DB {
 	dsn := config.GlobalConfig.MySQL.Dsn()
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	db.Callback()
+	db_, _ := db.DB()
 	if err != nil {
+		db_.Close()
 		panic(err)
 	}
+	// 设置连接池，空闲连接
+	db_.SetMaxIdleConns(50)
+	// 打开链接
+	db_.SetMaxOpenConns(100)
 	return db
 }
 

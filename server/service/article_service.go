@@ -15,7 +15,7 @@ type articleService struct{}
 func (articleService) FetchArticleById(id int64) *entity.Article {
 	var article entity.Article
 	log.Printf("id = %d", id)
-	res := db.DB().First(&article, id)
+	res := db.DB.First(&article, id)
 	if res.RowsAffected == 0 {
 		return nil
 	}
@@ -24,7 +24,7 @@ func (articleService) FetchArticleById(id int64) *entity.Article {
 
 // CreateArticle 创建文章
 func (articleService) CreateArticle(article *entity.Article) bool {
-	res := db.DB().Create(article).RowsAffected
+	res := db.DB.Create(article).RowsAffected
 	return res != 0
 }
 
@@ -32,7 +32,7 @@ func (articleService) CreateArticle(article *entity.Article) bool {
 func (articleService) ArticleList(param *vo.PagingParam) ([]entity.Article, error) {
 	articleList := make([]entity.Article, 0)
 	// 除了 md_text 字段之外都需要保留
-	result := db.DB().Omit("md_text").Scopes(db.Paginate(param)).Find(&articleList)
+	result := db.DB.Omit("md_text").Scopes(db.Paginate(param)).Find(&articleList)
 	if result.Error != nil {
 		return nil, result.Error
 	}
@@ -41,13 +41,13 @@ func (articleService) ArticleList(param *vo.PagingParam) ([]entity.Article, erro
 
 // FetchTotalNum  获取文章总数
 func (articleService) FetchTotalNum() (res int64) {
-	db.DB().Model(entity.Article{}).Count(&res)
+	db.DB.Model(entity.Article{}).Count(&res)
 	return res
 }
 
 // UpdateArticle 更新文章
 func (articleService) UpdateArticle(article *entity.Article) (bool, error) {
-	res := db.DB().Updates(article)
+	res := db.DB.Updates(article)
 	if res.Error != nil {
 		return false, res.Error
 	}
@@ -57,7 +57,7 @@ func (articleService) UpdateArticle(article *entity.Article) (bool, error) {
 // DeleteArticleById 删除文章
 func (articleService) DeleteArticleById(id int64) (bool, error) {
 	// 根据主键删除
-	res := db.DB().Delete(&entity.Article{}, id)
+	res := db.DB.Delete(&entity.Article{}, id)
 	if res.Error != nil {
 		return false, res.Error
 	}

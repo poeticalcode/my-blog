@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/he-wen-yao/my-blog/server/config"
+	"github.com/he-wen-yao/my-blog/server/db"
 	init_ "github.com/he-wen-yao/my-blog/server/init"
 )
 
@@ -13,7 +15,7 @@ import (
 
 func main() {
 	c := config.GlobalConfig
-
+	db.DB = db.InitDB()
 	app := init_.RouterInit()
 	err := app.Run(fmt.Sprintf(":%s", c.Port))
 	if err != nil {
