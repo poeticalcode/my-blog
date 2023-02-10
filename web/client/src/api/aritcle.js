@@ -1,6 +1,6 @@
 import request from "@/axios";
 
-const articleList = (pagingParam) => {
+const fetchArticleList = (pagingParam) => {
     return request({
         url: '/article/list',
         method: 'get',
@@ -9,5 +9,5 @@ const articleList = (pagingParam) => {
 }
 
 
-export {articleList}
+export {fetchArticleList}
 

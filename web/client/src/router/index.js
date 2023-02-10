@@ -7,14 +7,21 @@ import {check, isLogin} from "../util/auth.js"
 const routes = [
     {
         path: '/',
-        component: () => import(/*webpackChunkName:"article"*/ "@/views/home"),
-        // 任何人都可以阅读文章
-        meta: {
-            requiresAuth: false,
-            title: '发表文章',
-            authority: ["admin"]
-        }
-    }
+        component: () => import(/*webpackChunkName:"layout"*/ "@/layout/Layout.vue"),
+        children: [
+            {
+                path: '/',
+                component: () => import(/*webpackChunkName:"article"*/ "@/views/home/Index.vue"),
+                // 任何人都可以阅读文章
+                meta: {
+                    requiresAuth: false,
+                    title: '首页',
+                    authority: ["admin"]
+                }
+            }
+        ]
+    },
+    
 ]
 
 
@@ -39,7 +46,7 @@ router.beforeEach(async (to, from, next) => {
         NProgress.done()
     }
     if (to.meta.title) {
-        document.title = to.meta.title + " | 后台管理"
+        document.title = to.meta.title
     }
     next()
 })

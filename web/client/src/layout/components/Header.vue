@@ -1,50 +1,31 @@
 <template>
-  <div class="header">
-    <el-icon style="cursor: pointer;font-size: 24px" @click="isExpand = false" v-show="isExpand">
-      <Expand/>
-    </el-icon>
-    <el-icon style="cursor: pointer;font-size: 24px" @click="isExpand = true" v-show="!isExpand">
-      <Fold/>
-    </el-icon>
-    <div>
-      <el-dropdown>
-        <el-icon style="margin-right: 8px; margin-top: 1px">
-          <setting/>
-        </el-icon>
-        <template #dropdown>
-          <el-dropdown-menu>
-            <el-dropdown-item>View</el-dropdown-item>
-            <el-dropdown-item>Add</el-dropdown-item>
-            <el-dropdown-item>Delete</el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-      <span>Tom</span>
-    </div>
-  </div>
+  <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false"
+    @select="handleSelect">
+    <el-menu-item index="0">He'Blog</el-menu-item>
+    <div class="flex-grow" />
+    <el-menu-item index="1">首页</el-menu-item>
+    <el-menu-item index="2">归档</el-menu-item>
+    <el-menu-item index="3">标签</el-menu-item>
+    <el-menu-item index="4">关于我</el-menu-item>
+  </el-menu>
 </template>
 
 <script setup>
 
-import {inject, ref, watch} from "vue";
+import { ref } from 'vue'
 
-const layoutConfig = inject("layoutConfig")
-
-let isExpand = ref(false)
-
-watch(isExpand, (newVal) => {
-  layoutConfig.isCollapse = newVal;
-}, {
-  immediate: true
-})
-
+const activeIndex = ref('1')
+const handleSelect = (key, keyPath) => {
+  console.log(key, keyPath)
+}
 </script>
 
 <style scoped>
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex: 1;
+.el-menu-demo{
+  width: 100%;
+  padding: 0 100px;
+}
+.flex-grow {
+  flex-grow: 1;
 }
 </style>
