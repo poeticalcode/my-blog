@@ -2,28 +2,42 @@
 
 
   <el-row :gutter="10">
-
-    <el-col :xs="8" :sm="6" :md="4" :lg="14" :xl="12" :offset="1">
+    <el-col :xs="8" :sm="6" :md="4" :lg="16" :xl="12" :offset="1">
       <!-- 下拉刷新 -->
       <!-- <div v-infinite-scroll="initTableData"> -->
-        <!-- 渲染文章 -->
-        <el-card style="margin: 16px 0;" :body-style="{ padding: '0px' }" v-for="item in articleList" :key="item.id"
-          @click="toArticleDetail(item.id)">
-          <div class="card-inner">
-            <!-- 封面 -->
-            <el-image style="width: 360px; " :src="item.cover" lazy fit="fill" />
-            <!-- 文章信息 -->
-            <div style="padding: 14px;flex: 1;height: 220px;">
+      <!-- 渲染文章 -->
+      <el-card :body-style="{ padding: '0px' }" v-for="item in articleList" :key="item.id"
+        @click="toArticleDetail(item.id)">
+        <div class="card-inner">
+          <!-- 封面 -->
+          <el-image style="width: 360px; " :src="item.cover" lazy fit="fill" />
+          <!-- 文章信息 -->
+          <div class="article-text-info">
+            <div class="description">
               <p> {{ item.description }}</p>
             </div>
+            <div class="footer">
+              <span>发布时间：{{ item.created_at }}</span>
+              <span>阅读数量：{{ item.view_num }}</span>
+            </div>
           </div>
-        </el-card>
+        </div>
+      </el-card>
       <!-- </div> -->
     </el-col>
-
-    <!--    <el-col :xs="8" :sm="6" :md="4" :lg="6" :xl="6">
-      <div class="grid-content ep-bg-purple-light" />
-    </el-col> -->
+    <!-- 左侧功能列表 -->
+    <el-col :xs="8" :sm="6" :md="4" :lg="6" :xl="6">
+      <el-calendar>
+        <template #header="{ date }">
+          <div></div>
+        </template>
+        <template #date-cell="{ data }">
+          <div style="text-align: center;" :title="data.day">
+            <span>{{ data.day.split('-')[2] }}</span>
+          </div>
+        </template>
+      </el-calendar>
+    </el-col>
   </el-row>
 
 </template>
@@ -63,12 +77,31 @@ initTableData()
 
 // 去文章详情页面
 const toArticleDetail = (id) => {
-  window.open("/#/article?id=" + id)
+  window.open("/article?id=" + id)
 }
+
+
 
 </script>
 
-<style scoped>
+<style>
+.el-calendar {
+  --el-calendar-border: var(--el-table-border, 1px solid var(--el-border-color-lighter));
+  --el-calendar-header-border-bottom: var(--el-calendar-border);
+  --el-calendar-selected-bg-color: var(--el-color-primary-light-9);
+  --el-calendar-cell-width: 45px;
+  background-color: var(--el-fill-color-blank);
+}
+
+.el-calendar .el-calendar__body {
+  border: 1px solid #8590a6;
+  border-radius: 5px;
+}
+
+.el-calendar .el-calendar__header{
+  display: none;
+}
+
 .infinite-list {
   height: 300px;
   padding: 0;
@@ -84,11 +117,35 @@ const toArticleDetail = (id) => {
 
 .el-card {
   cursor: pointer;
+  margin: 0px 0px 16px;
 }
 
+.article-text-info {
+  padding: 14px;
+  flex: 1;
+  height: 220px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.article-text-info .footer {
+  display: flex;
+  gap: 8px;
+  color: #8590a6;
+}
 
 .main-inner {
   display: flex;
   justify-content: center;
+}
+
+.el-card .description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
 }
 </style>
