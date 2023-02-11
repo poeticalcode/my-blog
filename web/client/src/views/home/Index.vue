@@ -27,16 +27,35 @@
     </el-col>
     <!-- 左侧功能列表 -->
     <el-col :xs="8" :sm="6" :md="4" :lg="6" :xl="6">
-      <el-calendar>
-        <template #header="{ date }">
-          <div></div>
-        </template>
-        <template #date-cell="{ data }">
-          <div style="text-align: center;" :title="data.day">
-            <span>{{ data.day.split('-')[2] }}</span>
-          </div>
-        </template>
-      </el-calendar>
+      <el-row>
+        <el-col>
+          <el-calendar>
+            <template #header="{ date }">
+              <div></div>
+            </template>
+            <template #date-cell="{ data }">
+              <div style="text-align: center;" :title="data.day">
+                <span>{{ data.day.split('-')[2] }}</span>
+              </div>
+            </template>
+          </el-calendar>
+        </el-col>
+      </el-row>
+
+      <el-row>
+        <el-col>
+          <el-calendar>
+            <template #header="{ date }">
+              <div></div>
+            </template>
+            <template #date-cell="{ data }">
+              <div style="text-align: center;" :title="data.day">
+                <span>{{ data.day.split('-')[2] }}</span>
+              </div>
+            </template>
+          </el-calendar>
+        </el-col>
+      </el-row>
     </el-col>
   </el-row>
 
@@ -94,11 +113,11 @@ const toArticleDetail = (id) => {
 }
 
 .el-calendar .el-calendar__body {
-  border: 1px solid #8590a6;
+  border: 1px solid #ebeef5;
   border-radius: 5px;
 }
 
-.el-calendar .el-calendar__header{
+.el-calendar .el-calendar__header {
   display: none;
 }
 
