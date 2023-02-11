@@ -1,8 +1,8 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import {findLast} from "lodash"
-import {check, isLogin} from "../util/auth.js"
+import { findLast } from "lodash"
+import { check, isLogin } from "../util/auth.js"
 // 路由映射表
 const routes = [
     {
@@ -27,6 +27,14 @@ const routes = [
             }
         ]
     },
+    {
+        path: '/:pathMatch(.*)',
+        component: () => import(/*webpackChunkName:"home"*/ "@/views/404/Index.vue"),
+        // 404 页面
+        meta: {
+            title: '404',
+        }
+    }
 ]
 
 // 创建一个路由
@@ -34,7 +42,6 @@ const router = createRouter({
     history: createWebHistory(),
     routes
 })
-
 
 router.beforeEach(async (to, from, next) => {
     if (to.meta.title) {
