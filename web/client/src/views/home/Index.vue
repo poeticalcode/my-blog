@@ -1,59 +1,48 @@
 <template>
-
-
   <el-row :gutter="10">
-    <el-col :xs="8" :sm="6" :md="4" :lg="16" :xl="12" :offset="1">
+    <el-col :md="24" :lg="18" :xl="16">
       <!-- 下拉刷新 -->
       <!-- <div v-infinite-scroll="initTableData"> -->
       <!-- 渲染文章 -->
       <el-card :body-style="{ padding: '0px' }" v-for="item in articleList" :key="item.id"
         @click="toArticleDetail(item.id)">
-        <div class="card-inner">
-          <!-- 封面 -->
-          <el-image style="width: 360px; " :src="item.cover" lazy fit="fill" />
-          <!-- 文章信息 -->
-          <div class="article-text-info">
-            <div class="description">
-              <p> {{ item.description }}</p>
+        <el-row class="card-inner">
+          <el-col :md="10" :lg="10" :xl="10">
+            <!-- 封面 -->
+            <el-image style="width: 360px;height: 220px;" :src="item.cover" lazy fit="fill" />
+          </el-col>
+          <el-col :md="14" :lg="14" :xl="14">
+            <!-- 文章信息 -->
+            <div class="article-text-info">
+              <div class="description">
+                <p> {{ item.description }}</p>
+              </div>
+              <div class="footer">
+                <span>发布时间：{{ item.created_at }}</span>
+                <span>阅读数量：{{ item.view_num }}</span>
+              </div>
             </div>
-            <div class="footer">
-              <span>发布时间：{{ item.created_at }}</span>
-              <span>阅读数量：{{ item.view_num }}</span>
-            </div>
-          </div>
-        </div>
+          </el-col>
+        </el-row>
       </el-card>
       <!-- </div> -->
     </el-col>
     <!-- 左侧功能列表 -->
-    <el-col :xs="8" :sm="6" :md="4" :lg="6" :xl="6">
+    <el-col class="hidden-md-and-down" :lg="6" :xl="8">
       <el-row>
         <el-col>
-          <el-calendar>
-            <template #header="{ date }">
-              <div></div>
-            </template>
-            <template #date-cell="{ data }">
-              <div style="text-align: center;" :title="data.day">
-                <span>{{ data.day.split('-')[2] }}</span>
-              </div>
-            </template>
-          </el-calendar>
-        </el-col>
-      </el-row>
-
-      <el-row>
-        <el-col>
-          <el-calendar>
-            <template #header="{ date }">
-              <div></div>
-            </template>
-            <template #date-cell="{ data }">
-              <div style="text-align: center;" :title="data.day">
-                <span>{{ data.day.split('-')[2] }}</span>
-              </div>
-            </template>
-          </el-calendar>
+          <el-card>
+            <el-calendar>
+              <template #header="{ date }">
+                <div></div>
+              </template>
+              <template #date-cell="{ data }">
+                <div style="text-align: center;" :title="data.day">
+                  <span>{{ data.day.split('-')[2] }}</span>
+                </div>
+              </template>
+            </el-calendar>
+          </el-card>
         </el-col>
       </el-row>
     </el-col>
@@ -115,6 +104,7 @@ const toArticleDetail = (id) => {
 .el-calendar .el-calendar__body {
   border: 1px solid #ebeef5;
   border-radius: 5px;
+  padding: unset;
 }
 
 .el-calendar .el-calendar__header {

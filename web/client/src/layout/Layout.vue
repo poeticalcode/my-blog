@@ -6,11 +6,13 @@
     </el-header>
 
     <el-main>
-      <el-config-provider :locale="locale">
-        <router-view></router-view>
-      </el-config-provider>
+      <div class="main-inner">
+        <el-config-provider :locale="locale">
+          <router-view></router-view>
+        </el-config-provider>
+      </div>
     </el-main>
-    
+
   </el-container>
 </template>
 
@@ -32,5 +34,12 @@ provide("layoutConfig", layoutConfig)
 <style scoped>
 .el-header {
   padding: unset;
+}
+
+.el-main{
+  overflow: unset;
+}
+.main-inner{
+  padding: 0 96px;
 }
 </style>
