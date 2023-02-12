@@ -39,7 +39,18 @@ provide("layoutConfig", layoutConfig)
 /* .el-main{
   overflow: unset;
 } */
-.main-inner{
+.main-inner {
   padding: 0 96px;
 }
+/* 
+.el-header {
+  position: fixed;
+  width: 100%;
+}
+
+.el-main {
+  position: relative;
+  top: 75px;
+  z-index: -1;
+} */
 </style>
