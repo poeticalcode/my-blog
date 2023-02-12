@@ -36,9 +36,9 @@ provide("layoutConfig", layoutConfig)
   padding: unset;
 }
 
-.el-main{
+/* .el-main{
   overflow: unset;
-}
+} */
 .main-inner{
   padding: 0 96px;
 }
