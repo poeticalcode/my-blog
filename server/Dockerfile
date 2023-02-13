@@ -1,7 +1,7 @@
 FROM golang:1.19.3  
 
 # 配置环境变量
-ENV GOPROXY https://goproxy.cn,direct \
+ENV GOPROXY=https://goproxy.cn,direct \
     GO111MODULE=on \
     CGO_ENABLED=0 \
     GOOS=linux \
@@ -19,11 +19,7 @@ RUN go mod download
 COPY . .
 # 将我们的代码编译成二进制可执行文件 app
 RUN go build -o main ./main.go
-# 移动到用于存放生成的二进制文件的 /dist 目录
-WORKDIR /dist
-# 将二进制文件从 /build 目录复制到这里
-RUN cp /build/main .
 
 EXPOSE 9090
 
-CMD [ "/dist/main" ]
+CMD [ "/build/main" ]
