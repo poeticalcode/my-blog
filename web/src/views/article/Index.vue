@@ -60,8 +60,4 @@ initTableData()
   border-radius: 5px;
 }
 
-.editormd-preview-container,
-.editormd-html-preview {
-  padding: 0;
-}
 </style>
