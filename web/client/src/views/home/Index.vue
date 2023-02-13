@@ -29,9 +29,8 @@
     </el-col>
     <!-- 左侧功能列表 -->
     <el-col class="hidden-md-and-down" :lg="6" :xl="6">
-      <el-row>
-        <el-col>
-          <el-card>
+      <el-space direction="vertical">
+        <el-card>
             <el-calendar>
               <template #header="{ data }">
                 <div>{{ data }}</div>
@@ -43,8 +42,7 @@
               </template>
             </el-calendar>
           </el-card>
-        </el-col>
-      </el-row>
+      </el-space>
     </el-col>
   </el-row>
 

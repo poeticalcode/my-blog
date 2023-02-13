@@ -1,7 +1,7 @@
 <template>
   <el-row style="gap: 24px;">
     <!-- 内容区 -->
-    <el-col :md="24" :lg="18" :xl="17">
+    <el-col :xs="24" :xm="24" :md="24" :lg="18" :xl="17">
       <el-card v-if="articleDetail" style=" padding: 18px;">
         <template #header>
           <h2>{{ articleDetail.title }}</h2>
@@ -15,8 +15,9 @@
         </div>
       </el-card>
     </el-col>
+    
     <!-- 左侧功能区 -->
-    <el-col :md="24" :lg="5" :xl="6">
+    <el-col class="hidden-md-and-down"  :lg="5" :xl="6">
       <el-card v-if="articleDetail" :body-style="{ padding: '0px' }">
         <template #header>
           <div class="card-header">

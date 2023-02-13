@@ -73,3 +73,8 @@ body {
 }
 
 /* 滚动条优化 end */
+
+
+#app{
+  user-select: none;
+}

@@ -63,6 +63,7 @@ const toHtml = () => {
 <style scoped>
 .editor-md {
   box-sizing: border-box;
+  user-select:text;
 }
 
 </style>

@@ -24,6 +24,30 @@ const routes = [
                 meta: {
                     title: '文章详情',
                 }
+            },
+            {
+                path: '/about',
+                component: () => import(/*webpackChunkName:"about"*/ "@/views/about/Index.vue"),
+                // 任何人都可以阅读文章
+                meta: {
+                    title: '关于我',
+                }
+            } ,
+            {
+                path: '/archive',
+                component: () => import(/*webpackChunkName:"archive"*/ "@/views/archive/Index.vue"),
+                // 任何人都可以阅读文章
+                meta: {
+                    title: '归档',
+                }
+            },
+            {
+                path: '/tags',
+                component: () => import(/*webpackChunkName:"tags"*/ "@/views/tags/Index.vue"),
+                // 任何人都可以阅读文章
+                meta: {
+                    title: '标签',
+                }
             }
         ]
     },
