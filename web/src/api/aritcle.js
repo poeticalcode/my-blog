@@ -1,4 +1,4 @@
-import request from "@/uitl/request";
+import request from "@/util/request.js";
 
 const fetchArticleList = (pagingParam) => {
     return request({

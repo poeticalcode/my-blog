@@ -20,12 +20,8 @@ request.interceptors.request.use((req) => {
 
 
 // 添加响应拦截器
-request.interceptors.response.use((response) => {
-  const { code, data, msg } = res.data;
-  if (code === 200) {
-    return data
-  }
-  ElMessage.error(msg)
+request.interceptors.response.use((res) => {
+  return res.data
 }, (error) => {
   return Promise.reject(error)
 })
