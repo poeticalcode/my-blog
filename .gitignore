@@ -1,7 +1,5 @@
 /.idea/
 /server/.idea/
-/web/admin/.idea/
-/web/admin/node_modules/
-/web/client/.idea/
-/web/client/node_modules/
-/web/client/dist/
+/web/.idea/
+/web/node_modules/
+/web/dist/
