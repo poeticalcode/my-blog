@@ -93,7 +93,7 @@
     <!-- 分页组件 -->
     <el-pagination style="margin: 18px 0;float: right;" v-model:current-page="searchForm.page_num"
       v-model:page-size="searchForm.page_size" :small="false" :hide-on-single-page="true" :background="true"
-      :page-sizes="[10, 20, 50]" layout="total,sizes, prev, pager, next, jumper" :total="tableData.total" />
+      :page-sizes="[10, 20, 50]" layout="total, sizes, prev, pager, next, jumper" :total="tableData.total" />
 
   </el-card>
 </template>

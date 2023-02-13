@@ -4,7 +4,7 @@
       <!-- 下拉刷新 -->
       <!-- <div v-infinite-scroll="initTableData"> -->
       <!-- 渲染文章 -->
-      <el-card :body-style="{ padding: '0px' }" v-for="item in articleList" :key="item.id"
+      <el-card :body-style="{ padding: '0px' }" v-for="item in articleData.list" :key="item.id"
         @click="toArticleDetail(item.id)">
         <el-row class="card-inner">
           <el-col :md="10" :lg="10" :xl="10">
@@ -14,8 +14,13 @@
           <el-col :md="14" :lg="14" :xl="14">
             <!-- 文章信息 -->
             <div class="article-text-info">
-              <div class="description">
-                <p> {{ item.description }}</p>
+              <div>
+                <div style="font-weight: bold;font-size: 24px;">
+                  <span>{{ item.title }}</span>
+                </div>
+                <div class="description">
+                  <p> {{ item.description }}</p>
+                </div>
               </div>
               <div class="footer">
                 <span>发布时间：{{ item.created_at }}</span>
@@ -25,23 +30,31 @@
           </el-col>
         </el-row>
       </el-card>
+
+      <div style="width: 100%;width: 100%;display: flex;align-items: center;justify-content: center;">
+        <!-- 分页组件 -->
+        <el-pagination v-model:current-page="pagingParam.page_num" v-model:page-size="pagingParam.page_size"
+          :small="false" :hide-on-single-page="true" :background="true" layout="total, prev, pager, next, jumper"
+          :total="articleData.total" />
+      </div>
+
       <!-- </div> -->
     </el-col>
     <!-- 左侧功能列表 -->
     <el-col class="hidden-md-and-down" :lg="6" :xl="6">
       <el-space direction="vertical">
         <el-card>
-            <el-calendar>
-              <template #header="{ data }">
-                <div>{{ data }}</div>
-              </template>
-              <template #date-cell="{ data }">
-                <div style="text-align: center;" :title="data.day">
-                  <span>{{ data.day.split('-')[2] }}</span>
-                </div>
-              </template>
-            </el-calendar>
-          </el-card>
+          <el-calendar>
+            <template #header="{ data }">
+              <div>{{ data }}</div>
+            </template>
+            <template #date-cell="{ data }">
+              <div style="text-align: center;" :title="data.day">
+                <span>{{ data.day.split('-')[2] }}</span>
+              </div>
+            </template>
+          </el-calendar>
+        </el-card>
       </el-space>
     </el-col>
   </el-row>
@@ -52,30 +65,23 @@
 import { fetchArticleList } from "@/api/aritcle";
 import { ref, reactive, watch } from "vue";
 
-let articleList = ref([])
+let articleData = ref([])
 
-let startNum = 1
-let pageSize = 10
-let currentPage = -1
-let totalPage = 0
+const pagingParam = reactive({
+  page_num: 1,
+  page_size: 10
+})
+
+// 监听页面参数
+watch(pagingParam, (newVal, oldVal) => {
+  initTableData()
+})
 
 // 初始化表格数据
 const initTableData = async () => {
-  if (currentPage === totalPage && totalPage > 0) {
-    console.log("已经到底");
-    return
-  }
-  const res = await fetchArticleList({
-    page_num: startNum,
-    page_size: pageSize
-  });
-
+  const res = await fetchArticleList(pagingParam);
   if (res.code === 2000) {
-    const { list: list, next_page: next_page, total_page: total_page, current_page: current_page } = res["data"]
-    startNum = next_page
-    totalPage = total_page
-    currentPage = current_page
-    articleList.value = list
+    articleData.value = res["data"]
     return
   }
 };
@@ -152,7 +158,7 @@ const toArticleDetail = (id) => {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
 }
 </style>
