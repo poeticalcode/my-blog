@@ -1,12 +1,14 @@
 package initialize
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/he-wen-yao/my-blog/server/router"
+	"github.com/he-wen-yao/my-blog/server/util"
 )
 
 // RouterInit 初始化一个 gin 的路由
@@ -19,6 +21,8 @@ func RouterInit() *gin.Engine {
 	gin.DebugPrintRouteFunc = func(httpMethod, absolutePath, handlerName string, nuHandlers int) {
 		log.Printf("my-blog-server %v %v %v %v\n", httpMethod, absolutePath, handlerName, nuHandlers)
 	}
+	path := util.GetProjectRootPath()
+	app.Static("/static", fmt.Sprintf("%s/static", path))
 	apiGroup := app.Group("/api")
 	appRouterGroup := router.Router
 	{
