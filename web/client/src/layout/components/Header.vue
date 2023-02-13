@@ -21,10 +21,7 @@ const handleSelect = (key, keyPath) => {
 </script>
 
 <style scoped>
-.el-menu-demo{
-  width: 100%;
-  padding: 0 100px;
-}
+
 .flex-grow {
   flex-grow: 1;
 }

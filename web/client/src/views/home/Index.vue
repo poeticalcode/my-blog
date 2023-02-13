@@ -1,6 +1,6 @@
 <template>
   <el-row :gutter="10">
-    <el-col :md="24" :lg="18" :xl="16">
+    <el-col :md="24" :lg="18" :xl="18">
       <!-- 下拉刷新 -->
       <!-- <div v-infinite-scroll="initTableData"> -->
       <!-- 渲染文章 -->
@@ -28,7 +28,7 @@
       <!-- </div> -->
     </el-col>
     <!-- 左侧功能列表 -->
-    <el-col class="hidden-md-and-down" :lg="6" :xl="8">
+    <el-col class="hidden-md-and-down" :lg="6" :xl="6">
       <el-row>
         <el-col>
           <el-card>

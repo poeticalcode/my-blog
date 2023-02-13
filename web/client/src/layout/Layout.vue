@@ -36,21 +36,26 @@ provide("layoutConfig", layoutConfig)
   padding: unset;
 }
 
-/* .el-main{
-  overflow: unset;
-} */
 .main-inner {
   padding: 0 96px;
 }
-/* 
-.el-header {
-  position: fixed;
+
+.el-menu-demo {
   width: 100%;
+  padding: 0 100px;
 }
 
-.el-main {
-  position: relative;
-  top: 75px;
-  z-index: -1;
-} */
+
+/* 在超过 1920px 的屏幕上怎么显示 */
+@media only screen and (min-width: 1920px) {
+  .main-inner {
+    width: 1200px;
+    margin: 0 auto;
+  }
+
+  .el-menu-demo {
+    padding: 0px 250px;
+  }
+
+}
 </style>
