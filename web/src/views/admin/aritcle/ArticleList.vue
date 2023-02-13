@@ -85,7 +85,7 @@
             @click="handleCancelPublic(scope.row.id)">取消发布
           </el-button>
 
-          <el-button size="small" type="primary" @click="handleCancelPublic(scope.row.id)">预览</el-button>
+          <el-button size="small" type="primary" @click="handlePreview(scope.row.id)">预览</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -141,7 +141,7 @@ initTableData();
 
 // 编辑
 const handleEdit = (id) => {
-  console.log(id);
+  window.open("/admin/article/edit?id=" + id)
 };
 
 // 删除
@@ -151,10 +151,16 @@ const handleDelete = (id) => {
 
 // 发布
 const handlePublic = (id) => { };
+
 // 取消发布
 const handleCancelPublic = (id) => {
+};
+
+
+const handlePreview = (id) => {
   window.open("/article?id=" + id + "&action=preview")
 };
+
 
 // 提交检索请求
 const onSubmit = () => {

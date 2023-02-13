@@ -8,28 +8,40 @@
     ">
     <el-form :inline="true" :model="formInline" label-position="left" size="large">
       <el-form-item label="文章标题">
-        <el-input v-model="formInline.user" input-style="flex:1" placeholder="文章标题" />
+        <el-input v-model="formInline.title" input-style="flex:1" placeholder="文章标题"/>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">保存</el-button>
+        <el-button type="primary" @click="handleAddArticle">保存</el-button>
       </el-form-item>
     </el-form>
-    <Editor ref="myEditor" v-model="formInline.md"></Editor>
+    <Editor ref="myEditor" v-model="formInline.md_text"></Editor>
   </div>
 </template>
 
 <script setup>
-import "@toast-ui/editor/dist/toastui-editor.css";
-
 import Editor from "@/components/markdown/editor/Index.vue";
 
-import { ref, reactive, watch, onMounted } from "vue";
+import {addArticle} from "@/api/aritcle"
+
+import {ref, reactive, watch, onMounted} from "vue";
 
 const formInline = reactive({
-  user: "",
-  region: "",
-  md: "年后",
+  title: "",
+  md_text: ""
 });
+
+
+const handleAddArticle = async () => {
+  formInline.description = formInline.md_text
+  const {code, msg} = await addArticle(formInline)
+  if (code === 2000) {
+    ElMessage.success(msg)
+    return
+  }
+  ElMessage.error(msg)
+}
+
+
 </script>
 
 <style scoped>
