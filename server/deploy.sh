@@ -1,0 +1,1 @@
+docker build -f Dockerfile -t my-blog-docker:latest .
