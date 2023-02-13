@@ -10,7 +10,7 @@ const routes = [
         component: () => import(/*webpackChunkName:"layout"*/ "@/layout/admin/Layout.vue"),
         children: [
             {
-                path: '/',
+                path: '',
                 component: () => import(/*webpackChunkName:"index"*/ "@/views/admin/Index.vue"),
                 // 任何人都可以阅读文章
                 meta: {
@@ -18,7 +18,7 @@ const routes = [
                 }
             },
             {
-                path: '/article/list',
+                path: 'article/list',
                 component: () => import(/*webpackChunkName:"admin-article"*/ "@/views/admin/aritcle/ArticleList.vue"),
                 // 任何人都可以阅读文章
                 meta: {
@@ -26,7 +26,7 @@ const routes = [
                 }
             },
             {
-                path: '/article/post',
+                path: 'article/post',
                 component: () => import(/*webpackChunkName:"admin-article"*/ "@/views/admin/aritcle/PostArticle.vue"),
                 // 任何人都可以阅读文章
                 meta: {
@@ -40,7 +40,7 @@ const routes = [
         component: () => import(/*webpackChunkName:"layout"*/ "@/layout/Layout.vue"),
         children: [
             {
-                path: '/',
+                path: '',
                 component: () => import(/*webpackChunkName:"home"*/ "@/views/home/Index.vue"),
                 // 任何人都可以阅读文章
                 meta: {
@@ -48,7 +48,7 @@ const routes = [
                 }
             },
             {
-                path: '/article',
+                path: 'article',
                 component: () => import(/*webpackChunkName:"article"*/ "@/views/article/Index.vue"),
                 // 任何人都可以阅读文章
                 meta: {
@@ -56,7 +56,7 @@ const routes = [
                 }
             },
             {
-                path: '/about',
+                path: 'about',
                 component: () => import(/*webpackChunkName:"about"*/ "@/views/about/Index.vue"),
                 // 任何人都可以阅读文章
                 meta: {
@@ -64,7 +64,7 @@ const routes = [
                 }
             },
             {
-                path: '/archive',
+                path: 'archive',
                 component: () => import(/*webpackChunkName:"archive"*/ "@/views/archive/Index.vue"),
                 // 任何人都可以阅读文章
                 meta: {
@@ -72,7 +72,7 @@ const routes = [
                 }
             },
             {
-                path: '/tags',
+                path: 'tags',
                 component: () => import(/*webpackChunkName:"tags"*/ "@/views/tags/Index.vue"),
                 // 任何人都可以阅读文章
                 meta: {

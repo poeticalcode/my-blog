@@ -99,7 +99,7 @@
 </template>
 
 <script setup>
-import { articleList } from "@/api/aritcle";
+import { fetchArticleList } from "@/api/aritcle";
 import { ref, reactive, watch } from "vue";
 
 // 表格数据
@@ -123,7 +123,7 @@ watch(searchForm, (newVal, oldVal) => {
 // 初始化表格数据
 const initTableData = async () => {
   tableDataLoading.value = true
-  const res = await articleList(searchForm);
+  const res = await fetchArticleList(searchForm);
   if (res.code === 2000) {
     tableData.value = res["data"];
     tableDataLoading.value = false;
