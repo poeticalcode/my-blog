@@ -32,7 +32,7 @@ func (articleService) CreateArticle(article *entity.Article) bool {
 func (articleService) ArticleList(param *vo.PagingParam) ([]entity.Article, error) {
 	articleList := make([]entity.Article, 0)
 	// 除了 md_text 字段之外都需要保留
-	result := db.DB.Omit("md_text").Scopes(db.Paginate(param)).Find(&articleList)
+	result := db.DB.Omit("md_text").Order("created_at desc").Scopes(db.Paginate(param)).Find(&articleList)
 	if result.Error != nil {
 		return nil, result.Error
 	}
