@@ -1,15 +1,17 @@
 <template>
   <div class="header">
     <el-icon style="cursor: pointer;font-size: 24px" @click="isExpand = false" v-show="isExpand">
-      <Expand/>
+      <Expand />
     </el-icon>
     <el-icon style="cursor: pointer;font-size: 24px" @click="isExpand = true" v-show="!isExpand">
-      <Fold/>
+      <Fold />
     </el-icon>
+
     <div>
+      <el-button size="small" @click="toFornt">回到前台</el-button>
       <el-dropdown>
         <el-icon style="margin-right: 8px; margin-top: 1px">
-          <setting/>
+          <setting />
         </el-icon>
         <template #dropdown>
           <el-dropdown-menu>
@@ -26,7 +28,7 @@
 
 <script setup>
 
-import {inject, ref, watch} from "vue";
+import { inject, ref, watch } from "vue";
 
 const layoutConfig = inject("layoutConfig")
 
@@ -37,6 +39,12 @@ watch(isExpand, (newVal) => {
 }, {
   immediate: true
 })
+
+
+
+const toFornt = () => {
+  window.open('/')
+}
 
 </script>
 

@@ -6,9 +6,10 @@
         <template #header>
           <h2>{{ articleDetail.title }}</h2>
         </template>
+        <!-- markdown 内容预览 -->
         <MmarkdownPreview v-model="articleDetail.md_text" toc="toc"></MmarkdownPreview>
         <div class="footer"
-          style="color: rgb(133, 144, 166);display: flex;align-items: center;gap: 10px;text-align: right;justify-content: flex-end;">
+          style="color: rgb(133, 144, 166);font-size: 14px;display: flex;align-items: center;gap: 10px;text-align: right;justify-content: flex-end;">
           <span>发布于 {{ articleDetail.created_at }}</span>
           <span>最近更新于 {{ articleDetail.updated_at }}</span>
           <span>阅读数量 {{ articleDetail.view_num }}</span>

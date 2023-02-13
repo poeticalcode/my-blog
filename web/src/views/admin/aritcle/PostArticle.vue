@@ -1,25 +1,14 @@
 <template>
-  <div
-    style="
+  <div style="
       display: flex;
       flex-direction: column;
       height: 100%;
       width: 95%;
       margin: 0 auto;
-    "
-  >
-    <el-form
-      :inline="true"
-      :model="formInline"
-      label-position="left"
-      size="large"
-    >
+    ">
+    <el-form :inline="true" :model="formInline" label-position="left" size="large">
       <el-form-item label="文章标题">
-        <el-input
-          v-model="formInline.user"
-          input-style="flex:1"
-          placeholder="文章标题"
-        />
+        <el-input v-model="formInline.user" input-style="flex:1" placeholder="文章标题" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary">保存</el-button>

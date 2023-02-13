@@ -8,7 +8,7 @@
       :collapse="layoutConfig.isCollapse"
   >
 
-    <el-menu-item index="/admin/">
+    <el-menu-item index="/admin">
       <el-icon>
         <HomeFilled/>
       </el-icon>

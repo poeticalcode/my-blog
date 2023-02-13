@@ -11,7 +11,7 @@ const routes = [
         children: [
             {
                 path: '',
-                component: () => import(/*webpackChunkName:"index"*/ "@/views/admin/Index.vue"),
+                component: () => import(/*webpackChunkName:"admin-index"*/ "@/views/admin/Index.vue"),
                 // 任何人都可以阅读文章
                 meta: {
                     title: '首页'
@@ -26,11 +26,20 @@ const routes = [
                 }
             },
             {
-                path: 'article/post',
+                path: '/admin/article/post',
                 component: () => import(/*webpackChunkName:"admin-article"*/ "@/views/admin/aritcle/PostArticle.vue"),
                 // 任何人都可以阅读文章
                 meta: {
-                    title: '图片列表'
+                    title: '发布文章'
+                }
+            }
+            ,
+            {
+                path: ':pathMatch(.*)',
+                component: () => import(/*webpackChunkName:"admin-home"*/ "@/views/404/Index.vue"),
+                // 404 页面
+                meta: {
+                    title: '404',
                 }
             }
         ]
@@ -78,16 +87,16 @@ const routes = [
                 meta: {
                     title: '标签',
                 }
+            },
+            {
+                path: '/:pathMatch(.*)',
+                component: () => import(/*webpackChunkName:"home"*/ "@/views/404/Index.vue"),
+                // 404 页面
+                meta: {
+                    title: '404',
+                }
             }
         ]
-    },
-    {
-        path: '/:pathMatch(.*)',
-        component: () => import(/*webpackChunkName:"home"*/ "@/views/404/Index.vue"),
-        // 404 页面
-        meta: {
-            title: '404',
-        }
     }
 ]
 
@@ -98,6 +107,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
+    NProgress.start()
     if (to.meta.title) {
         document.title = to.meta.title
     }

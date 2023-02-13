@@ -152,7 +152,9 @@ const handleDelete = (id) => {
 // 发布
 const handlePublic = (id) => { };
 // 取消发布
-const handleCancelPublic = (id) => { };
+const handleCancelPublic = (id) => {
+  window.open("/article?id=" + id + "&action=preview")
+};
 
 // 提交检索请求
 const onSubmit = () => {
