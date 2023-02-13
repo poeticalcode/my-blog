@@ -1,4 +1,4 @@
-import request from "@/axios";
+import request from "@/uitl/request";
 
 const fetchArticleList = (pagingParam) => {
     return request({

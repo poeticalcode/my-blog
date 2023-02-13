@@ -30,7 +30,7 @@ provide("layoutConfig", layoutConfig)
 
 </script>
 
-<style scoped>
+<style >
 .el-header {
   border-bottom: solid 1px var(--el-menu-border-color);
 }
@@ -39,7 +39,7 @@ provide("layoutConfig", layoutConfig)
   padding: 20px 0;
 }
 
-.el-header  {
+.el-header {
   padding: 0 100px;
 }
 
@@ -53,9 +53,11 @@ provide("layoutConfig", layoutConfig)
   }
 }
 
-@media only screen and (min-width: 1920px) {
+
+
+@media only screen and (max-width: 1920px) {
   .main-inner {
-    width: 1200px;
+    width: 1240px;
     margin: 0 auto;
   }
 
@@ -76,6 +78,5 @@ provide("layoutConfig", layoutConfig)
   .el-header {
     padding: 0px 250px;
   }
-
 }
 </style>

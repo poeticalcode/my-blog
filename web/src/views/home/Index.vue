@@ -4,14 +4,16 @@
       <!-- 下拉刷新 -->
       <!-- <div v-infinite-scroll="initTableData"> -->
       <!-- 渲染文章 -->
-      <el-card :body-style="{ padding: '0px' }" v-for="item in articleData.list" :key="item.id"
+      <el-card class="aricle-item" :body-style="{ padding: '0px' }" v-for="item in articleData.list" :key="item.id"
         @click="toArticleDetail(item.id)">
         <el-row class="card-inner">
-          <el-col :md="10" :lg="10" :xl="10">
+          
+          <el-col :md="10" :lg="9" :xl="10">
             <!-- 封面 -->
-            <el-image style="width: 360px;height: 220px;" :src="item.cover" lazy fit="fill" />
+            <el-image style="height: 220px;"  :src="item.cover" lazy fit="fill" />
           </el-col>
-          <el-col :md="14" :lg="14" :xl="14">
+
+          <el-col :md="14" :lg="15" :xl="14">
             <!-- 文章信息 -->
             <div class="article-text-info">
               <div>
