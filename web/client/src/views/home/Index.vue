@@ -33,8 +33,8 @@
         <el-col>
           <el-card>
             <el-calendar>
-              <template #header="{ date }">
-                <div></div>
+              <template #header="{ data }">
+                <div>{{ data }}</div>
               </template>
               <template #date-cell="{ data }">
                 <div style="text-align: center;" :title="data.day">

@@ -1,0 +1,9 @@
+FROM golang:1.19.3  
+WORKDIR /opt
+ADD .  /opt
+
+RUN go build -o main ./main.go  
+
+EXPOSE 9090
+
+CMD ["/opt/main"]
