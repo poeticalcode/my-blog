@@ -21,7 +21,7 @@
 <script setup>
 import "@toast-ui/editor/dist/toastui-editor.css";
 
-import Editor from "@/components/markdown-editor/Index.vue";
+import Editor from "@/components/markdown/editor/Index.vue";
 
 import { ref, reactive, watch, onMounted } from "vue";
 

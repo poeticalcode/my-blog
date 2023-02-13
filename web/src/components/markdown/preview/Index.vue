@@ -1,14 +1,16 @@
 <template>
+  <CodeCopy></CodeCopy>
   <div :id="id" class="editor-md"></div>
 </template>
 
 <script setup>
+import CodeCopy from "@/components/markdown/components/codecopy/Index.vue";
 import asyncLoadJs from '@/util/fetchScript'
 
 import { v4 as UUID4 } from 'uuid'
-import { onMounted, ref, defineProps } from "vue";
+import { onMounted, ref, defineProps, createApp, h } from "vue";
 
-const props = defineProps(["height", "modelValue","toc"])
+const props = defineProps(["height", "modelValue", "toc"])
 
 const emits = defineEmits(["update:modelValue"])
 
@@ -36,11 +38,11 @@ const initEditor = async function () {
     markdown: props["modelValue"],//+ "\r\n" + $("#append-test").text(),
     //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
     htmlDecode: "style,script,iframe",  // you can filter tags decode
-    toc             : true,
+    toc: true,
     tocm: true,    // Using [TOCM]
-    tocContainer    : "#" + props["toc"], // 自定义 ToC 容器层
+    tocContainer: "#" + props["toc"], // 自定义 ToC 容器层
     //gfm             : false,
-    tocDropdown     : true,
+    tocDropdown: true,
     // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
     emoji: true,
     taskList: true,
@@ -48,6 +50,27 @@ const initEditor = async function () {
     flowChart: true,  // 默认不解析
     sequenceDiagram: true,  // 默认不解析
   })
+
+
+  document.querySelectorAll('pre').forEach(el => {
+    //   console.log(el)
+    if (el.classList.contains('code-copy-added')) return
+    //   https://cn.vuejs.org/v2/api/index.html#Vue-extend
+    /* 使用基础 Vue 构造器，创建一个“子类”。参数是一个包含组件选项的对象 */
+    // let ComponentClass = Vue.extend(CodeCopy)
+    // let instance = new ComponentClass()
+    // instance.code = el.innerText
+
+    // console.log(instance);
+    // instance.parent = el
+    // /* 手动挂载 */
+    // instance.$mount()
+    // el.classList.add('code-copy-added')
+    // el.appendChild(instance.$el)
+   
+  })
+
+
 }
 
 onMounted(initEditor)
@@ -63,7 +86,6 @@ const toHtml = () => {
 <style scoped>
 .editor-md {
   box-sizing: border-box;
-  user-select:text;
+  user-select: text;
 }
-
 </style>
