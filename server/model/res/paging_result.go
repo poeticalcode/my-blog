@@ -1,6 +1,6 @@
-package dto
+package res
 
-import "github.com/he-wen-yao/my-blog/server/model/vo"
+import "github.com/he-wen-yao/my-blog/server/model/req"
 
 // PagingResult 分页结果实体
 type pagingResult struct {
@@ -13,7 +13,7 @@ type pagingResult struct {
 	PageSize    int         `json:"page_size"`
 }
 
-func GenPagingResult(list interface{}, param vo.PagingParam, total int) pagingResult {
+func GenPagingResult(list interface{}, param req.PagingParam, total int) pagingResult {
 	return pagingResult{
 		Total:       total,
 		List:        list,

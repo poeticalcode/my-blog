@@ -3,14 +3,14 @@ package service
 import (
 	"github.com/he-wen-yao/my-blog/server/db"
 	"github.com/he-wen-yao/my-blog/server/model/entity"
-	"github.com/he-wen-yao/my-blog/server/model/vo"
+	"github.com/he-wen-yao/my-blog/server/model/req"
 )
 
 // 标签服务
 type tagService struct{}
 
 // FetchTagList 获取标签列表
-func (tagService) FetchTagList(param *vo.PagingParam) {
+func (tagService) FetchTagList(param *req.PagingParam) {
 
 }
 

@@ -1,18 +1,19 @@
-package service_test
+package test
 
 import (
 	"fmt"
-	"github.com/he-wen-yao/my-blog/server/model/entity"
 	"testing"
+
+	"github.com/he-wen-yao/my-blog/server/model/entity"
 
 	"github.com/he-wen-yao/my-blog/server/service"
 
-	"github.com/he-wen-yao/my-blog/server/model/vo"
+	"github.com/he-wen-yao/my-blog/server/model/req"
 )
 
 func TestArticleList(t *testing.T) {
 	articleService := service.ArticleService
-	list, _ := articleService.ArticleList(&vo.PagingParam{PageNum: 1, PageSize: 5})
+	list, _ := articleService.ArticleList(&req.PagingParam{PageNum: 1, PageSize: 5})
 	fmt.Println(list)
 }
 

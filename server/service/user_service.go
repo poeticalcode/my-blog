@@ -6,8 +6,3 @@ type userService struct{}
 func (userService) FetchUserList() {
 
 }
-
-// Login 用户登录
-func (userService) Login() {
-
-}

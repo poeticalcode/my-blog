@@ -4,9 +4,9 @@ import (
 	"log"
 
 	"github.com/he-wen-yao/my-blog/server/db"
-	"github.com/he-wen-yao/my-blog/server/model/vo"
-
 	"github.com/he-wen-yao/my-blog/server/model/entity"
+
+	"github.com/he-wen-yao/my-blog/server/model/req"
 )
 
 type articleService struct{}
@@ -29,7 +29,7 @@ func (articleService) CreateArticle(article *entity.Article) bool {
 }
 
 // ArticleList 分页获取文章信息
-func (articleService) ArticleList(param *vo.PagingParam) ([]entity.Article, error) {
+func (articleService) ArticleList(param *req.PagingParam) ([]entity.Article, error) {
 	articleList := make([]entity.Article, 0)
 	// 除了 md_text 字段之外都需要保留
 	result := db.DB.Omit("md_text").Order("created_at desc").Scopes(db.Paginate(param)).Find(&articleList)

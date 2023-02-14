@@ -2,7 +2,7 @@ package db
 
 import (
 	"github.com/he-wen-yao/my-blog/server/config"
-	"github.com/he-wen-yao/my-blog/server/model/vo"
+	"github.com/he-wen-yao/my-blog/server/model/req"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -25,7 +25,7 @@ func InitDB() *gorm.DB {
 }
 
 // Paginate 分页查询公共部分
-func Paginate(p *vo.PagingParam) func(db *gorm.DB) *gorm.DB {
+func Paginate(p *req.PagingParam) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		offset := (p.PageNum - 1) * p.PageSize
 		limit := p.PageSize

@@ -1,4 +1,4 @@
-package vo
+package req
 
 import (
 	"errors"
