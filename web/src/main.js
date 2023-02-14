@@ -9,14 +9,19 @@ import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/display.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
+/* 图片预览 */
+import 'viewerjs/dist/viewer.css'
+import VueViewer from 'v-viewer'
 
-import Auth from "./directives/auth.js";
 
+import Auth from "./directives/auth.js"
 
-const app = createApp(App);
+const app = createApp(App)
+app.use(VueViewer)
 app.use(ElementPlus)
 app.use(router)
 app.use(Auth)
+
 
 //全局注册 element-plus icon
 Object.keys(ElementPlusIconsVue).forEach((key) => {

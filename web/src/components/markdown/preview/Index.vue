@@ -1,6 +1,6 @@
 <template>
   <CodeCopy></CodeCopy>
-  <div :id="id" class="editor-md"></div>
+  <div v-viewer :id="id" class="editor-md"></div>
 </template>
 
 <script setup>
@@ -67,7 +67,7 @@ const initEditor = async function () {
     // instance.$mount()
     // el.classList.add('code-copy-added')
     // el.appendChild(instance.$el)
-   
+
   })
 
 
@@ -76,16 +76,20 @@ const initEditor = async function () {
 onMounted(initEditor)
 
 
-const toHtml = () => {
-  return editor_.value.getHTML()
-}
-
 </script>
 
 
-<style scoped>
+<style>
 .editor-md {
   box-sizing: border-box;
   user-select: text;
+}
+
+.markdown-body img {
+  cursor: zoom-in;
+}
+
+.editor-md.markdown-body.editormd-html-preview{
+  padding: 0;
 }
 </style>
