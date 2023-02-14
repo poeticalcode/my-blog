@@ -21,7 +21,7 @@
 <script setup>
 import Editor from "@/components/markdown/editor/Index.vue";
 
-import {addArticle} from "@/api/aritcle"
+import {addArticle} from "@/api/aritcleApi";
 
 import {ref, reactive, watch, onMounted} from "vue";
 

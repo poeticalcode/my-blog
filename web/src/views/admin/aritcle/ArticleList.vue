@@ -99,7 +99,7 @@
 </template>
 
 <script setup>
-import { fetchArticleList } from "@/api/aritcle";
+import { fetchArticleList, deleteArticle } from "@/api/aritcleApi";
 import { ref, reactive, watch } from "vue";
 
 // 表格数据
@@ -145,8 +145,13 @@ const handleEdit = (id) => {
 };
 
 // 删除
-const handleDelete = (id) => {
-  console.log(id);
+const handleDelete = async (id) => {
+  const res = await deleteArticle(id)
+  console.log(res);
+  if (res.code === 2000) {
+    initTableData()
+    return
+  }
 };
 
 // 发布

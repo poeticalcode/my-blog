@@ -7,10 +7,10 @@
       <el-card class="aricle-item" :body-style="{ padding: '0px' }" v-for="item in articleData.list" :key="item.id"
         @click="toArticleDetail(item.id)">
         <el-row class="card-inner">
-          
+
           <el-col :md="10" :lg="9" :xl="10">
             <!-- 封面 -->
-            <el-image style="height: 220px;"  :src="item.cover" lazy fit="fill" />
+            <el-image style="height: 220px;" :src="item.cover" lazy fit="fill" />
           </el-col>
 
           <el-col :md="14" :lg="15" :xl="14">
@@ -64,7 +64,7 @@
 </template>
 
 <script setup>
-import { fetchArticleList } from "@/api/aritcle";
+import { fetchArticleList } from "@/api/aritcleApi";
 import { ref, reactive, watch } from "vue";
 
 let articleData = ref([])

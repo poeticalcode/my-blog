@@ -35,7 +35,7 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
-import { fetchArticleDetail } from "@/api/aritcle";
+import { fetchArticleDetail } from "@/api/aritcleApi";
 import MmarkdownPreview from "@/components/markdown/preview/Index.vue";
 import { ref, reactive, watch } from "vue";
 const route = useRoute()

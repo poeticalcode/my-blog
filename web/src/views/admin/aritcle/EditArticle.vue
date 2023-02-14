@@ -23,7 +23,7 @@ import Editor from "@/components/markdown/editor/Index.vue";
 import {ref} from "vue";
 import {useRoute, useRouter} from 'vue-router'
 
-import {updateArticle, fetchArticleDetail} from "@/api/aritcle";
+import {updateArticle, fetchArticleDetail} from "@/api/aritcleApi";
 
 
 const router = useRouter()
