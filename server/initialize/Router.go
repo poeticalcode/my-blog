@@ -27,6 +27,7 @@ func RouterInit() *gin.Engine {
 	appRouterGroup := router.Router
 	{
 		appRouterGroup.InitArticleRouter(apiGroup)
+		appRouterGroup.InitLoginRouter(apiGroup)
 	}
 	// 没有对应路由
 	app.NoRoute(func(c *gin.Context) {

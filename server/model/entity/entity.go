@@ -38,3 +38,16 @@ type Tag struct {
 func (Tag) TableName() string {
 	return "tb_tag"
 }
+
+// User 用户模型
+type User struct {
+	BaseModel
+	Email    string `json:"email"`     // 邮箱
+	Password string `json:"password"`  // 密码
+	NickName string `json:"nick_name"` // 昵称
+}
+
+// TableName 返回 User 模型对应的数据库表名
+func (User) TableName() string {
+	return "tb_user"
+}
