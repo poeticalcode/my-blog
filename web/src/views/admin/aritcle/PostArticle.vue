@@ -33,9 +33,12 @@ const formInline = reactive({
 
 const handleAddArticle = async () => {
   formInline.description = formInline.md_text
-  const {code, msg} = await addArticle(formInline)
+  const {code, data, msg} = await addArticle(formInline)
   if (code === 2000) {
     ElMessage.success(msg)
+    setTimeout(()=>{
+      window.open("/admin/article/edit?id="+data.id)
+    },1000)
     return
   }
   ElMessage.error(msg)
