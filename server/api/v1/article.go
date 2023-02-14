@@ -36,7 +36,7 @@ func (ArticleApi) CreateArticle(c *gin.Context) {
 		return
 	}
 
-	if res := service.ArticleService.CreateArticle(&article); !res {
+	if !service.ArticleService.CreateArticle(&article) {
 		res.ResponseGen.FailWithMessage("插入失败", c)
 		return
 	}
@@ -60,7 +60,7 @@ func (ArticleApi) UpdateArticle(c *gin.Context) {
 		return
 	}
 
-	if res, _ := service.ArticleService.UpdateArticle(&article); !res {
+	if res_, _ := service.ArticleService.UpdateArticle(&article); !res_ {
 		res.ResponseGen.FailWithMessage("更新失败", c)
 		return
 	}
@@ -101,8 +101,8 @@ func (ArticleApi) DeleteArticleById(c *gin.Context) {
 	// 获取 ID
 	id := c.Param("id")
 	if id, err := strconv.ParseInt(id, 10, 64); err == nil {
-		res, _ := service.ArticleService.DeleteArticleById(id)
-		if res {
+		res_, _ := service.ArticleService.DeleteArticleById(id)
+		if res_ {
 			res.ResponseGen.OkWithMessage("删除成功", c)
 		} else {
 			res.ResponseGen.FailWithMessage("删除失败", c)
