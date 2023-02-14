@@ -12,6 +12,12 @@
 
   <!-- 卡片 -->
   <el-card shadow="never">
+    <template #header>
+      <div class="card-header">
+        <span>文章列表</span>
+        <el-button class="button" type="primary" @click="handPost">撰写文章</el-button>
+      </div>
+    </template>
     <!-- 检索表单 -->
     <el-form :inline="true" :model="searchForm">
       <el-form-item label="标题">
@@ -34,11 +40,7 @@
             <template #content>
               <el-image style="width: 200px; height: 150px" :key="scope.row.id" :src="scope.row.cover" lazy />
             </template>
-            <div style="
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              ">
+            <div style=" display: flex; align-items: center; justify-content: center;">
               <el-image style="width: 100px; height: 75px" :key="scope.row.id" :src="scope.row.cover" lazy />
             </div>
           </el-tooltip>
@@ -154,6 +156,11 @@ const handleDelete = async (id) => {
   }
 };
 
+
+const handPost = () => {
+  window.open("/admin/article/post")
+}
+
 // 发布
 const handlePublic = (id) => { };
 
@@ -177,5 +184,11 @@ const onSubmit = () => {
 <style scoped>
 .el-card {
   margin-top: 18px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>
