@@ -10,6 +10,6 @@ type loginService struct{}
 
 // Login 登录业务实现
 func (loginService) Login(loginReq *req.LoginReqParam) (user *entity.User) {
-	db.DB.Where("email = ? and password = ? ", loginReq.Email, loginReq.Password).First(user)
+	db.DB.Where("email = ? and password = ? ", loginReq.Email, loginReq.Password).First(&user)
 	return
 }

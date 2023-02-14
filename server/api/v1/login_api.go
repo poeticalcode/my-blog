@@ -20,11 +20,21 @@ func (LoginApi) Login(c *gin.Context) {
 		res.ResponseGen.FailWithMessage("提交的格式有误", c)
 		return
 	}
+	log.Print(params)
 	user := service.LoginService.Login(&params)
-	log.Print(user)
-	token, err := util.GenerateToken(user.Email, "he.123456")
-	if err != nil {
-		res.ResponseGen.FailWithMessage("JWT 生成 Token 失败", c)
+	if user != nil {
+		token, err := util.GenerateToken(user.Email, "he.123456")
+		if err != nil {
+			res.ResponseGen.FailWithMessage("JWT 生成 Token 失败", c)
+		}
+		res.ResponseGen.OkWithDetailed(map[string]interface{}{"token": token}, "登录成功", c)
+		return
 	}
-	res.ResponseGen.OkWithDetailed(map[string]interface{}{"token": token}, "登录成功", c)
+	res.ResponseGen.OkWithDetailed(nil, "账户或密码错误", c)
+}
+
+// FetchLoginUserInfo 获取当前登录用户信息
+func (LoginApi) FetchLoginUserInfo(c *gin.Context) {
+	claims, _ := c.Get("claims")
+	res.ResponseGen.OkWithDetailed(claims, "获取成功", c)
 }

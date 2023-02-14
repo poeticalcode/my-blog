@@ -5,13 +5,16 @@ import (
 	"github.com/he-wen-yao/my-blog/server/model/req"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 var DB *gorm.DB
 
 func InitDB() *gorm.DB {
 	dsn := config.GlobalConfig.MySQL.Dsn()
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info),
+	})
 	db_, _ := db.DB()
 	if err != nil {
 		db_.Close()

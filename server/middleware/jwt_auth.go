@@ -9,7 +9,7 @@ import (
 
 func JWTAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		token := c.Request.Header.Get("Authorization")
+		token := c.Request.Header.Get("Blog-Authorization")
 		if token == "" {
 			c.JSON(http.StatusOK, gin.H{
 				"msg": "请求未携带token，无权限访问",
