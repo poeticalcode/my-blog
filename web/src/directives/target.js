@@ -1,6 +1,7 @@
 // 修改被修饰元素内部的 a 标签的 target
-function install(Vue, options = {}) {
-  Vue.directive(options.name || "target", (el, binding) => {
+export default {
+  name: "target",
+  handle: (el, binding) => {
     let target = binding.value || ""
     setTimeout(() => {
       let aList = el.getElementsByTagName("a")
@@ -8,6 +9,5 @@ function install(Vue, options = {}) {
         item.target = target
       })
     }, 1000);
-  })
-}
-export default { install }
+  }
+} 

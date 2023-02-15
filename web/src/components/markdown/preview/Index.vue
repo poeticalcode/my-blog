@@ -1,5 +1,5 @@
 <template>
-  <div v-viewer :id="id" class="editor-md"></div>
+  <div :id="id" class="editor-md"></div>
 </template>
 
 <script setup>
@@ -78,17 +78,24 @@ onMounted(initEditor)
 </script>
 
 
-<style>
-.editor-md {
+<style lang="scss">
+
+.editor-md.markdown-body.editormd-html-preview {
+  padding: 0;
   box-sizing: border-box;
   user-select: text;
-}
 
-.markdown-body img {
-  cursor: zoom-in;
-}
+  img {
+    cursor: zoom-in;
+  }
 
-.editor-md.markdown-body.editormd-html-preview{
-  padding: 0;
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    border-left: 4px solid #3E9DEA;
+    padding-left: 4px;
+  }
 }
 </style>

@@ -30,17 +30,22 @@ provide("layoutConfig", layoutConfig)
 
 </script>
 
-<style >
+<style lang="scss">
 .el-header {
+  $bgColor: white;
   border-bottom: solid 1px var(--el-menu-border-color);
+  background-color: $bgColor;
+  box-shadow: 0px 0px 8px 0px #c3c3c3;
+  padding: 0 100px;
+
+  .el-menu {
+    border-bottom: unset;
+    background-color: $bgColor;
+  }
 }
 
 .el-main {
   padding: 20px 0;
-}
-
-.el-header {
-  padding: 0 100px;
 }
 
 @media only screen and (min-width: 960) {
