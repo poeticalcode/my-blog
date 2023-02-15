@@ -7,9 +7,9 @@
           <h2>{{ articleDetail.title }}</h2>
         </template>
         <!-- markdown 内容预览 -->
-        <MmarkdownPreview  v-viewer v-target="'_blank'" v-model="articleDetail.md_text" toc="toc"></MmarkdownPreview>
+        <MarkdownPreview v-viewer v-target="'_blank'" v-model="articleDetail.md_text" toc="toc"></MarkdownPreview>
         <div class="footer"
-          style="color: rgb(133, 144, 166);font-size: 14px;display: flex;align-items: center;gap: 10px;text-align: right;justify-content: flex-end;">
+             style="color: rgb(133, 144, 166);font-size: 14px;display: flex;align-items: center;gap: 10px;text-align: right;justify-content: flex-end;">
           <span>发布于 {{ articleDetail.created_at }}</span>
           <span>最近更新于 {{ articleDetail.updated_at }}</span>
           <span>阅读数量 {{ articleDetail.view_num }}</span>
@@ -34,12 +34,13 @@
 
 
 <script setup>
-import { useRoute } from 'vue-router'
-import { fetchArticleDetail } from "@/api/aritcleApi";
-import MmarkdownPreview from "@/components/markdown/preview/Index.vue";
-import { ref, reactive, watch } from "vue";
+import {useRoute} from 'vue-router'
+import {fetchArticleDetail} from "@/api/aritcleApi";
+import MarkdownPreview from "@/components/markdown/preview/Index.vue";
+import {ref} from "vue";
+
 const route = useRoute()
-const { id: id } = route.query
+const {id: id} = route.query
 
 
 const articleDetail = ref()

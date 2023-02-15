@@ -6,8 +6,8 @@
 import CodeCopy from "@/components/markdown/components/codecopy/Index.vue";
 import asyncLoadJs from '@/util/fetchScript'
 
-import { v4 as UUID4 } from 'uuid'
-import { onMounted, ref, defineProps, createApp, h } from "vue";
+import {v4 as UUID4} from 'uuid'
+import {onMounted, ref, defineProps, createApp, h, createVNode, render} from "vue";
 
 const props = defineProps(["height", "modelValue", "toc"])
 
@@ -17,6 +17,8 @@ const id = ref(UUID4())
 
 const editor_ = ref(null)
 
+
+// 初始化编辑器
 const initEditor = async function () {
   // 请求资源
   await asyncLoadJs('/plugins/editor.md/lib/jquery.js')
@@ -52,10 +54,23 @@ const initEditor = async function () {
 
 
   document.querySelectorAll('pre').forEach(el => {
-    //   console.log(el)
     if (el.classList.contains('code-copy-added')) return
+
     //   https://cn.vuejs.org/v2/api/index.html#Vue-extend
     /* 使用基础 Vue 构造器，创建一个“子类”。参数是一个包含组件选项的对象 */
+    let copy = createVNode(CodeCopy, {
+      code: el.innerText
+    })
+    copy.parent = el
+
+    let mountNode = document.createElement("div");
+    render(copy,mountNode)
+    console.log(copy)
+
+    el.classList.add('code-copy-added')
+
+    el.appendChild(copy.el)
+
     // let ComponentClass = Vue.extend(CodeCopy)
     // let instance = new ComponentClass()
     // instance.code = el.innerText
