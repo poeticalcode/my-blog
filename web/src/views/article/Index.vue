@@ -7,7 +7,7 @@
           <h2>{{ articleDetail.title }}</h2>
         </template>
         <!-- markdown 内容预览 -->
-        <MmarkdownPreview v-model="articleDetail.md_text" toc="toc"></MmarkdownPreview>
+        <MmarkdownPreview v-target="'_blank'" v-model="articleDetail.md_text" toc="toc"></MmarkdownPreview>
         <div class="footer"
           style="color: rgb(133, 144, 166);font-size: 14px;display: flex;align-items: center;gap: 10px;text-align: right;justify-content: flex-end;">
           <span>发布于 {{ articleDetail.created_at }}</span>
@@ -16,9 +16,9 @@
         </div>
       </el-card>
     </el-col>
-    
+
     <!-- 左侧功能区 -->
-    <el-col class="hidden-md-and-down"  :lg="5" :xl="6">
+    <el-col class="hidden-md-and-down" :lg="5" :xl="6">
       <el-card v-if="articleDetail" :body-style="{ padding: '0px' }">
         <template #header>
           <div class="card-header">
@@ -59,5 +59,4 @@ initTableData()
 .el-card {
   border-radius: 5px;
 }
-
 </style>

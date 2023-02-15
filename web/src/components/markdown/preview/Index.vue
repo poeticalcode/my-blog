@@ -1,5 +1,4 @@
 <template>
-  <CodeCopy></CodeCopy>
   <div v-viewer :id="id" class="editor-md"></div>
 </template>
 
