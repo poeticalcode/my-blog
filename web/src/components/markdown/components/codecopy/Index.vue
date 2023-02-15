@@ -56,8 +56,9 @@ const copyMessage = function (value) {
 
 <style lang="scss" scoped>
 .copy-content {
-  height: 30px;
-  background-color: red;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .icon {
@@ -77,9 +78,6 @@ const copyMessage = function (value) {
   transition: 0.3s;
   background: rgba(255, 255, 255, 0.2);
 
-  &:active {
-    background: rgba(253, 253, 253, 0.575);
-  }
 }
 
 .copy-success-text {

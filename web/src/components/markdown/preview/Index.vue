@@ -62,9 +62,10 @@ const initEditor = async function () {
       code: el.innerText
     })
     copy.parent = el
+    el.style.position = "relative"
 
     let mountNode = document.createElement("div");
-    render(copy,mountNode)
+    render(copy, mountNode)
     console.log(copy)
 
     el.classList.add('code-copy-added')
@@ -111,6 +112,12 @@ onMounted(initEditor)
   h6 {
     border-left: 4px solid #3E9DEA;
     padding-left: 4px;
+  }
+}
+
+.code-copy-added:hover {
+  .copy-btn ,.copy-success-text{
+    background: rgb(3 0 0 / 58%);
   }
 }
 </style>
