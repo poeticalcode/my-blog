@@ -13,3 +13,7 @@ func TestTagService_AddTag(t *testing.T) {
 	service.TagService.AddTag(tag)
 	log.Printf("ID = %d", tag.ID)
 }
+
+func TestUpload(t *testing.T) {
+
+}

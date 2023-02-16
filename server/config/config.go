@@ -4,13 +4,15 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/he-wen-yao/my-blog/server/util"
 	"github.com/spf13/viper"
+
+	"github.com/he-wen-yao/my-blog/server/util/path"
 )
 
 // 读取配置文件
 func readConfig() error {
-	path := util.GetProjectRootPath()
+	path := path.GetProjectRootPath()
+	GlobalConfig.ProjectRootPath = path
 	fmt.Printf("path =========== %s", path)
 	log.Printf("path =========== %s", path)
 	viper.SetConfigName("config")

@@ -1,4 +1,4 @@
-package util
+package path
 
 import (
 	"log"
@@ -11,7 +11,7 @@ import (
 
 func GetProjectRootPath() string {
 	path := getCurrentAbPath()
-	return strings.ReplaceAll(path, "/util", "")
+	return strings.ReplaceAll(path, "/util/path", "")
 }
 
 // GetCurrentAbPath 最终方案-全兼容

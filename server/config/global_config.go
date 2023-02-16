@@ -1,6 +1,8 @@
 package config
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type mysqlConfig struct {
 	Host     string
@@ -11,6 +13,14 @@ type mysqlConfig struct {
 	Charset  string
 }
 
+type githubOOS struct {
+	Token      string
+	Message    string
+	Repository string
+	API        string
+	UserName   string
+}
+
 func (db mysqlConfig) Dsn() (dsn string) {
 	//"utf8mb4"
 	dsn = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=True&loc=Local",
@@ -19,6 +29,8 @@ func (db mysqlConfig) Dsn() (dsn string) {
 }
 
 type globalConfig struct {
-	Port  string
-	MySQL mysqlConfig
+	ProjectRootPath string
+	Port            string
+	MySQL           mysqlConfig
+	GithubOOS       githubOOS
 }
