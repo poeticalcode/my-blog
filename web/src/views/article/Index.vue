@@ -7,7 +7,8 @@
           <h2>{{ articleDetail.title }}</h2>
         </template>
         <!-- markdown 内容预览 -->
-        <MarkdownPreview v-viewer v-target="'_blank'" v-model="articleDetail.md_text" toc="toc"></MarkdownPreview>
+        <MarkdownPreview v-viewer v-code-copy v-target="'_blank'" :value="articleDetail.md_text" toc="toc"></MarkdownPreview>
+
         <div class="footer"
              style="color: rgb(133, 144, 166);font-size: 14px;display: flex;align-items: center;gap: 10px;text-align: right;justify-content: flex-end;">
           <span>发布于 {{ articleDetail.created_at }}</span>

@@ -1,43 +1,36 @@
+import {createVNode, render} from "vue";
+import CodeCopy from "@/components/markdown/components/codecopy/Index.vue";
+
+const callback = (preList) => {
+  preList.forEach(el => {
+    if (el.classList.contains('code-copy-added')) return
+    //   https://cn.vuejs.org/v2/api/index.html#Vue-extend
+    /* 使用基础 Vue 构造器，创建一个“子类”。参数是一个包含组件选项的对象 */
+    let copy = createVNode(CodeCopy, {
+      code: el.innerText
+    })
+    copy.parent = el
+    el.style.position = "relative"
+    let mountNode = document.createElement("div");
+    render(copy, mountNode)
+    el.classList.add('code-copy-added')
+    el.appendChild(copy.el)
+  })
+}
+
 export default {
-  name: "copy",
-  handle: {
-    bind(el, binding) {
-      // 双击触发复制
-      if (binding.modifiers.dblclick) {
-        el.addEventListener('dblclick', () => handleClick(el.innerText))
-        el.style.cursor = 'copy'
+  name: "code-copy",
+  handle: (el, bind) => {
+    let preList = []
+    let flag = false
+    let count = 0
+    let tim = setInterval(() => {
+      if (flag) {
+        clearInterval(tim)
+        callback(preList)
       }
-      // 点击icon触发复制
-      else if (binding.modifiers.icon) {
-        if (el.hasIcon) return
-        const iconElement = document.createElement('i')
-        iconElement.setAttribute('class', 'el-icon-document-copy')
-        iconElement.setAttribute('style', 'margin-left:5px')
-        el.appendChild(iconElement)
-        el.hasIcon = true
-        iconElement.addEventListener('click', () => handleClick(el.innerText))
-        iconElement.style.cursor = 'copy'
-      }
-      // 单击触发复制
-      else {
-        el.addEventListener('click', () => handleClick(el.innerText))
-        el.style.cursor = 'copy'
-      }
-    }
+      preList = el.querySelectorAll('pre')
+      flag = preList.length > 0 || count++ > 40
+    }, 500)
   }
-}
-function handleClick(text) {
-  // 创建元素
-  if (!document.getElementById('copyTarget')) {
-    const copyTarget = document.createElement('input')
-    copyTarget.setAttribute('style', 'position:fixed;top:0;left:0;opacity:0;z-index:-1000;')
-    copyTarget.setAttribute('id', 'copyTarget')
-    document.body.appendChild(copyTarget)
-  }
-  // 复制内容
-  const input = document.getElementById('copyTarget')
-  input.value = text
-  input.select()
-  document.execCommand('copy')
-  // alert('复制成功')
-}
+};

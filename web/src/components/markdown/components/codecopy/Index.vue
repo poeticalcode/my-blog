@@ -1,7 +1,7 @@
 <template>
   <div class="copy-content">
     <!-- 复制按钮 -->
-    <div class="copy-btn code-data-copy" @click="copyMessage" data-clipboard-action="copy" :data-clipboard-text="code">
+    <div class="copy-btn code-data-copy" @click="copyMessage" >
       <svg t="1609826359524" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
            p-id="2955">
         <path
@@ -19,34 +19,31 @@
       </svg>
     </div>
     <div v-if="success" class="copy-success-text">复制成功!</div>
+    <textarea v-model="code"></textarea>
   </div>
 </template>
 
 <script setup>
 import ClipboardJS from 'clipboard'
-import {ref,defineProps} from "vue";
+import {ref, defineProps} from "vue";
 
 const props = defineProps(["code"])
 //复制插件
 const code = ref(props["code"])
 const success = ref(false)
 
-console.log(code);
 const copyMessage = function (value) {
   success.value = false
-  let clipboard = new ClipboardJS('.code-data-copy')
-
+  let clipboard = new ClipboardJS('.code-data-copy',{
+    text:()=>{
+      return code.value
+    }
+  })
   clipboard.on('success', function (e) {
     success.value = true
-    // setTimeout(() => {
-    //   _this.success = false
-    // }, 300)
     clipboard.destroy() // 销毁,避免多次点击重复出现
   })
-
-
   clipboard.on('error', function (e) {
-    console.log(e);
     console.log('复制失败')
   })
 }
