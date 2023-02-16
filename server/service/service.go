@@ -5,4 +5,5 @@ var (
 	UserService    = new(userService)
 	TagService     = new(tagService)
 	LoginService   = new(loginService)
+	FileService    = new(fileService)
 )
