@@ -6,7 +6,6 @@ import (
 
 	"github.com/he-wen-yao/my-blog/server/util"
 	"github.com/he-wen-yao/my-blog/server/util/path"
-	"github.com/he-wen-yao/my-blog/server/util/oos"
 )
 
 func TestJwt_GenerateToken(t *testing.T) {
@@ -34,12 +33,4 @@ func TestJwt_ParseToken(t *testing.T) {
 func TestPath_GetCurrentAbPath(t *testing.T) {
 	path := path.GetProjectRootPath()
 	fmt.Println(path)
-}
-
-func TestUploadGithub_Upload(t *testing.T) {
-	err := oos.Github.UploadFileToGithub()
-	if err != nil {
-		t.Error(err)
-	}
-	t.Log()
 }

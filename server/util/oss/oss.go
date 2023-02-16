@@ -1,3 +1,3 @@
-package oos
+package oss
 
 var Github = new(github)
