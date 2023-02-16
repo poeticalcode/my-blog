@@ -10,14 +10,14 @@
 
           <el-col :md="10" :lg="9" :xl="10">
             <!-- 封面 -->
-            <el-image style="height: 220px;" :src="item.cover" lazy fit="fill" />
+            <el-image style="height: 200px;" :src="item.cover" lazy fit="fill" />
           </el-col>
 
           <el-col :md="14" :lg="15" :xl="14">
             <!-- 文章信息 -->
             <div class="article-text-info">
               <div>
-                <div style="font-weight: bold;font-size: 24px;">
+                <div style="font-weight: bold;font-size: 20px;">
                   <span>{{ item.title }}</span>
                 </div>
                 <div class="description">
@@ -58,12 +58,13 @@
           </el-calendar>
         </el-card>
       </el-space>
-    </el-col>
-  </el-row>
 
+    </el-col>
+</el-row>
 </template>
 
 <script setup>
+
 import { fetchArticleList } from "@/api/aritcleApi";
 import { ref, reactive, watch } from "vue";
 
@@ -98,69 +99,69 @@ const toArticleDetail = (id) => {
 
 </script>
 
-<style>
+<style lang="scss" scoped>
 .el-calendar {
   --el-calendar-border: var(--el-table-border, 1px solid var(--el-border-color-lighter));
   --el-calendar-header-border-bottom: var(--el-calendar-border);
   --el-calendar-selected-bg-color: var(--el-color-primary-light-9);
   --el-calendar-cell-width: 45px;
   background-color: var(--el-fill-color-blank);
+
+  :deep(.el-calendar__header) {
+    display: none;
+  }
+
+  :deep(.el-calendar__body) {
+    border: 1px solid #ebeef5;
+    border-radius: 5px;
+    padding: unset;
+  }
+
+  
+  .infinite-list {
+    height: 300px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
 }
 
-.el-calendar .el-calendar__body {
-  border: 1px solid #ebeef5;
-  border-radius: 5px;
-  padding: unset;
-}
-
-.el-calendar .el-calendar__header {
-  display: none;
-}
-
-.infinite-list {
-  height: 300px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-
-.el-card .card-inner {
-  display: flex;
-  height: 220px;
-}
 
 .el-card {
+  $cardHeight: 200px;
   cursor: pointer;
   margin: 0px 0px 16px;
-}
 
-.article-text-info {
-  padding: 14px;
-  flex: 1;
-  height: 220px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+  .card-inner {
+    display: flex;
+    height: $cardHeight;
 
-.article-text-info .footer {
-  display: flex;
-  gap: 8px;
-  color: #8590a6;
-}
+    .article-text-info {
+      padding: 14px;
+      flex: 1;
+      height: $cardHeight;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
-.main-inner {
-  display: flex;
-  justify-content: center;
-}
+      .description {
+        font-size: 14px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+      }
 
-.el-card .description {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
+      .footer {
+        font-size: 13px;
+        display: flex;
+        gap: 8px;
+        color: #8590a6;
+      }
+    }
+  }
 }
 </style>
