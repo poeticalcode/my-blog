@@ -34,6 +34,12 @@ func init() {
 	GlobalConfig.MySQL.Password = viper.GetString("mysql.password")
 	GlobalConfig.MySQL.Charset = viper.GetString("mysql.charset")
 	GlobalConfig.MySQL.DataBase = viper.GetString("mysql.database")
+	// 初始化 githubOSS
+	GlobalConfig.GithubOSS.Message = viper.GetString("githubOOS.message")
+	GlobalConfig.GithubOSS.Token = viper.GetString("githubOOS.token")
+	GlobalConfig.GithubOSS.UserName = viper.GetString("githubOOS.username")
+	GlobalConfig.GithubOSS.Repository = viper.GetString("githubOOS.repository")
+
 }
 
 var GlobalConfig = new(globalConfig)

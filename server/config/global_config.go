@@ -13,7 +13,7 @@ type mysqlConfig struct {
 	Charset  string
 }
 
-type githubOOS struct {
+type githubOSS struct {
 	Token      string
 	Message    string
 	Repository string
@@ -32,5 +32,5 @@ type globalConfig struct {
 	ProjectRootPath string
 	Port            string
 	MySQL           mysqlConfig
-	GithubOOS       githubOOS
+	GithubOSS       githubOSS
 }

@@ -1,9 +1,11 @@
 package test
 
 import (
-	"github.com/he-wen-yao/my-blog/server/util/oss"
+	"encoding/base64"
 	"os"
 	"testing"
+
+	"github.com/he-wen-yao/my-blog/server/util/oss"
 )
 
 func TestUploadGithub(t *testing.T) {
@@ -13,16 +15,18 @@ func TestUploadGithub(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	defer func(file *os.File) {
-		err := file.Close()
-		if err != nil {
-
-		}
-	}(file)
-	err = oss.Github.UploadFile(file, "test.jgp")
+	defer file.Close()
+	path, err := oss.Github.UploadFile(file, "12222ddd2222dasdas22ddd222asda111.jgp")
 	if err != nil {
-		t.Error("上传失败")
+		t.Errorf("上传失败 %s", err)
 		return
 	}
-	t.Log("上传成功")
+	t.Logf("上传成功 %s", path)
+}
+
+func TestBase64(t *testing.T) {
+	tt, _ := base64.StdEncoding.Strict().DecodeString("bXkgbmV3IGZpbGUgY29udGVudHM=")
+	t.Log(string(tt))
+
+	t.Log(base64.StdEncoding.Strict().EncodeToString([]byte("my new file contents")))
 }

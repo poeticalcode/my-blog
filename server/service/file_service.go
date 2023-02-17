@@ -2,9 +2,11 @@ package service
 
 import (
 	"errors"
-	"github.com/he-wen-yao/my-blog/server/util/oss"
+	"fmt"
 	"mime/multipart"
 	"path"
+
+	"github.com/he-wen-yao/my-blog/server/util/oss"
 )
 
 // 文件上传服务
@@ -17,14 +19,18 @@ var allowExtMap = map[string]bool{
 	".jpeg": true,
 }
 
-func (fileService) uploadImage(fileHeader multipart.FileHeader) error {
+func (fileService) UploadImage(fileHeader *multipart.FileHeader) (url string, err error) {
 	// 获取扩展名
 	extName := path.Ext(fileHeader.Filename)
 	if _, ok := allowExtMap[extName]; !ok {
-		return errors.New("图片后缀名不合法")
+		err = errors.New("图片后缀名不合法")
+		return
 	}
 	fileName := fileHeader.Filename + extName
-	file, _ := fileHeader.Open()
-	oss.Github.UploadFile(file, fileName)
-	return nil
+	file, err := fileHeader.Open()
+	if err != nil {
+		err = errors.New(fmt.Sprintf("图片打开失,err = %s", err))
+	}
+	url, err = oss.Github.UploadFile(file, fileName)
+	return
 }

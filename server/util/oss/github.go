@@ -3,52 +3,51 @@ package oss
 import (
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"strings"
-	"time"
 
 	"github.com/he-wen-yao/my-blog/server/config"
+	"github.com/he-wen-yao/my-blog/server/util"
 )
 
 type github struct{}
 
 // UploadFile 上传文件
-func (github) UploadFile(file io.Reader, fileName string) error {
-	imgByte, _ := io.ReadAll(file)
-	// 取图片类型
-	mimeType := http.DetectContentType(imgByte)
-	imgBase64 := ""
-	switch mimeType {
-	case "image/jpeg":
-		imgBase64 = "data:image/jpeg;base64," + base64.StdEncoding.EncodeToString(imgByte)
-	case "image/png":
-		imgBase64 = "data:image/png;base64," + base64.StdEncoding.EncodeToString(imgByte)
+func (github) UploadFile(file io.Reader, fileName string) (path string, err error) {
+	sourcebuffer, _ := io.ReadAll(file)
+	github := config.GlobalConfig.GithubOSS
+	dateYMD := strings.Split(util.Now(), " ")[0]
+	path = fmt.Sprintf("%s/%s/contents/%s/%s", github.UserName, github.Repository, dateYMD, fileName)
+	uploadApi := fmt.Sprintf("https://api.github.com/repos/%s", path)
+	j, err := json.Marshal(map[string]interface{}{"message": github.Message, "content": base64.StdEncoding.EncodeToString(sourcebuffer)})
+	if err != nil {
+		return
 	}
-	github := config.GlobalConfig.GithubOOS
-	const LAYOUT = "2006-01-02 15:04:05"
-	// 获取当前日期
-	now := time.Now()
-	now_ := strings.Split(now.Format(LAYOUT), " ")[0] // 获取 年 月 日
-	// 2022-08-31 09:48:40
-	uploadApi := fmt.Sprintf("https://api.github.com/repos/%s/%s/contents/%s/%s", github.UserName, github.Repository, now_, fileName)
-	log.Println(uploadApi)
-	p := map[string]string{"message": github.Message, "content": imgBase64}
-	j, _ := json.Marshal(p)
 	payload := strings.NewReader(string(j))
-	log.Println(payload)
 	req, _ := http.NewRequest("PUT", uploadApi, payload)
 	req.Header.Add("Accept", "application/vnd.github+json")
 	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", github.Token))
 	// 执行请求
 	response, err := http.DefaultClient.Do(req)
 	if err != nil {
-		return err
+		return
 	}
 	defer response.Body.Close()
-
-	log.Println(response.)
-	return nil
+	_, err = util.ParseResponse(response)
+	if err != nil {
+		return
+	}
+	switch response.StatusCode {
+	// 更新资源
+	case 200:
+	case 201:
+	default:
+		path = ""
+		err = errors.New("更新或创建失败")
+		return
+	}
+	return
 }

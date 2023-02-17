@@ -11,6 +11,7 @@ import (
 
 func GetProjectRootPath() string {
 	path := getCurrentAbPath()
+	log.Println(path)
 	return strings.ReplaceAll(path, "/util/path", "")
 }
 
