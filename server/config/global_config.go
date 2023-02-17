@@ -19,6 +19,8 @@ type githubOSS struct {
 	Repository string
 	API        string
 	UserName   string
+	CDN        string
+	Branch     string
 }
 
 func (db mysqlConfig) Dsn() (dsn string) {

@@ -39,6 +39,8 @@ func init() {
 	GlobalConfig.GithubOSS.Token = viper.GetString("githubOOS.token")
 	GlobalConfig.GithubOSS.UserName = viper.GetString("githubOOS.username")
 	GlobalConfig.GithubOSS.Repository = viper.GetString("githubOOS.repository")
+	GlobalConfig.GithubOSS.CDN = viper.GetString("githubOOS.cdn")
+	GlobalConfig.GithubOSS.Branch = viper.GetString("githubOOS.branch")
 
 }
 
