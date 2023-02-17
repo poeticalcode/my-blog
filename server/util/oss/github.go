@@ -19,7 +19,7 @@ type github struct{}
 
 // UploadFile 上传文件
 func (github) UploadFile(file io.Reader, fileName string) (url string, err error) {
-	sourcebuffer, _ := io.ReadAll(file)
+	sourceBuffer, _ := io.ReadAll(file)
 	github := config.GlobalConfig.GithubOSS
 	dateYMD := strings.Split(util.Now(), " ")[0]
 	// 使用 UUID 重新命名
@@ -27,7 +27,7 @@ func (github) UploadFile(file io.Reader, fileName string) (url string, err error
 	// 拼接上传的 API 地址
 	uploadApi := fmt.Sprintf("https://api.github.com/repos/%s/%s/contents/%s/%s", github.UserName, github.Repository, dateYMD, newFileName)
 	// 拼接 JSON 数据
-	j, err := json.Marshal(map[string]interface{}{"message": fmt.Sprintf("%s:upload %s", github.Message, fileName), "content": base64.StdEncoding.EncodeToString(sourcebuffer)})
+	j, err := json.Marshal(map[string]interface{}{"message": fmt.Sprintf("%s:upload %s", github.Message, fileName), "content": base64.StdEncoding.EncodeToString(sourceBuffer)})
 	if err != nil {
 		return
 	}
