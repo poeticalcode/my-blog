@@ -36,6 +36,7 @@ const initEditor = async function () {
     markdown: props["value"],//+ "\r\n" + $("#append-test").text(),
     //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
     htmlDecode: "style,script,iframe",  // you can filter tags decode
+    atLink    : false,
     toc: true,
     tocm: true,    // Using [TOCM]
     tocContainer: "#" + props["toc"], // 自定义 ToC 容器层
