@@ -20,7 +20,7 @@ func InitDB() *gorm.DB {
 		db_.Close()
 		panic(err)
 	}
-	// 设置连接池，空闲连接
+	// 设置连接池，空闲连接 c
 	db_.SetMaxIdleConns(50)
 	// 打开链接
 	db_.SetMaxOpenConns(100)
