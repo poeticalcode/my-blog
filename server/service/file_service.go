@@ -12,6 +12,7 @@ import (
 // 文件上传服务
 type fileService struct{}
 
+// allowExtMap 允许的扩展名
 var allowExtMap = map[string]bool{
 	".jpg":  true,
 	".png":  true,
@@ -19,6 +20,7 @@ var allowExtMap = map[string]bool{
 	".jpeg": true,
 }
 
+// UploadImage 上传图片的业务逻辑
 func (fileService) UploadImage(fileHeader *multipart.FileHeader) (url string, err error) {
 	// 获取扩展名
 	extName := path.Ext(fileHeader.Filename)
@@ -31,6 +33,11 @@ func (fileService) UploadImage(fileHeader *multipart.FileHeader) (url string, er
 	if err != nil {
 		err = errors.New(fmt.Sprintf("图片打开失,err = %s", err))
 	}
-	url, err = oss.Github.UploadFile(file, fileName)
+
+	var uploader oss.Uploader
+	// todo 需要判断启用的是什么 oss
+
+	uploader = oss.Github // 默认 github
+	url, err = uploader.Upload(file, fileName)
 	return
 }

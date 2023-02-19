@@ -10,7 +10,7 @@ import (
 
 type FileApi struct{}
 
-// Login 登录接口实现
+// UploadImage Login 登录接口实现
 func (FileApi) UploadImage(c *gin.Context) {
 	// 单文件
 	file, err := c.FormFile("file")

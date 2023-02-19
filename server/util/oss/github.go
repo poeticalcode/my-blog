@@ -17,8 +17,11 @@ import (
 
 type github struct{}
 
-// UploadFile 上传文件
-func (github) UploadFile(file io.Reader, fileName string) (url string, err error) {
+// 校验是否实现了 Uploader 接口
+var _ Uploader = (*github)(nil)
+
+// Upload UploadFile 上传文件
+func (github) Upload(file io.Reader, fileName string) (url string, err error) {
 	sourceBuffer, _ := io.ReadAll(file)
 	github := config.GlobalConfig.GithubOSS
 	dateYMD := strings.Split(util.Now(), " ")[0]
