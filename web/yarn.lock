@@ -152,6 +152,11 @@
   dependencies:
     "@floating-ui/core" "^1.0.5"
 
+"@hewenyao/vue-directives@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@hewenyao/vue-directives/-/vue-directives-1.0.3.tgz#cd190407c1cb74cc8060663583dfe449aa362d95"
+  integrity sha512-r7OimBnlXiN0t6Y3R5euQZahYKaPcZ+2SfW3Q9J5SQqmn+vx+3xy/Adz1HktrSMuZhXAx+Vfp21XAZEM5uBpFA==
+
 "@iconify/types@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@iconify/types/-/types-2.0.0.tgz#ab0e9ea681d6c8a1214f30cd741fe3a20cc57f57"

@@ -60,7 +60,7 @@ provide("layoutConfig", layoutConfig)
 
 
 
-@media only screen and (max-width: 1920px) {
+@media only screen and (max-width: 1919px) {
   .main-inner {
     width: 1100px;
     margin: 0 auto;
@@ -76,7 +76,7 @@ provide("layoutConfig", layoutConfig)
 /* 在超过 1920px 的屏幕上怎么显示 */
 @media only screen and (min-width: 1920px) {
   .main-inner {
-    width: 1100px;
+    width: 1280px;;
     margin: 0 auto;
   }
 

@@ -16,7 +16,7 @@ func TestUploadGithub(t *testing.T) {
 		return
 	}
 	defer file.Close()
-	path, err := oss.Github.UploadFile(file, "12222ddd2222dasdas22ddd222asda111.jgp")
+	path, err := oss.Github.Upload(file, "12222ddd2222dasdas22ddd222asda111.jgp")
 	if err != nil {
 		t.Errorf("上传失败 %s", err)
 		return
