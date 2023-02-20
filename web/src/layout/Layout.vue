@@ -1,9 +1,9 @@
 <template>
-
   <el-container style="height: 100%;">
     <el-header>
       <Header></Header>
     </el-header>
+
     <el-main>
       <div class="main-inner">
         <el-config-provider :locale="locale">
@@ -16,11 +16,14 @@
 </template>
 
 <script setup>
+
+
 import Header from "./components/Header.vue";
 
-import { provide, reactive, } from "vue";
+import {provide, reactive,} from "vue";
 
 import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+
 let locale = zhCn
 
 const layoutConfig = reactive({
@@ -31,6 +34,7 @@ provide("layoutConfig", layoutConfig)
 </script>
 
 <style lang="scss">
+
 .el-header {
   $bgColor: white;
   border-bottom: solid 1px var(--el-menu-border-color);
@@ -46,6 +50,7 @@ provide("layoutConfig", layoutConfig)
 
 .el-main {
   padding: 20px 0;
+  overflow: unset;
 }
 
 @media only screen and (min-width: 960) {
@@ -57,7 +62,6 @@ provide("layoutConfig", layoutConfig)
     padding: 0 !important;
   }
 }
-
 
 
 @media only screen and (max-width: 1919px) {
@@ -84,4 +88,5 @@ provide("layoutConfig", layoutConfig)
     padding: 0px 250px;
   }
 }
+
 </style>

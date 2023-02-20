@@ -4,7 +4,7 @@
       <!-- 下拉刷新 -->
       <!-- <div v-infinite-scroll="initTableData"> -->
       <!-- 渲染文章 -->
-      <el-card class="aricle-item" :body-style="{ padding: '0px' }" v-for="item in articleData.list" :key="item.id"
+      <el-card class="article-item" :body-style="{ padding: '0px' }" v-for="item in articleData.list" :key="item.id"
         @click="toArticleDetail(item.id)">
         <el-row class="card-inner">
 
