@@ -9,6 +9,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/he-wen-yao/my-blog/server/router"
 	"github.com/he-wen-yao/my-blog/server/util/path"
+
+	_ "github.com/he-wen-yao/my-blog/server/docs"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 // RouterInit 初始化一个 gin 的路由
@@ -23,6 +27,10 @@ func RouterInit() *gin.Engine {
 	}
 	path := path.GetProjectRootPath()
 	app.Static("/static", fmt.Sprintf("%s/static", path))
+
+	// Swagger 配置
+	app.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+
 	apiGroup := app.Group("/api")
 	appRouterGroup := router.Router
 	{

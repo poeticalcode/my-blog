@@ -16,7 +16,19 @@ import (
 // ArticleApi 文章相关 api 集合
 type ArticleApi struct{}
 
+
 // CreateArticle 添加文章
+// @Summary  接口描述
+// 一个大类别的名称
+// @Tags  接口分类名称
+// 接受类型
+// @Accept json
+// 返回类型
+// @Produce json
+// 成功返回 2000  返回的类型
+// @Success 200 {string} Helloworld
+// 路由地址
+// @Router /api/article [post]
 func (ArticleApi) CreateArticle(c *gin.Context) {
 	var article entity.Article
 	err := c.ShouldBindJSON(&article)
