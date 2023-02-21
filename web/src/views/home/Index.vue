@@ -4,16 +4,15 @@
       <!-- 下拉刷新 -->
       <!-- <div v-infinite-scroll="initTableData"> -->
       <!-- 渲染文章 -->
+
       <el-card class="article-item" :body-style="{ padding: '0px' }" v-for="item in articleData.list" :key="item.id"
         @click="toArticleDetail(item.id)">
         <el-row class="card-inner">
-
-          <el-col :md="10" :lg="9" :xl="10">
+          <el-col :sm="24" :md="10" :lg="9" :xl="10">
             <!-- 封面 -->
-            <el-image style="height: 200px;" :src="item.cover" lazy fit="fill" />
+            <el-image style="height: 100%;" :src="item.cover" lazy fit="fill" />
           </el-col>
-
-          <el-col :md="14" :lg="15" :xl="14">
+          <el-col :sm="24" :md="14" :lg="15" :xl="14">
             <!-- 文章信息 -->
             <div class="article-text-info">
               <div>
@@ -60,7 +59,7 @@
       </el-space>
 
     </el-col>
-</el-row>
+  </el-row>
 </template>
 
 <script setup>
@@ -117,7 +116,7 @@ const toArticleDetail = (id) => {
     padding: unset;
   }
 
-  
+
   .infinite-list {
     height: 300px;
     padding: 0;
@@ -135,7 +134,7 @@ const toArticleDetail = (id) => {
 
   .card-inner {
     display: flex;
-    height: $cardHeight;
+    min-height: $cardHeight;
 
     .article-text-info {
       padding: 14px;

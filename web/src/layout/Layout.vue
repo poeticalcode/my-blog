@@ -43,31 +43,41 @@ provide("layoutConfig", layoutConfig)
   padding: 15px 0;
   margin-right: auto;
   margin-left: auto;
+  overflow: hidden;
 }
 
-@media screen and (min-width: 576px) {
+// xs
+@media only screen and (min-width: 576px) {
   .el-main {
     max-width: 540px;
   }
-
-  
 }
 
-@media screen and (min-width: 768px) {
+// sm
+@media only screen and (min-width: 768px) {
   .el-main {
     max-width: 720px;
   }
 }
 
-@media screen and (min-width: 992px) {
+// md
+@media only screen and (min-width: 992px) {
   .el-main {
     max-width: 960px;
   }
 }
 
-@media screen and (min-width: 1200px) {
+// lg
+@media only screen and (min-width: 1200px) {
   .el-main {
     max-width: 1140px;
+  }
+}
+
+// xl
+@media only screen and (min-width: 1920px) {
+  .el-main {
+    max-width: 1840;
   }
 }
 
