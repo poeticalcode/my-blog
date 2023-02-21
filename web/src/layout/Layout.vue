@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid" style="padding:0;">
     <Header style="margin-bottom: 18px;"></Header>
-    <div class="container" style="margin-top: 7.8rem;">
+    <div class="container" style="margin-top: 1.8rem;">
       <router-view></router-view>
     </div>
   </div>
