@@ -5,13 +5,10 @@
     </el-header>
 
     <el-main>
-      <div class="main-inner">
-        <el-config-provider :locale="locale">
-          <router-view></router-view>
-        </el-config-provider>
-      </div>
+      <el-config-provider :locale="locale">
+        <router-view></router-view>
+      </el-config-provider>
     </el-main>
-
   </el-container>
 </template>
 
@@ -20,7 +17,7 @@
 
 import Header from "./components/Header.vue";
 
-import {provide, reactive,} from "vue";
+import { provide, reactive, } from "vue";
 
 import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 
@@ -33,60 +30,48 @@ provide("layoutConfig", layoutConfig)
 
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scoped>
 .el-header {
   $bgColor: white;
   border-bottom: solid 1px var(--el-menu-border-color);
   background-color: $bgColor;
   box-shadow: 0px 0px 8px 0px #c3c3c3;
-  padding: 0 100px;
-
-  .el-menu {
-    border-bottom: unset;
-    background-color: $bgColor;
-  }
 }
 
 .el-main {
-  padding: 20px 0;
-  overflow: unset;
-}
-
-@media only screen and (min-width: 960) {
-  .main-inner {
-    padding: 0 96px;
-  }
-
-  .el-card {
-    padding: 0 !important;
-  }
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 
-@media only screen and (max-width: 1919px) {
-  .main-inner {
-    width: 1100px;
-    margin: 0 auto;
-  }
-
-  .el-header {
-    padding: 0px 250px;
-  }
-
-}
 
 
-/* 在超过 1920px 的屏幕上怎么显示 */
-@media only screen and (min-width: 1920px) {
-  .main-inner {
-    width: 1280px;;
-    margin: 0 auto;
-  }
 
-  .el-header {
-    padding: 0px 250px;
+
+@media screen and (min-width: 576px) {
+  .el-main {
+    max-width: 540px;
   }
 }
 
+@media screen and (min-width: 768px) {
+  .el-main {
+    max-width: 720px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .el-main {
+    max-width: 960px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .el-main {
+    max-width: 1140px;
+  }
+}
 </style>

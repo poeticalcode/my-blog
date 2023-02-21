@@ -34,4 +34,11 @@ const router = useRouter()
     cursor: pointer;
   }
 }
+
+
+@media screen and (max-width:300) {
+  .el-menu-demo{
+    display: none;
+  }
+}
 </style>

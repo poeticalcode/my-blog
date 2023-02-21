@@ -23,10 +23,10 @@
 import Aside from "./components/Aside.vue";
 import Header from "./components/Header.vue";
 
-import {provide, reactive,} from "vue";
+import { provide, reactive, } from "vue";
 
 import zhCn from 'element-plus/lib/locale/lang/zh-cn'
-let  locale=zhCn
+let locale = zhCn
 
 const layoutConfig = reactive({
   isCollapse: true
@@ -35,7 +35,13 @@ provide("layoutConfig", layoutConfig)
 
 </script>
 
-<style scoped>
+<style >
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+}
 
 .el-header {
   display: flex;
@@ -43,9 +49,8 @@ provide("layoutConfig", layoutConfig)
   border-bottom: 1px solid #f6f6f6;
   user-select: none;
 }
+
 .el-aside {
   width: auto;
 }
-
-
 </style>
