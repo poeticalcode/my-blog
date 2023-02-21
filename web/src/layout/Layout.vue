@@ -40,10 +40,10 @@ provide("layoutConfig", layoutConfig)
 
 .el-main {
   width: 100%;
-  padding: 15px 0;
   margin-right: auto;
   margin-left: auto;
   overflow: hidden;
+  padding: 15px  5px;
 }
 
 // xs
