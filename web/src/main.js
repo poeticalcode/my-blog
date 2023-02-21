@@ -3,6 +3,9 @@ import App from './App.vue'
 
 import router from "./router/index.js";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
+
 // ElementPlus
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'

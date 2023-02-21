@@ -1,44 +1,44 @@
 <template>
-  <div class="nav">
-    <div class="brand" @click="router.push('/')">
-      <span>He'Blog</span>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">He'Blog</a>
+      <div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse right" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">首页</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="archive">归档</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tags">标签</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about">关于我</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false" :router="true">
-      <el-menu-item index="/">首页</el-menu-item>
-      <el-menu-item index="/archive">归档</el-menu-item>
-      <el-menu-item index="/tags">标签</el-menu-item>
-      <el-menu-item index="/about">关于我</el-menu-item>
-    </el-menu>
-</div>
+  </nav>
 </template>
 
 <script setup>
 
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-const activeIndex = ref('/')
 const router = useRouter()
 </script>
 
 <style lang="scss" scoped>
-.el-menu {
-  border-bottom: unset;
+.navbar {
+  height: 6rem;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  font-size: 1.4rem;
 }
 
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .brand {
-    cursor: pointer;
-  }
-}
-
-
-@media screen and (max-width:300) {
-  .el-menu-demo{
-    display: none;
-  }
-}
 </style>

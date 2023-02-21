@@ -1,15 +1,10 @@
 <template>
-  <el-container style="height: 100%;">
-    <el-header>
-      <Header></Header>
-    </el-header>
-
-    <el-main>
-      <el-config-provider :locale="locale">
-        <router-view></router-view>
-      </el-config-provider>
-    </el-main>
-  </el-container>
+  <div class="container-fluid" style="padding:0;">
+    <Header style="margin-bottom: 18px;"></Header>
+    <div class="container" style="margin-top: 7.8rem;">
+      <router-view></router-view>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -31,19 +26,12 @@ provide("layoutConfig", layoutConfig)
 </script>
 
 <style lang="scss" scoped>
-.el-header {
-  $bgColor: white;
-  border-bottom: solid 1px var(--el-menu-border-color);
-  background-color: $bgColor;
-  box-shadow: 0px 0px 8px 0px #c3c3c3;
-}
-
 .el-main {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
   overflow: hidden;
-  padding: 15px  5px;
+  padding: 15px 5px;
 }
 
 // xs
@@ -80,5 +68,4 @@ provide("layoutConfig", layoutConfig)
     max-width: 1840;
   }
 }
-
 </style>

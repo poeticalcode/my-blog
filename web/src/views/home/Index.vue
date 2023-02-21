@@ -1,47 +1,29 @@
 <template>
-  <el-row :gutter="10">
-    <el-col :md="24" :lg="18" :xl="18">
+  <div class="row">
+    <div class="col-md-12 col-lg-9 col-xl-9">
       <!-- 下拉刷新 -->
       <!-- <div v-infinite-scroll="initTableData"> -->
       <!-- 渲染文章 -->
-      <el-card class="article-item" :body-style="{ padding: '0px' }" v-for="item in articleData.list" :key="item.id"
-        @click="toArticleDetail(item.id)">
-        <el-row class="card-inner">
-          <el-col :sm="24" :md="10" :lg="9" :xl="10">
-            <!-- 封面 -->
-            <el-image style="height: 100%;" :src="item.cover" lazy fit="fill" />
-          </el-col>
-          <el-col :sm="24" :md="14" :lg="15" :xl="14">
-            <!-- 文章信息 -->
-            <div class="article-text-info">
-              <div>
-                <div style="font-weight: bold;font-size: 20px;">
-                  <span>{{ item.title }}</span>
-                </div>
-                <div class="description">
-                  <p> {{ item.description }}</p>
-                </div>
-              </div>
-              <div class="footer">
-                <span>发布时间：{{ item.created_at }}</span>
-                <span>阅读数量：{{ item.view_num }}</span>
-              </div>
-            </div>
-          </el-col>
-        </el-row>
-      </el-card>
-
-      <div style="width: 100%;width: 100%;display: flex;align-items: center;justify-content: center;">
-        <!-- 分页组件 -->
-        <el-pagination v-model:current-page="pagingParam.page_num" v-model:page-size="pagingParam.page_size"
+      <div v-for="item in articleData.list" :key="item.id" @click="toArticleDetail(item.id)" class="card mb-3">
+        <img :src="item.cover" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.title }}</h5>
+          <p class="card-text">{{ item.description }}</p>
+          <p class="card-text"><small class="text-muted">发布时间：{{ item.created_at }}
+            </small><small class="text-muted">
+              阅读数量：{{ item.view_num }}</small></p>
+        </div>
+      </div>
+      <!-- <div style="width: 100%;width: 100%;display: flex;align-items: center;justify-content: center;"> -->
+      <!-- 分页组件 -->
+      <!--  <el-pagination v-model:current-page="pagingParam.page_num" v-model:page-size="pagingParam.page_size"
           :small="false" :hide-on-single-page="true" :background="true" layout="total, prev, pager, next, jumper"
           :total="articleData.total" />
-      </div>
-
+      </div> -->
       <!-- </div> -->
-    </el-col>
+    </div>
     <!-- 左侧功能列表 -->
-    <el-col class="hidden-md-and-down" :lg="6" :xl="6">
+    <div class="hidden-md-and-down  col-lg-3 col-xl-3">
       <el-space direction="vertical">
         <el-card>
           <el-calendar>
@@ -56,9 +38,8 @@
           </el-calendar>
         </el-card>
       </el-space>
-
-    </el-col>
-  </el-row>
+    </div>
+  </div>
 </template>
 
 <script setup>
