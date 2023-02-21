@@ -40,21 +40,17 @@ provide("layoutConfig", layoutConfig)
 
 .el-main {
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding: 15px 0;
   margin-right: auto;
   margin-left: auto;
 }
-
-
-
-
-
 
 @media screen and (min-width: 576px) {
   .el-main {
     max-width: 540px;
   }
+
+  
 }
 
 @media screen and (min-width: 768px) {
@@ -74,4 +70,5 @@ provide("layoutConfig", layoutConfig)
     max-width: 1140px;
   }
 }
+
 </style>

@@ -2,13 +2,12 @@
   <el-row style="gap: 24px;">
     <!-- 内容区 -->
     <el-col :xs="24" :xm="24" :md="24" :lg="18" :xl="17">
-      <el-card v-if="articleDetail" style=" padding: 18px;">
+      <el-card v-if="articleDetail">
         <template #header>
           <h2>{{ articleDetail.title }}</h2>
         </template>
         <!-- markdown 内容预览 -->
         <MarkdownPreview v-viewer v-code-copy v-target="'_blank'" :value="articleDetail.md_text" toc="toc"></MarkdownPreview>
-
         <div class="footer"
              style="color: rgb(133, 144, 166);font-size: 14px;display: flex;align-items: center;gap: 10px;text-align: right;justify-content: flex-end;">
           <span>发布于 {{ articleDetail.created_at }}</span>
