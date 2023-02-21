@@ -6,10 +6,7 @@
 :root {
   font-size: 10px;
 }
-*{
-  margin: 0;
-  padding: 0;
-}
+
 
 /* 滚动条优化 start */
 ::-webkit-scrollbar {
