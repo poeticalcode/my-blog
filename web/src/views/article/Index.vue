@@ -3,11 +3,11 @@
     <!-- 内容区 -->
     <el-col :xs="24" :xm="24" :md="18" :lg="18" :xl="18">
       <el-card v-if="articleDetail">
-        <div style="font-size: 1.4rem;font-weight: bold;margin: 18px 0;">
+        <div style="font-size: 2.4rem;font-weight: bold;margin: 18px 0;">
           {{ articleDetail.title }}
         </div>
         <span>发布于 {{ articleDetail.created_at}}</span>
-        <MarkdownPreview style="font-size: 1.6rem;" v-viewer v-code-copy v-target="'_blank'" :value="articleDetail.md_text" toc="toc" />
+        <MarkdownPreview style="font-size: 1.2rem;" v-viewer v-code-copy v-target="'_blank'" :value="articleDetail.md_text" toc="toc" />
       </el-card>
     </el-col>
 

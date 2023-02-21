@@ -1,14 +1,14 @@
 <template>
   <div style="
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      width: 95%;
-      margin: 0 auto;
-    ">
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 95%;
+        margin: 0 auto;
+      ">
     <el-form :inline="true" :model="articleDetail" label-position="left" size="large">
       <el-form-item label="文章标题">
-        <el-input v-model="articleDetail.title" input-style="flex:1" placeholder="文章标题"/>
+        <el-input v-model="articleDetail.title" input-style="flex:1" placeholder="文章标题" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="handleUpdateArticle">更新</el-button>
@@ -20,15 +20,15 @@
 
 <script setup>
 import Editor from "@/components/markdown/editor/Index.vue";
-import {ref} from "vue";
-import {useRoute, useRouter} from 'vue-router'
+import { ref } from "vue";
+import { useRoute, useRouter } from 'vue-router'
 
-import {updateArticle, fetchArticleDetail} from "@/api/aritcleApi";
+import { updateArticle, fetchArticleDetail } from "@/api/aritcleApi";
 
 
 const router = useRouter()
 const route = useRoute()
-const {id: id} = route.query
+const { id: id } = route.query
 
 const articleDetail = ref({})
 const initTableData = async () => {
@@ -49,8 +49,8 @@ initTableData()
 
 
 const handleUpdateArticle = async () => {
-  const {id, description, title, md_text} = articleDetail.value
-  const {code, msg} = await updateArticle({
+  const { id, description, title, md_text } = articleDetail.value
+  const { code, msg } = await updateArticle({
     id,
     description,
     title,
@@ -66,7 +66,14 @@ const handleUpdateArticle = async () => {
 
 </script>
 
-<style scoped>
+<style >
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+}
+
 .el-form {
   display: flex;
   justify-content: space-between;

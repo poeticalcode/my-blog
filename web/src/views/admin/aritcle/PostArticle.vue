@@ -7,16 +7,14 @@
       <el-form-item>
         <el-popover
             placement="top-start"
-            title="Title"
-            :width="400"
-            trigger="hover"
+            title="文章属性"
+            :width="300"
+            trigger="click"
         >
           <p>Are you sure to delete this?</p>
           <div style="text-align: right; margin: 0">
             <el-button size="small" text @click="visible = false">cancel</el-button>
-            <el-button size="small" type="primary" @click="visible = false"
-            >confirm</el-button
-            >
+            <el-button size="small" type="primary" @click="handleAddArticle">确认发布</el-button>
           </div>
           <template #reference>
             <el-button type="primary" >发布</el-button>
@@ -34,6 +32,9 @@ import Editor from "@/components/markdown/editor/Index.vue";
 import {addArticle} from "@/api/aritcleApi";
 
 import {ref, reactive, watch, onMounted} from "vue";
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 
 const formInline = reactive({
   title: "",
@@ -47,7 +48,7 @@ const handleAddArticle = async () => {
   if (code === 2000) {
     ElMessage.success(msg)
     setTimeout(() => {
-      window.open("/admin/article/edit?id=" + data.id)
+      router.push("/admin/article/edit?id=" + data.id)
     }, 1000)
     return
   }
@@ -57,8 +58,13 @@ const handleAddArticle = async () => {
 
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss" >
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+}
 .el-form {
   padding: 0 18px;
   display: flex;
