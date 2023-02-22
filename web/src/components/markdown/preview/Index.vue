@@ -28,7 +28,7 @@ const compiledMarkdown = computed(() => {
 
 <style lang="scss">
 .markdown-body {
-  padding: 0;
+  padding: 1.8rem 0;
   box-sizing: border-box;
   user-select: text;
 
@@ -36,6 +36,7 @@ const compiledMarkdown = computed(() => {
     cursor: zoom-in;
   }
 
+  h1,
   h2,
   h3,
   h4,
@@ -52,11 +53,12 @@ const compiledMarkdown = computed(() => {
     word-wrap: break-word;
     font-size: 1.4rem;
     border-radius: 5px;
+    margin: 15px 0;
   }
+
 }
 
 .code-copy-added:hover {
-
   .copy-btn,
   .copy-success-text {
     background: rgb(3 0 0 / 58%);

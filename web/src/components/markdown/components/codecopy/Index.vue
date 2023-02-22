@@ -59,14 +59,13 @@ const copyMessage = function (value) {
 }
 
 .icon {
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 1rem;
+  height: 1rem;
   fill: white;
 }
 
 .copy-btn {
   opacity: 1;
-  //position: absolute;
   right: 5px;
   top: 5px;
   cursor: pointer;
@@ -74,7 +73,6 @@ const copyMessage = function (value) {
   border-radius: 3px;
   transition: 0.3s;
   background: rgba(255, 255, 255, 0.2);
-
 }
 
 .copy-success-text {

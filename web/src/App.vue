@@ -3,5 +3,7 @@
 </template>
 
 <style lang="scss" >
-
+#app{
+  user-select: none;
+}
 </style>
