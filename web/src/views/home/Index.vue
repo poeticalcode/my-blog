@@ -49,7 +49,7 @@
       </div>
     </div>
     <!-- 左侧功能列表 -->
-    <div class="col-lg-3 col-xl-3">
+    <div class="col-hidden-down-md col-lg-3 col-xl-3">
       <el-space direction="vertical">
         <el-card>
           <el-calendar>
