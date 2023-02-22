@@ -21,15 +21,11 @@
   }
 
   pre {
-    padding: 10px;
     border: 1px solid #ddd;
     white-space: pre-wrap;
     word-wrap: break-word;
     font-size: 1.4rem;
-    border-radius: 5px;
-    margin: 15px 0;
   }
-
 }
 
 .markdown-body {
@@ -37,7 +33,6 @@
   min-width: 200px;
   max-width: 980px;
   margin: 0 auto;
-  // padding: 45px;
 }
 
 @media (max-width: 767px) {

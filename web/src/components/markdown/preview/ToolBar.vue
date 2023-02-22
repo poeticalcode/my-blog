@@ -18,12 +18,14 @@
             p-id="2959"/>
       </svg>
       <textarea style="display:none" v-model="code"></textarea>
+
+      <div class="tool-bar-tooltip" role="tool-bar-tooltip">
+        {{ success ? "Copied!" : "Copy to clipboard" }}
+        <div class="arrow" data-popper-arrow></div>
+      </div>
     </div>
 
-    <div class="tool-bar-tooltip" role="tool-bar-tooltip">
-      Copy to clipboard
-      <div class="arrow" data-popper-arrow></div>
-    </div>
+
   </div>
 
 
@@ -41,10 +43,9 @@ const props = defineProps(["code"])
 const code = ref(props["code"])
 const success = ref(false)
 
-
 const copyMessage = function (value) {
   success.value = false
-  let clipboard = new ClipboardJS('.code-data-copy', {
+  let clipboard = new ClipboardJS('.copy-to-clipboard', {
     text: () => {
       return code.value
     }
@@ -89,7 +90,6 @@ onMounted(() => {
           {name: 'eventListeners', enabled: true},
         ],
       }));
-
       // 更新位置
       popperInstance.update();
     });
@@ -119,7 +119,7 @@ onMounted(() => {
 .tool-bar {
   position: absolute;
   top: 0;
-  right: 1rem;
+  right: 1.5rem;
 
   .copy-to-clipboard {
     cursor: pointer;
@@ -176,4 +176,5 @@ onMounted(() => {
 .tool-bar-tooltip[data-popper-placement^='right'] > .arrow {
   left: -0.4rem;
 }
+
 </style>

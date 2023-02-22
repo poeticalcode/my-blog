@@ -32,7 +32,6 @@ const compiledMarkdown = computed(() => {
 onMounted(() => {
   let markdown = document.getElementById(id.value)
   markdown.querySelectorAll("pre").forEach(pre => {
-    if (pre.classList.contains('code-copy-added')) return
     let copy = createVNode(ToolBar, {
       code: pre.innerText
     })
@@ -40,7 +39,6 @@ onMounted(() => {
     pre.style.position = "relative"
     let mountNode = document.createElement("div");
     render(copy, mountNode)
-    pre.classList.add('code-copy-added')
     pre.appendChild(copy.el)
   })
 })
@@ -65,7 +63,8 @@ onMounted(() => {
 
 
 // mac 风格代码块
-$pre-padding: 1rem;
+$circle-size: 1.1rem;
+$pre-padding: 1.5rem;
 
 .mac-header pre {
   padding: $pre-padding *3 $pre-padding $pre-padding;
@@ -79,13 +78,13 @@ $pre-padding: 1rem;
   position: absolute;
   background: #FF6057;
   margin-top: - 2*$pre-padding;
-  width: $pre-padding;
-  height: $pre-padding;
+  width: $circle-size;
+  height: $circle-size;
   left: $pre-padding;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   -webkit-box-shadow: $pre-padding 0 #FFBD2F, $pre-padding 0 #28C93F;
-  box-shadow: 2 * $pre-padding 0 #FFBD2F, 4 * $pre-padding 0 #28C93F;
+  box-shadow: 2 * $circle-size 0 #FFBD2F, 4 * $circle-size 0 #28C93F;
 }
 
 
