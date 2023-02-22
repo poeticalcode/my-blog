@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-md-12 col-xl-9">
+    <div class="col-md-12">
       <div class="card article" v-if="articleDetail">
         <div class="card-header bg-transparent ">
           {{ articleDetail.title }}
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="col-hidden-down-md col-xl-3">
+    <div class="col-hidden-down-xll col-xl-3">
       <div v-if="articleDetail">
         <div class="card" id="toc"></div>
       </div>

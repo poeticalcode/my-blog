@@ -19,7 +19,7 @@
       </svg>
     </div>
     <div v-if="success" class="copy-success-text">复制成功!</div>
-    <textarea v-model="code"></textarea>
+    <textarea style="display:none" v-model="code"></textarea>
   </div>
 </template>
 
