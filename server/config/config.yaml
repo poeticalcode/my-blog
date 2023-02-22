@@ -1,0 +1,18 @@
+server:
+  port: 9090
+
+mysql:
+  port: 3306
+  host: xxxxxxxxxxxxx
+  userName: root
+  password: xxxxxxxx
+  charset: utf8mb4
+  database: self_blog
+
+githubOOS:
+  username: xxxxxxxxx
+  token: xxxxxxxxxxx #token填写在这里
+  repository: xxxxxxxxxxxx#仓库名
+  message: xxxxxxxxxx #描述
+  cdn: https://cdn.jsdelivr.net/gh # cdn
+  branch: main # 分支名
