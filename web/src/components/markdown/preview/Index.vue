@@ -27,11 +27,15 @@ const compiledMarkdown = computed(() => {
 </script>
 
 <style lang="scss">
-
 .code-copy-added:hover {
+
   .copy-btn,
   .copy-success-text {
     background: rgb(3 0 0 / 58%);
   }
+}
+
+p:has(img) {
+  text-align: center;
 }
 </style>
