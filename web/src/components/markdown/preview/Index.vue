@@ -1,22 +1,27 @@
 <template>
-  <div :id="id" class="markdown-body" v-html="compiledMarkdown"></div>
+  <div :id="id" class="markdown-body mac-header" v-html="compiledMarkdown"></div>
 </template>
 
 <script setup>
 
-import { v4 as UUID4 } from 'uuid'
-import { ref, defineProps, computed } from "vue";
-import { marked } from 'marked'
-import hljs from 'highlight.js'//引用
-import 'highlight.js/styles/intellij-light.css';
-import './themes/github.scss'
-const props = defineProps(["height", "value", "toc"])
+import {v4 as UUID4} from "uuid"
+import {ref, defineProps, computed, watch, onMounted, createVNode, render} from "vue";
+import {marked} from 'marked'
+import h from "highlight.js"
+import "highlight.js/styles/intellij-light.css";
 
+import "@/components/markdown/preview/themes/github.scss"
+import ToolBar from "@/components/markdown/preview/ToolBar.vue";
+// UUID
 const id = ref(UUID4())
 
+const props = defineProps(["height", "value", "toc"])
+
+// 设置选项
 marked.setOptions({
+  // 代码高亮
   highlight: function (code) {
-    return hljs.highlightAuto(code).value;
+    return h.highlightAuto(code).value;
   }
 })
 
@@ -24,40 +29,63 @@ const compiledMarkdown = computed(() => {
   return marked(props["value"])
 })
 
+onMounted(() => {
+  let markdown = document.getElementById(id.value)
+  markdown.querySelectorAll("pre").forEach(pre => {
+    if (pre.classList.contains('code-copy-added')) return
+    let copy = createVNode(ToolBar, {
+      code: pre.innerText
+    })
+    copy.parent = pre
+    pre.style.position = "relative"
+    let mountNode = document.createElement("div");
+    render(copy, mountNode)
+    pre.classList.add('code-copy-added')
+    pre.appendChild(copy.el)
+  })
+})
+
+
 </script>
 
 <style lang="scss">
 .code-copy-added:hover {
-
   .copy-btn,
   .copy-success-text {
     background: rgb(3 0 0 / 58%);
   }
 }
 
-p:has(img) {
-  text-align: center;
+.markdown-body {
+  // 图片居中
+  p:has(img) {
+    text-align: center;
+  }
 }
 
-// 添加相关样式
-pre {
-  padding: 32px 10px 10px 10px !important;
-  overflow-x: auto !important;
+
+// mac 风格代码块
+$pre-padding: 1rem;
+
+.mac-header pre {
+  padding: $pre-padding *3 $pre-padding $pre-padding;
   position: relative;
+  overflow-x: hidden;
+  box-shadow: 0 0 $pre-padding 0 #8A7B7B66;
 }
 
-pre:before {
+.mac-header pre::before {
   content: " ";
   position: absolute;
+  background: #FF6057;
+  margin-top: - 2*$pre-padding;
+  width: $pre-padding;
+  height: $pre-padding;
+  left: $pre-padding;
   -webkit-border-radius: 50%;
   border-radius: 50%;
-  background: #fc625d;
-  margin-top: -2.2rem;
-  width: 1.2rem;
-  height: 1.2rem;
-  -webkit-box-shadow: 2rem 0 #fdbc40, 4rem 0 #35cd4b;
-  box-shadow: 2rem 0 #fdbc40, 4rem 0 #35cd4b;
-  z-index: 2;
+  -webkit-box-shadow: $pre-padding 0 #FFBD2F, $pre-padding 0 #28C93F;
+  box-shadow: 2 * $pre-padding 0 #FFBD2F, 4 * $pre-padding 0 #28C93F;
 }
 
 

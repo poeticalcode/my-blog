@@ -11,6 +11,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
     "@hewenyao/vue-directives": "^1.0.3",
+    "@popperjs/core": "^2.11.6",
     "@toast-ui/editor": "^3.2.1",
     "axios": "^1.2.2",
     "bootstrap": "^5.2.3",

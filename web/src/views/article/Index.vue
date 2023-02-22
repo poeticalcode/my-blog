@@ -6,11 +6,12 @@
           {{ articleDetail.title }}
         </div>
         <div class="card-body">
-          <MarkdownPreview v-viewer v-code-copy v-target="'_blank'" :value="articleDetail.md_text" toc="toc" />
+          <MarkdownPreview v-viewer v-target="'_blank'" :value="articleDetail.md_text" toc="toc"/>
         </div>
         <div class="card-footer bg-transparent">
           <small class="text-muted" style="font-size: 1.2rem;text-align: right;padding: 0.4rem;">发布于: {{
-            articleDetail.created_at }}</small>
+              articleDetail.created_at
+            }}</small>
         </div>
       </div>
     </div>
@@ -24,13 +25,13 @@
 
 
 <script setup>
-import { useRoute } from 'vue-router'
-import { fetchArticleDetail } from "@/api/aritcleApi";
+import {useRoute} from 'vue-router'
+import {fetchArticleDetail} from "@/api/aritcleApi";
 import MarkdownPreview from "@/components/markdown/preview/Index.vue";
-import { ref } from "vue";
+import {ref} from "vue";
 
 const route = useRoute()
-const { id: id } = route.query
+const {id: id} = route.query
 
 
 const articleDetail = ref()
