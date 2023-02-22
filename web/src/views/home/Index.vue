@@ -1,29 +1,48 @@
 <template>
   <div class="row">
     <div class="col-md-12 col-lg-9 col-xl-9">
-      <!-- 下拉刷新 -->
-      <!-- <div v-infinite-scroll="initTableData"> -->
-      <!-- 渲染文章 -->
-      <div v-for="item in articleData.list" :key="item.id" @click="toArticleDetail(item.id)" class="card mb-3">
-        <img :src="item.cover" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{ item.title }}</h5>
-          <p class="card-text">{{ item.description }}</p>
-          <p class="card-text"><small class="text-muted">发布时间：{{ item.created_at }}
-            </small><small class="text-muted">
-              阅读数量：{{ item.view_num }}</small></p>
+      <!-- 没有数据就显示骨架屏 -->
+      <div class="card" aria-hidden="true" v-for="i in 3" :key="'c' + i" v-if="!articleData.list">
+        <div class="row g-0">
+          <div class="col-md-5">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg"
+              role="img" aria-label="占 位 符" preserveAspectRatio="xMidYMid slice" focusable="false" _mstaria-label="177515"
+              _mstHash="178">
+              <title _mstTextHash="7742150" _mstHash="179">占 位 符</title>
+              <rect width="100%" height="100%" fill="#868e96"></rect>
+            </svg>
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h5 class="card-title text-truncate placeholder-glow"></h5>
+              <p class="card-text text-truncate placeholder-glow"></p>
+              <p class="card-text placeholder-glow"><small class="text-muted">发布时间：
+                </small><small class="text-muted">
+                  阅读数量：</small></p>
+            </div>
+          </div>
         </div>
       </div>
-      <!-- <div style="width: 100%;width: 100%;display: flex;align-items: center;justify-content: center;"> -->
-      <!-- 分页组件 -->
-      <!--  <el-pagination v-model:current-page="pagingParam.page_num" v-model:page-size="pagingParam.page_size"
-          :small="false" :hide-on-single-page="true" :background="true" layout="total, prev, pager, next, jumper"
-          :total="articleData.total" />
-      </div> -->
-      <!-- </div> -->
+      <!-- 渲染文章 -->
+      <div v-else class="card mb-3" v-for="item in articleData.list" :key="item.id" @click="toArticleDetail(item.id)">
+        <div class="row g-0">
+          <div class="col-md-5">
+            <img :src="item.cover" class="card-img-top" alt="...">
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h5 class="card-title text-truncate">{{ item.title }}</h5>
+              <p class="card-text text-truncate">{{ item.description }}</p>
+              <p class="card-text"><small class="text-muted">发布时间：{{ item.created_at }}
+                </small><small class="text-muted">
+                  阅读数量：{{ item.view_num }}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- 左侧功能列表 -->
-    <div class="hidden-md-and-down  col-lg-3 col-xl-3">
+    <div class="col-lg-3 col-xl-3">
       <el-space direction="vertical">
         <el-card>
           <el-calendar>
@@ -79,6 +98,12 @@ const toArticleDetail = (id) => {
 </script>
 
 <style lang="scss" scoped>
+
+
+.card{
+  cursor: pointer;
+}
+
 .el-calendar {
   --el-calendar-border: var(--el-table-border, 1px solid var(--el-border-color-lighter));
   --el-calendar-header-border-bottom: var(--el-calendar-border);
@@ -142,5 +167,4 @@ const toArticleDetail = (id) => {
       }
     }
   }
-}
-</style>
+}</style>

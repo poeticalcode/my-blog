@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid" style="padding:0;">
-    <Header class="z-1" style="margin-bottom: 18px;"></Header>
-    <div class="container z-n1" style="margin-top: 1.8rem;">
+    <Header style="margin-bottom: 18px;background-color: white;"></Header>
+    <div class="container" style="margin-top: 1.8rem;max-width: 1140px;">
       <router-view></router-view>
     </div>
   </div>
@@ -26,6 +26,4 @@ provide("layoutConfig", layoutConfig)
 
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
