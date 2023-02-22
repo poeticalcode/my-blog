@@ -38,4 +38,27 @@ const compiledMarkdown = computed(() => {
 p:has(img) {
   text-align: center;
 }
+
+// 添加相关样式
+pre {
+  padding: 32px 10px 10px 10px !important;
+  overflow-x: auto !important;
+  position: relative;
+}
+
+pre:before {
+  content: " ";
+  position: absolute;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background: #fc625d;
+  margin-top: -2.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  -webkit-box-shadow: 2rem 0 #fdbc40, 4rem 0 #35cd4b;
+  box-shadow: 2rem 0 #fdbc40, 4rem 0 #35cd4b;
+  z-index: 2;
+}
+
+
 </style>
