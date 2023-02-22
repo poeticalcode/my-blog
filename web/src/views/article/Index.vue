@@ -53,7 +53,7 @@ initTableData()
 
 .card.article {
   user-select: text;
-  padding: 18px;
+  padding: 3rem;
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, .09);
   margin-bottom: 18px;
 
@@ -67,6 +67,20 @@ initTableData()
 
   .card-footer {
     font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .card.article {
+    padding: 0;
+
+    .card-header {
+      margin: 1.2rem 0;
+    }
+
+    .card-body {
+      padding: 0;
+    }
   }
 }
 </style>
