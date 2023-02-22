@@ -115,11 +115,12 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-
+$size: 1rem;
+$bei: 2;
 .tool-bar {
   position: absolute;
-  top: 0;
-  right: 1.5rem;
+  top: $bei * $size;
+  right: $bei * $size;
 
   .copy-to-clipboard {
     cursor: pointer;
@@ -129,6 +130,15 @@ onMounted(() => {
     }
   }
 }
+
+@media (max-width: 767px) {
+  $bei: 1;
+  .tool-bar {
+    top: $bei * $size;
+    right: $bei * $size;
+  }
+}
+
 
 .tool-bar-tooltip {
   background: #333;

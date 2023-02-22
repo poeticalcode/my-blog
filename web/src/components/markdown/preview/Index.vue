@@ -64,26 +64,48 @@ onMounted(() => {
 
 // mac 风格代码块
 $circle-size: 1.1rem;
-$pre-padding: 1.5rem;
+$pre-padding: 1.4rem;
 
+$bei: 2;
 .mac-header pre {
-  padding: $pre-padding *3 $pre-padding $pre-padding;
+  padding: $pre-padding * $bei * 2 $pre-padding * $bei $pre-padding * $bei;
   position: relative;
-  box-shadow: 0 0 $pre-padding 0 #8A7B7B66;
+  box-shadow: 0 0 0.5 * $pre-padding 0 #8A7B7B66;
 }
 
 .mac-header pre::before {
   content: " ";
   position: absolute;
   background: #FF6057;
-  margin-top: - 2*$pre-padding;
+  margin-top: - $bei*$pre-padding;
   width: $circle-size;
   height: $circle-size;
-  left: $pre-padding;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   -webkit-box-shadow: $pre-padding 0 #FFBD2F, $pre-padding 0 #28C93F;
   box-shadow: 2 * $circle-size 0 #FFBD2F, 4 * $circle-size 0 #28C93F;
+}
+
+@media (max-width: 767px) {
+  $bei: 1;
+  .mac-header pre {
+    padding: $pre-padding * $bei * 2 $pre-padding * $bei $pre-padding * $bei;
+    position: relative;
+    box-shadow: 0 0 $pre-padding 0 #8A7B7B66;
+  }
+
+  .mac-header pre::before {
+    content: " ";
+    position: absolute;
+    background: #FF6057;
+    margin-top: - $bei*$pre-padding;
+    width: $circle-size;
+    height: $circle-size;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-box-shadow: $pre-padding 0 #FFBD2F, $pre-padding 0 #28C93F;
+    box-shadow: 2 * $circle-size 0 #FFBD2F, 4 * $circle-size 0 #28C93F;
+  }
 }
 
 
