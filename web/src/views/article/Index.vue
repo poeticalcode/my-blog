@@ -46,11 +46,16 @@ initTableData()
 </script>
 
 
-<style lang="scss" scoped>
+<style lang="scss">
+#main {
+  max-width: 960px !important;
+}
+
 .card.article {
   user-select: text;
   padding: 18px;
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, .09);
+  margin-bottom: 18px;
 
   .card-header {
     font-size: 2.4rem;

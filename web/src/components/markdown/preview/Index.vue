@@ -9,7 +9,7 @@ import { ref, defineProps, computed } from "vue";
 import { marked } from 'marked'
 import hljs from 'highlight.js'//引用
 import 'highlight.js/styles/intellij-light.css';
-
+import './themes/github.scss'
 const props = defineProps(["height", "value", "toc"])
 
 const id = ref(UUID4())
@@ -27,36 +27,6 @@ const compiledMarkdown = computed(() => {
 </script>
 
 <style lang="scss">
-.markdown-body {
-  padding: 1.8rem 0;
-  box-sizing: border-box;
-  user-select: text;
-
-  img {
-    cursor: zoom-in;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    border-left: 4px solid #3E9DEA;
-    padding-left: 4px;
-  }
-
-  pre {
-    padding: 10px;
-    border: 1px solid #ddd;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    font-size: 1.4rem;
-    border-radius: 5px;
-    margin: 15px 0;
-  }
-
-}
 
 .code-copy-added:hover {
   .copy-btn,

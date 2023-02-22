@@ -1,0 +1,47 @@
+@import url(github-markdown-css);
+
+.markdown-body {
+  padding: 1.8rem 0;
+  box-sizing: border-box;
+  user-select: text;
+
+  img {
+    cursor: zoom-in;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    border-left: 0.4rem solid #3E9DEA;
+    padding-left: 1rem;
+    margin-bottom: 1.6rem;
+  }
+
+  pre {
+    padding: 10px;
+    border: 1px solid #ddd;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 1.4rem;
+    border-radius: 5px;
+    margin: 15px 0;
+  }
+
+}
+
+.markdown-body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  // padding: 45px;
+}
+
+@media (max-width: 767px) {
+  .markdown-body {
+    padding: 15px;
+  }
+}
