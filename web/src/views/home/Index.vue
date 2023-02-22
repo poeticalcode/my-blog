@@ -31,11 +31,18 @@
           </div>
           <div class="col-md-7">
             <div class="card-body">
-              <h5 class="card-title text-truncate">{{ item.title }}</h5>
-              <p class="card-text text-truncate">{{ item.description }}</p>
-              <p class="card-text"><small class="text-muted">发布时间：{{ item.created_at }}
-                </small><small class="text-muted">
-                  阅读数量：{{ item.view_num }}</small></p>
+              <div>
+                <p class="card-title">{{ item.title }}</p>
+                <p class="card-desc">{{ item.description }}</p>
+              </div>
+              <p class="card-text">
+                <small class="text-muted">
+                  发布时间：{{ item.created_at }}
+                </small>
+                <small class="text-muted">
+                  阅读数量：{{ item.view_num }}
+                </small>
+              </p>
             </div>
           </div>
         </div>
@@ -98,10 +105,29 @@ const toArticleDetail = (id) => {
 </script>
 
 <style lang="scss" scoped>
-
-
-.card{
+.card {
   cursor: pointer;
+  box-shadow: 0px 0px 10px 0px #e9e7e7;
+
+  .card-body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card-title {
+    font-size: 2rem;
+    font-size: bold;
+    margin-bottom: 0.8rem;
+  }
+
+  .card-desc {
+    max-height: 124px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .el-calendar {
@@ -167,4 +193,5 @@ const toArticleDetail = (id) => {
       }
     }
   }
-}</style>
+}
+</style>

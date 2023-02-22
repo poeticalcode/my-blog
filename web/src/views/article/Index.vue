@@ -1,18 +1,22 @@
 <template>
-
   <div class="row">
     <div class="col-xl-9">
-      <div v-if="articleDetail">
-        <div style="font-size: 2.4rem;font-weight: bold;margin: 18px 0;">
+      <div class="card article" v-if="articleDetail">
+        <div class="card-header bg-transparent ">
           {{ articleDetail.title }}
         </div>
-        <span>发布于 {{ articleDetail.created_at}}</span>
-        <MarkdownPreview style="font-size: 1.2rem;" v-viewer v-code-copy v-target="'_blank'" :value="articleDetail.md_text" toc="toc" />
+        <div class="card-body">
+          <MarkdownPreview v-viewer v-code-copy v-target="'_blank'" :value="articleDetail.md_text" toc="toc" />
+        </div>
+        <div class="card-footer bg-transparent">
+          <small class="text-muted" style="font-size: 1.2rem;text-align: right;padding: 0.4rem;">发布于: {{
+            articleDetail.created_at }}</small>
+        </div>
       </div>
     </div>
     <div class="col-xl-3">
       <div v-if="articleDetail">
-        <div id="toc"></div>
+        <div class="card" id="toc"></div>
       </div>
     </div>
   </div>
@@ -42,5 +46,21 @@ initTableData()
 </script>
 
 
-<style scoped>
+<style lang="scss" scoped>
+.card.article {
+  padding: 18px;
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, .09);
+
+  .card-header {
+    font-size: 2.4rem;
+  }
+
+  .card-body {
+    font-size: 1.4rem;
+  }
+
+  .card-footer {
+    font-size: 1.2rem;
+  }
+}
 </style>
