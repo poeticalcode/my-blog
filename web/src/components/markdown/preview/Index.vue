@@ -69,7 +69,6 @@ $pre-padding: 1.5rem;
 .mac-header pre {
   padding: $pre-padding *3 $pre-padding $pre-padding;
   position: relative;
-  overflow-x: hidden;
   box-shadow: 0 0 $pre-padding 0 #8A7B7B66;
 }
 
