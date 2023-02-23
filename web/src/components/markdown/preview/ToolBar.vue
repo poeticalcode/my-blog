@@ -1,7 +1,8 @@
 <template>
   <div class="tool-bar">
     <div class="mac-header"></div>
-
+    <!-- 语言类型-->
+    <div class="mac-title">{{ props["lang"] }}</div>
     <div class="copy-to-clipboard" aria-describedby="tool-bar-tooltip" @click="handleCopyMessage">
       <!-- 复制按钮 -->
       <svg t="1677148441267" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -31,9 +32,7 @@ import ClipboardJS from 'clipboard'
 import {createPopper} from '@popperjs/core';
 import {ref, defineProps, onMounted} from "vue";
 // 需要接收一个 code ，存放代码
-const props = defineProps(["code"])
-// 复制插件
-const code = ref(props["code"])
+const props = defineProps(["code", "lang"])
 // 复制状态
 const success = ref(false)
 
@@ -42,7 +41,7 @@ const handleCopyMessage = function (value) {
   success.value = false
   let clipboard = new ClipboardJS('.copy-to-clipboard', {
     text: () => {
-      return code.value
+      return props["code"]
     }
   })
   clipboard.on('success', function (e) {
@@ -132,6 +131,11 @@ $bei: 2;
     border-radius: 50%;
     -webkit-box-shadow: $pre-padding 0 #FFBD2F, $pre-padding 0 #28C93F;
     box-shadow: 2 * $circle-size 0 #FFBD2F, 4 * $circle-size 0 #28C93F;
+  }
+
+  .mac-title {
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.6);
   }
 
   .copy-to-clipboard {

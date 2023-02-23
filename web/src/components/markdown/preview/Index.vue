@@ -5,7 +5,7 @@
 <script setup>
 import {v4 as UUID4} from "uuid"
 import {ref, defineProps, computed, h, onMounted, render} from "vue";
-import {marked} from 'marked'
+import {marked, Renderer} from 'marked'
 import "highlight.js/styles/intellij-light.css";
 import "@/components/markdown/preview/themes/github.scss"
 import highlight from "highlight.js"
@@ -19,13 +19,38 @@ const id = ref(UUID4())
 // 定义需要接收的 props
 const props = defineProps(["height", "value", "toc"])
 
-// 设置 marked 选项
-marked.setOptions({
-  // 代码高亮
-  highlight: function (code) {
-    return highlight.highlightAuto(code).value;
+
+const toc = []
+
+
+let anchor = 0;
+let tocList = [];
+
+// Override function
+const renderer = {
+  heading(text, level) {
+    anchor += 1
+    tocList.push({level: level, id: text, 'anchor': "toc-" + anchor})
+    return `<h${level} id="toc-${anchor}"> ${text} </h${level}>`;
+  },
+  // 修改链接为新打开标签页
+  link: function (href, title, text) {
+    return '<a href="' + href + '" title="' + text + '" target="_blank">' + text + '</a>';
+  },
+  code: function (code, lang) {
+    lang = (lang || '').match(/\S*/)[0];
+    code = highlight.highlightAuto(code).value;
+    code = code.replace(/\n$/, '') + '\n';
+    return '<pre lang="' + lang + '"><code class="'
+        + this.options.langPrefix
+        + lang
+        + '">'
+        + code
+        + '</code></pre>\n';
   }
-})
+};
+
+marked.use({renderer});
 
 //  md 转 html
 const compiledMarkdown = computed(() => {
@@ -75,9 +100,9 @@ const appendToolBar = () => {
     pre.style.border = "0"
     // margin 取消
     pre.style.margin = "0"
-
     let toolBar = h(ToolBar, {
       code: pre.innerText,
+      lang: pre.lang || "未指定语言",
       style: {
         borderBottom,
         paddingLeft,
