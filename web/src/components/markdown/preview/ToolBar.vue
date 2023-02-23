@@ -1,49 +1,44 @@
 <template>
   <div class="tool-bar">
-    <div class="copy-to-clipboard" aria-describedby="tool-bar-tooltip" @click="copyMessage">
-      <!-- 复制按钮 -->
-      <svg t="1609826359524" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-           p-id="2955">
-        <path
-            d="M770.63802083 933.875H216.92708332c-44.82421875 0-79.1015625-34.27734375-79.10156249-79.1015625V195.59374999h553.7109375c44.82421875 0 79.1015625 34.27734375 79.1015625 79.10156251v659.1796875zM190.55989583 248.328125v606.4453125c0 15.8203125 10.546875 26.3671875 26.36718751 26.3671875h500.97656249V274.6953125c0-15.8203125-10.546875-26.3671875-26.3671875-26.3671875H190.55989583z"
-            p-id="2956"/>
-        <path
-            d="M612.43489583 424.98828125H296.02864583c-13.18359375 0-26.3671875-10.546875-26.3671875-26.3671875 0-13.18359375 10.546875-26.3671875 26.3671875-26.3671875h316.40625c13.18359375 0 26.3671875 10.546875 26.36718751 26.3671875 0 13.18359375-13.18359375 26.3671875-26.36718751 26.3671875z m0 131.8359375H296.02864583c-13.18359375 0-26.3671875-10.546875-26.3671875-26.3671875 0-13.18359375 10.546875-26.3671875 26.3671875-26.3671875h316.40625c13.18359375 0 26.3671875 10.546875 26.36718751 26.3671875 0 13.18359375-13.18359375 26.3671875-26.36718751 26.3671875z m0 131.8359375H296.02864583c-13.18359375 0-26.3671875-10.546875-26.3671875-26.3671875 0-13.18359375 10.546875-26.3671875 26.3671875-26.3671875h316.40625c13.18359375 0 26.3671875 10.546875 26.36718751 26.3671875 0 13.18359375-13.18359375 26.3671875-26.36718751 26.3671875z"
-            p-id="2957"/>
-        <path
-            d="M828.64583333 90.125h-527.34375001c-15.8203125 0-26.3671875 10.546875-26.36718749 26.3671875s10.546875 26.3671875 26.36718751 26.3671875h527.34374999c15.8203125 0 26.3671875 10.546875 26.3671875 26.3671875v606.4453125H823.37239583v52.73437499h84.375V169.2265625c0-44.82421875-36.9140625-79.1015625-79.1015625-79.1015625z"
-            p-id="2958"/>
-        <path
-            d="M797.00520833 802.0390625a26.3671875 26.3671875 0 1 0 52.73437501 0 26.3671875 26.3671875 0 1 0-52.73437501 0z"
-            p-id="2959"/>
-      </svg>
-      <textarea style="display:none" v-model="code"></textarea>
+    <div class="mac-header"></div>
 
-      <div class="tool-bar-tooltip" role="tool-bar-tooltip">
+    <div class="copy-to-clipboard" aria-describedby="tool-bar-tooltip" @click="handleCopyMessage">
+      <!-- 复制按钮 -->
+      <svg t="1677148441267" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+           p-id="8607" width="16" height="16">
+        <path
+            d="M763.392 543.744h-157.184V386.048a31.744 31.744 0 1 0-62.976 0v157.696H385.536a31.744 31.744 0 0 0 0 62.976h157.696v157.696a31.744 31.744 0 0 0 62.976 0v-157.696h157.696a31.744 31.744 0 0 0 0-62.976z"
+            fill="" p-id="8608"></path>
+        <path
+            d="M802.816 240.128H348.16a113.664 113.664 0 0 0-113.664 113.664v454.144A113.664 113.664 0 0 0 348.16 921.6h454.144a113.664 113.664 0 0 0 113.664-113.664V353.792a113.664 113.664 0 0 0-113.152-113.664zM870.4 807.936a68.096 68.096 0 0 1-68.096 68.096H348.16a68.096 68.096 0 0 1-68.096-68.096V353.792A68.096 68.096 0 0 1 348.16 285.696h454.144A68.096 68.096 0 0 1 870.4 353.792z"
+            fill="" p-id="8609"></path>
+        <path
+            d="M699.904 162.816a25.6 25.6 0 0 0 0-51.2H245.248A139.264 139.264 0 0 0 106.496 250.88v454.144a25.6 25.6 0 0 0 51.2 0V250.88a88.064 88.064 0 0 1 87.552-88.064z"
+            fill="" p-id="8610"></path>
+      </svg>
+      <div class="tool-bar-tooltip">
         {{ success ? "Copied!" : "Copy to clipboard" }}
         <div class="arrow" data-popper-arrow></div>
       </div>
     </div>
-
-
   </div>
 
 
 </template>
 
 <script setup>
-
 import ClipboardJS from 'clipboard'
-import {ref, defineProps, onMounted} from "vue";
 import {createPopper} from '@popperjs/core';
-
-
+import {ref, defineProps, onMounted} from "vue";
+// 需要接收一个 code ，存放代码
 const props = defineProps(["code"])
-//复制插件
+// 复制插件
 const code = ref(props["code"])
+// 复制状态
 const success = ref(false)
 
-const copyMessage = function (value) {
+// 复制代码功能
+const handleCopyMessage = function (value) {
   success.value = false
   let clipboard = new ClipboardJS('.copy-to-clipboard', {
     text: () => {
@@ -58,7 +53,8 @@ const copyMessage = function (value) {
   })
 }
 
-onMounted(() => {
+// 复制图标上的提示
+const handleTooltip = () => {
   const copyToClipboard = document.querySelector('.copy-to-clipboard');
   const toolBarTooltip = document.querySelector('.tool-bar-tooltip');
 
@@ -73,10 +69,8 @@ onMounted(() => {
       },
     ],
   });
-
   const showEvents = ['mouseenter', 'focus'];
   const hideEvents = ['mouseleave', 'blur'];
-
   showEvents.forEach((event) => {
     copyToClipboard.addEventListener(event, () => {
       // 使工具提示可见
@@ -109,33 +103,44 @@ onMounted(() => {
       }));
     });
   });
-})
+
+}
+
+onMounted(handleTooltip)
 
 
 </script>
 
 <style lang="scss" scoped>
-$size: 1rem;
+
+
+$circle-size: 1rem;
+$pre-padding: 1rem;
 $bei: 2;
 .tool-bar {
-  position: absolute;
-  top: $bei * $size;
-  right: $bei * $size;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  // mac 风格代码块
+  .mac-header {
+    //padding: $pre-padding * $bei * 2 $pre-padding * $bei $pre-padding * $bei;
+    background: #FF6057;
+    width: $circle-size;
+    height: $circle-size;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-box-shadow: $pre-padding 0 #FFBD2F, $pre-padding 0 #28C93F;
+    box-shadow: 2 * $circle-size 0 #FFBD2F, 4 * $circle-size 0 #28C93F;
+  }
 
   .copy-to-clipboard {
     cursor: pointer;
 
     .icon {
-      width: 1.2rem;
+      width: 1.6rem;
+      height: 1.6rem;
     }
-  }
-}
-
-@media (max-width: 767px) {
-  $bei: 1;
-  .tool-bar {
-    top: $bei * $size;
-    right: $bei * $size;
   }
 }
 
@@ -186,5 +191,6 @@ $bei: 2;
 .tool-bar-tooltip[data-popper-placement^='right'] > .arrow {
   left: -0.4rem;
 }
+
 
 </style>
