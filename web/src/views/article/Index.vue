@@ -72,15 +72,26 @@ initTableData()
 }
 
 @media (max-width: 767px) {
-  .card.article {
-    padding: 0;
 
-    .card-header {
-      margin: 1.2rem 0;
+  body {
+    background-color: white;
+
+    #app nav {
+      display: none !important;
     }
 
-    .card-body {
-      padding: 0;
+    .card.article {
+      border: none;
+      box-shadow: none;
+      padding: 1.2rem;
+
+      .card-header {
+        margin: 1.2rem 0;
+      }
+
+      .card-body {
+        padding: 0;
+      }
     }
   }
 }

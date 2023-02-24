@@ -155,7 +155,6 @@ $bei: 2;
   }
 }
 
-
 .tool-bar-tooltip {
   background: #333;
   color: white;

@@ -12,7 +12,6 @@ import highlight from "highlight.js"
 
 import ToolBar from "./ToolBar.vue";
 
-
 // UUID
 const id = ref(UUID4())
 
@@ -131,5 +130,8 @@ onMounted(appendToolBar)
 </script>
 
 <style lang="scss">
+
+
+
 
 </style>
