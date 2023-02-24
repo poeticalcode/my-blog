@@ -83,7 +83,7 @@ initTableData()
     .card.article {
       border: none;
       box-shadow: none;
-      padding: 1.2rem;
+      padding: 0;
 
       .card-header {
         margin: 1.2rem 0;
