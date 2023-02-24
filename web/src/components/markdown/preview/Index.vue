@@ -5,9 +5,8 @@
 <script setup>
 import {v4 as UUID4} from "uuid"
 import {ref, defineProps, computed, h, onMounted, render} from "vue";
-import {marked, Renderer} from 'marked'
-import "highlight.js/styles/intellij-light.css";
-import "@/components/markdown/preview/themes/github.scss"
+import {marked} from 'marked'
+import "./styles/theme.scss"
 import highlight from "highlight.js"
 
 import ToolBar from "./ToolBar.vue";
@@ -24,6 +23,10 @@ const toc = []
 
 let anchor = 0;
 let tocList = [];
+
+marked.setOptions({
+  langPrefix: "hljs "
+})
 
 // Override function
 const renderer = {
@@ -130,8 +133,6 @@ onMounted(appendToolBar)
 </script>
 
 <style lang="scss">
-
-
 
 
 </style>

@@ -162,7 +162,7 @@
         mode                 : "gfm",          //gfm or markdown
         name                 : "",             // Form element name
         value                : "",             // value for CodeMirror, if mode not gfm/markdown
-        theme                : "",             // Editor.md self themes, before v1.5.0 is CodeMirror theme, default empty
+        theme                : "",             // Editor.md self styles, before v1.5.0 is CodeMirror theme, default empty
         editorTheme          : "default",      // Editor area, this is CodeMirror theme at v1.5.0
         previewTheme         : "",             // Preview area theme, default empty
         markdown             : "",             // Markdown source code
@@ -4110,16 +4110,16 @@
         return div;
     };
     
-    // Editor.md themes, change toolbar themes etc.
+    // Editor.md styles, change toolbar styles etc.
     // added @1.5.0
     editormd.themes        = ["default", "dark"];
     
-    // Preview area themes
+    // Preview area styles
     // added @1.5.0
     editormd.previewThemes = ["default", "dark"];
     
-    // CodeMirror / editor area themes
-    // @1.5.0 rename -> editorThemes, old version -> themes
+    // CodeMirror / editor area styles
+    // @1.5.0 rename -> editorThemes, old version -> styles
     editormd.editorThemes = [
         "default", "3024-day", "3024-night",
         "ambiance", "ambiance-mobile",

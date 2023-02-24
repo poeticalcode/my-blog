@@ -1,3 +1,4 @@
+@import "highlight.js/styles/github-dark.css";
 @import url(github-markdown-css);
 
 .markdown-body {
@@ -25,6 +26,13 @@
     white-space: pre-wrap;
     word-wrap: break-word;
     font-size: 1.4rem;
+
+    code{
+      line-height: 2.1rem;
+    }
+    tt{
+      line-height: 2.1rem;
+    }
   }
 }
 
@@ -39,4 +47,12 @@
   .markdown-body {
     padding: 15px;
   }
+}
+
+pre code.hljs{
+  padding: 0;
+}
+
+.markdown-body .highlight pre, .markdown-body pre{
+    background-color: #0d1117;
 }
