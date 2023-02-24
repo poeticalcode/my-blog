@@ -3,7 +3,8 @@
     <div class="mac-header"></div>
     <!-- 语言类型-->
     <div class="mac-title">{{ props["lang"] }}</div>
-    <div class="copy-to-clipboard" aria-describedby="tool-bar-tooltip" @click="handleCopyMessage">
+    <div :id="copyId" class="copy-to-clipboard" id="copy-" aria-describedby="tool-bar-tooltip"
+         @click="handleCopyMessage">
       <!-- 复制按钮 -->
       <svg t="1677148441267" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
            p-id="8607" width="16" height="16">
@@ -17,21 +18,24 @@
             d="M699.904 162.816a25.6 25.6 0 0 0 0-51.2H245.248A139.264 139.264 0 0 0 106.496 250.88v454.144a25.6 25.6 0 0 0 51.2 0V250.88a88.064 88.064 0 0 1 87.552-88.064z"
             fill="" p-id="8610"></path>
       </svg>
-      <div class="tool-bar-tooltip">
+      <div :id="copyTipId" class="tool-bar-tooltip">
         {{ success ? "Copied!" : "Copy to clipboard" }}
         <div class="arrow" data-popper-arrow></div>
       </div>
     </div>
   </div>
-
-
 </template>
 
 <script setup>
 import ClipboardJS from 'clipboard'
 import {createPopper} from '@popperjs/core';
 import {ref, defineProps, onMounted} from "vue";
-// 需要接收一个 code ，存放代码
+import {v4 as UUID4} from "uuid"
+// UUID
+const id = UUID4()
+const copyId = ref("copy-" + id)
+const copyTipId = ref("copy-tip-" + id)
+
 const props = defineProps(["code", "lang"])
 // 复制状态
 const success = ref(false)
@@ -39,7 +43,7 @@ const success = ref(false)
 // 复制代码功能
 const handleCopyMessage = function (value) {
   success.value = false
-  let clipboard = new ClipboardJS('.copy-to-clipboard', {
+  let clipboard = new ClipboardJS("#" + copyId.value, {
     text: () => {
       return props["code"]
     }
@@ -49,13 +53,15 @@ const handleCopyMessage = function (value) {
     clipboard.destroy() // 销毁,避免多次点击重复出现
   })
   clipboard.on('error', function (e) {
+    success.value = false
+    clipboard.destroy() // 销毁,避免多次点击重复出现
   })
 }
 
 // 复制图标上的提示
 const handleTooltip = () => {
-  const copyToClipboard = document.querySelector('.copy-to-clipboard');
-  const toolBarTooltip = document.querySelector('.tool-bar-tooltip');
+  const copyToClipboard = document.querySelector("#" + copyId.value);
+  const toolBarTooltip = document.querySelector("#" + copyTipId.value);
 
   const popperInstance = createPopper(copyToClipboard, toolBarTooltip, {
     placement: 'top',
@@ -64,10 +70,11 @@ const handleTooltip = () => {
         name: 'offset',
         options: {
           offset: [0, 8],
-        },
-      },
+        }
+      }
     ],
   });
+
   const showEvents = ['mouseenter', 'focus'];
   const hideEvents = ['mouseleave', 'blur'];
   showEvents.forEach((event) => {
