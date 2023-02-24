@@ -95,7 +95,7 @@ const appendToolBar = () => {
   markdown.querySelectorAll("pre").forEach(pre => {
     // 获取最终的代码块样式
     let preComputedStyle = window.getComputedStyle(pre)
-    const {backgroundColor, borderRadius, margin, border, paddingLeft, paddingRight} = preComputedStyle
+    const {backgroundColor,borderBottom, borderRadius, margin, border, paddingLeft, paddingRight} = preComputedStyle
     // 消除左上右上圆角
     pre.style.borderTopLeftRadius = pre.style.borderTopRightRadius = "0";
     // 边框取消
@@ -106,7 +106,7 @@ const appendToolBar = () => {
       code: pre.innerText,
       lang: pre.lang || "未指定语言",
       style: {
-        borderBottom:"1px solid #666565",
+        borderBottom,
         paddingLeft,
         paddingRight,
         "paddingTop": "0.8rem",
