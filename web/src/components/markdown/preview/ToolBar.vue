@@ -3,7 +3,7 @@
     <div class="mac-header"></div>
     <!-- 语言类型-->
     <div class="mac-title">{{ props["lang"] }}</div>
-    <div :id="copyId" class="copy-to-clipboard" id="copy-" aria-describedby="tool-bar-tooltip"
+    <div :id="copyId" class="copy-to-clipboard"  aria-describedby="tool-bar-tooltip"
          @click="handleCopyMessage">
       <!-- 复制按钮 -->
       <svg t="1677148441267" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -43,6 +43,8 @@ const success = ref(false)
 // 复制代码功能
 const handleCopyMessage = function (value) {
   success.value = false
+  console.log(props["code"]);
+
   let clipboard = new ClipboardJS("#" + copyId.value, {
     text: () => {
       return props["code"]
