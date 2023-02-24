@@ -55,8 +55,9 @@ initTableData()
 .card.article {
   user-select: text;
   padding: 3rem;
-  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, .09);
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, .09);
   margin-bottom: 18px;
+  border: none;
 
   .card-header {
     font-size: 2.4rem;
@@ -81,7 +82,6 @@ initTableData()
     }
 
     .card.article {
-      border: none;
       box-shadow: none;
       padding: 0;
 
