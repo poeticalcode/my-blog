@@ -142,7 +142,7 @@ $bei: 2;
 
   .mac-title {
     font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: black;
   }
 
   .copy-to-clipboard {

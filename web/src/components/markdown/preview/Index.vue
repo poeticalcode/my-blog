@@ -4,25 +4,23 @@
 
 <script setup>
 import {v4 as UUID4} from "uuid"
-import {ref, defineProps, computed, h, onMounted, render} from "vue";
+import {ref, defineProps, computed, h, onMounted, render, defineExpose} from "vue";
 import {marked} from 'marked'
 import "./styles/theme.scss"
 import highlight from "highlight.js"
-
 import ToolBar from "./ToolBar.vue";
-
 // UUID
 const id = ref(UUID4())
+const tocTree = ref([]);
 
 // 定义需要接收的 props
 const props = defineProps(["height", "value", "toc"])
 
-
+let tocList = [];
 const toc = []
 
-
 let anchor = 0;
-let tocList = [];
+
 
 marked.setOptions({
   langPrefix: "hljs "
@@ -32,8 +30,9 @@ marked.setOptions({
 const renderer = {
   heading(text, level) {
     anchor += 1
-    tocList.push({level: level, id: text, 'anchor': "toc-" + anchor})
-    return `<h${level} id="toc-${anchor}"> ${text} </h${level}>`;
+    let tocAnchor = "toc-anchor-" + anchor
+    tocList.push({level: level, title: text, 'anchor': tocAnchor})
+    return `<h${level} id="${tocAnchor}"> ${text} </h${level}>`;
   },
   // 修改链接为新打开标签页
   link: function (href, title, text) {
@@ -52,6 +51,7 @@ const renderer = {
   }
 };
 
+
 marked.use({renderer});
 
 //  md 转 html
@@ -65,7 +65,7 @@ const compiledMarkdown = computed(() => {
  * @param el
  * @returns {VNode}
  */
-const realDom2VirtualDom = (el) => {
+const dom2VNode = (el) => {
   const tag = el.nodeName;
   const attributes = el.attributes;
   const childNodes = el.childNodes;
@@ -78,7 +78,7 @@ const realDom2VirtualDom = (el) => {
   const children = [];
   childNodes.forEach(child => {
     if (child.nodeType === 1) {   // 元素节点
-      child = realDom2VirtualDom(child)
+      child = dom2VNode(child)
     } else {                      // 文本节点
       child = child.nodeValue;
     }
@@ -95,41 +95,69 @@ const appendToolBar = () => {
   markdown.querySelectorAll("pre").forEach(pre => {
     // 获取最终的代码块样式
     let preComputedStyle = window.getComputedStyle(pre)
-    const {backgroundColor,borderBottom, borderRadius, margin, border, paddingLeft, paddingRight} = preComputedStyle
-    // 消除左上右上圆角
-    pre.style.borderTopLeftRadius = pre.style.borderTopRightRadius = "0";
-    // 边框取消
-    pre.style.border = "0"
-    // margin 取消
-    pre.style.margin = "0"
-    let toolBar = h(ToolBar, {
-      code: pre.innerText,
-      lang: pre.lang || "未指定语言",
-      style: {
-        borderBottom,
-        paddingLeft,
-        paddingRight,
-        "paddingTop": "0.8rem",
-        "paddingBottom": "0.8rem"
-      }
-    })
-    let wrapStyle = {backgroundColor, borderRadius, margin, border}
-    let wrap = h("div",
-        {
-          style: wrapStyle
-        },
-        [
-          toolBar,
-          h(realDom2VirtualDom(pre))
-        ])
-    let mountNode = document.createElement("div");
-    render(wrap, mountNode)
-    pre.before(wrap.el)
-    pre.remove()
+    const {padding, backgroundColor} = preComputedStyle
+    let codeDom = pre.querySelector("code")
+    let codeVNode = dom2VNode(codeDom)
+
+    pre.style.padding = "unset"
+    pre.style.border = "unset"
+    pre.style.boxShadow = "#ddd 0px 2px 10px"
+
+
+
+    let mountDom = document.createElement("div")
+    let paddingSize = padding.slice(0, -2)
+    let halfPadding = (paddingSize * 2) / 3+ "px"
+
+
+    render(h("pre", [
+      h(ToolBar, {
+        code: pre.innerText,
+        lang: pre.lang || "未指定语言",
+        style: {
+          padding: padding,
+          paddingTop: halfPadding,
+          paddingBottom: halfPadding,
+          paddingRight: paddingSize,
+          borderBottom: "1px solid rgb(221 221 221)"
+        }
+      }),
+      h(codeVNode, {
+        style: {
+          padding: padding,
+          paddingTop: halfPadding,
+          display: "block"
+        }
+      })
+    ]), mountDom)
+    pre.innerHTML = mountDom.querySelector("pre").innerHTML
   })
 }
 
 onMounted(appendToolBar)
+const genTocTree = function () {
+  let root = {level: 0, title: "", children: []}
+  let curr = root;
+  for (let toc of tocList) {
+    let level = toc.level
+    let node = Object.assign(toc, {"children": []})
+
+    // level 越大说明标题越小 ,curr.level >= level 说明遇到了一个比自己大的标题，要回退到上一个节点
+    while (curr.level >= level) {
+      curr = curr.parent;
+    }
+    node.parent = curr;
+    curr.children.push(node)
+    curr = node
+  }
+  return root.children
+};
+onMounted(() => {
+  tocTree.value = genTocTree()
+})
+
+// 将目录树暴露出去
+defineExpose(tocTree)
 </script>
 
 <style lang="scss">
