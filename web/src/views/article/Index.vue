@@ -31,13 +31,11 @@ import MarkdownPreview from "@/components/markdown/preview/Index.vue";
 import {ref} from "vue";
 
 const route = useRoute()
-const {id: id} = route.query
-
-
+const {articleId} = route.params
 const articleDetail = ref()
 
 const initTableData = async () => {
-  const res = await fetchArticleDetail(id);
+  const res = await fetchArticleDetail(articleId);
   if (res.code === 2000) {
     articleDetail.value = res.data
   }

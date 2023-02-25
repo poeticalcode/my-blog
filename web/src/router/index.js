@@ -48,7 +48,7 @@ const routes = [
                 // 任何人都可以阅读文章
                 meta: { title: '首页' }
             }, {
-                path: 'article',
+                path: 'article/:articleId(\\d+)',
                 component: () => import(/*webpackChunkName:"article"*/ "@/views/article/Index.vue"),
                 // 任何人都可以阅读文章
                 meta: { title: '文章详情', }
