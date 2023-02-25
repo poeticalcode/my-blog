@@ -8,7 +8,7 @@ import (
 
 // BaseModel 基础模型 [公共部分]
 type BaseModel struct {
-	ID        uint64         `json:"id" gorm:"primaryKey;autoIncrement=false"`
+	ID        DbUInt64       `json:"id" gorm:"primaryKey;autoIncrement=false"`
 	CreatedAt XTime          `json:"created_at"` // 创建时间
 	UpdatedAt XTime          `json:"updated_at"` // 更新时间
 	DeletedAt gorm.DeletedAt `json:"-"`          // 删除时间
@@ -17,7 +17,6 @@ type BaseModel struct {
 // Article 文章模型
 type Article struct {
 	BaseModel
-	ID          uint64 `json:"id" gorm:"primaryKey;autoIncrement=false"`
 	Title       string `json:"title"`       // 文章标题
 	Status      uint16 `json:"status"`      // 文章状态
 	ViewNum     uint64 `json:"view_num"`    // 阅读数量
@@ -27,7 +26,7 @@ type Article struct {
 }
 
 func (a *Article) BeforeCreate(tx *gorm.DB) (err error) {
-	a.ID = snowflake.Snowflake.NextVal()
+	a.ID = DbUInt64(snowflake.Snowflake.NextVal())
 	log.Println(a)
 	return
 }
