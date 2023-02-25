@@ -1,12 +1,14 @@
 package entity
 
 import (
+	"github.com/he-wen-yao/my-blog/server/util/snowflake"
 	"gorm.io/gorm"
+	"log"
 )
 
 // BaseModel 基础模型 [公共部分]
 type BaseModel struct {
-	ID        uint           `json:"id" gorm:"primaryKey"`
+	ID        uint64         `json:"id" gorm:"primaryKey;autoIncrement=false"`
 	CreatedAt XTime          `json:"created_at"` // 创建时间
 	UpdatedAt XTime          `json:"updated_at"` // 更新时间
 	DeletedAt gorm.DeletedAt `json:"-"`          // 删除时间
@@ -15,16 +17,23 @@ type BaseModel struct {
 // Article 文章模型
 type Article struct {
 	BaseModel
+	ID          uint64 `json:"id" gorm:"primaryKey;autoIncrement=false"`
 	Title       string `json:"title"`       // 文章标题
 	Status      uint16 `json:"status"`      // 文章状态
-	ViewNum     uint64 `json:"view_num"`    //
+	ViewNum     uint64 `json:"view_num"`    // 阅读数量
 	Cover       string `json:"cover"`       // 文章封面
-	MdText      string `json:"md_text"`     // markdowm 文本
+	MdText      string `json:"md_text"`     // markdown 文本
 	Description string `json:"description"` // 文章描述
 }
 
+func (a *Article) BeforeCreate(tx *gorm.DB) (err error) {
+	a.ID = snowflake.Snowflake.NextVal()
+	log.Println(a)
+	return
+}
+
 // TableName 返回 Article 模型对应的数据库表名
-func (Article) TableName() string {
+func (a *Article) TableName() string {
 	return "tb_article"
 }
 
