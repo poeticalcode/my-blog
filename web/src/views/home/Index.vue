@@ -115,7 +115,7 @@ initTableData()
 
 // 去文章详情页面
 const toArticleDetail = (id) => {
-  window.open("/article?id=" + id)
+  window.open("/article/" + id)
 }
 
 
