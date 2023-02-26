@@ -8,34 +8,34 @@ import { check, isLogin } from "../util/auth.js"
 // 路由映射表
 const routes = [
     {
-        path: '/admin',
-        component: () => import(/*webpackChunkName:"layout"*/ "@/layout/admin/Layout.vue"),
+        path: '/console',
+        component: () => import(/*webpackChunkName:"layout"*/ "@/layout/console/Layout.vue"),
         children: [{
             path: '',
-            component: () => import(/*webpackChunkName:"admin-index"*/ "@/views/admin/home/Index.vue"),
+            component: () => import(/*webpackChunkName:"console-index"*/ "@/views/console/home/Index.vue"),
             // 任何人都可以阅读文章
             meta: { title: '首页' }
         }, {
             path: 'article/list',
-            component: () => import(/*webpackChunkName:"admin-article"*/ "@/views/admin/aritcle/ArticleList.vue"),
+            component: () => import(/*webpackChunkName:"console-article"*/ "@/views/console/aritcle/ArticleList.vue"),
             // 任何人都可以阅读文章
             meta: { title: '文章列表' }
         }, {
             path: ':pathMatch(.*)',
-            component: () => import(/*webpackChunkName:"admin-home"*/ "@/views/404/Index.vue"),
+            component: () => import(/*webpackChunkName:"console-home"*/ "@/views/404/Index.vue"),
             // 404 页面
             meta: { title: '404', }
         }]
     },
     {
-        path: '/admin/article/post',
-        component: () => import(/*webpackChunkName:"admin-article"*/ "@/views/admin/aritcle/PostArticle.vue"),
+        path: '/console/article/post',
+        component: () => import(/*webpackChunkName:"console-article"*/ "@/views/console/aritcle/PostArticle.vue"),
         // 任何人都可以阅读文章
         meta: { title: '发布文章' }
     },
     {
-        path: '/admin/article/edit',
-        component: () => import(/*webpackChunkName:"admin-article"*/ "@/views/admin/aritcle/EditArticle.vue"),
+        path: '/console/article/edit',
+        component: () => import(/*webpackChunkName:"console-article"*/ "@/views/console/aritcle/EditArticle.vue"),
         // 任何人都可以阅读文章
         meta: { title: '编辑文章' }
     }, {

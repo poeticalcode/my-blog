@@ -143,7 +143,7 @@ initTableData();
 
 // 编辑
 const handleEdit = (id) => {
-  window.open("/admin/article/edit?id=" + id)
+  window.open("/console/article/edit?id=" + id)
 };
 
 // 删除
@@ -158,7 +158,7 @@ const handleDelete = async (id) => {
 
 
 const handPost = () => {
-  window.open("/admin/article/post")
+  window.open("/console/article/post")
 }
 
 // 发布

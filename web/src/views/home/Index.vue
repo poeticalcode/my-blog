@@ -49,7 +49,6 @@
         </div>
       </div>
 
-
       <!-- 加载更多文章按钮-->
       <div style="display: flex;justify-content: center;margin-bottom: 1.8rem">
         <div v-if="haveMore" class="btn btn-primary" @click="loadMore">加载更多</div>
@@ -57,21 +56,7 @@
       </div>
     </div>
     <!-- 左侧功能列表 -->
-    <div class="col-hidden-down-md col-lg-3 col-xl-3">
-      <el-space direction="vertical">
-        <el-card>
-          <el-calendar>
-            <template #header="{ data }">
-              <div>{{ data }}</div>
-            </template>
-            <template #date-cell="{ data }">
-              <div style="text-align: center;" :title="data.day">
-                <span>{{ data.day.split('-')[2] }}</span>
-              </div>
-            </template>
-          </el-calendar>
-        </el-card>
-      </el-space>
+    <div class="col-hidden-down-xll col-lg-3 col-xl-3">
     </div>
   </div>
 </template>

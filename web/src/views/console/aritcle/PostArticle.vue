@@ -48,7 +48,7 @@ const handleAddArticle = async () => {
   if (code === 2000) {
     ElMessage.success(msg)
     setTimeout(() => {
-      router.push("/admin/article/edit?id=" + data.id)
+      router.push("/console/article/edit?id=" + data.id)
     }, 1000)
     return
   }

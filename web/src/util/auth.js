@@ -1,6 +1,6 @@
 // 返回当前权限
 export function getCurrentAuthority() {
-    return ["admin"]
+    return ["console"]
 }
 
 export function check(authority) {

@@ -43,7 +43,7 @@ if (id == undefined) {
     message: '传入 ID 错误，跳转至发布页面',
     type: 'error',
   })
-  router.push("/admin/article/post")
+  router.push("/console/article/post")
 }
 initTableData()
 
