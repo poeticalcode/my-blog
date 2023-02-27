@@ -1,5 +1,6 @@
 <template>
-  <div id="hot" style="width: 829px; height: 256px;">
+  <div id="main-inner">
+    <div id="hot" style="width: 829px; height: 256px;"></div>
   </div>
 </template>
 
@@ -23,26 +24,53 @@ echarts.use([
   HeatmapChart,
   CanvasRenderer
 ]);
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
+
+import {fetchDailyArticleCount} from "@/api/aritcleApi.js";
+
+
+const dailyArticleCountData = ref([])
+
+
+const getBeforeDate = (n) => {
+  let date = new Date();
+  let year, month, day;
+  date.setDate(date.getDate() - n);
+  year = date.getFullYear();
+  month = date.getMonth() + 1;
+  day = date.getDate();
+  return year + '-' + (month < 10 ? ('0' + month) : month) + '-' + (day < 10 ? ('0' + day) : day);
+}
+
+const initDailyArticleCount = async () => {
+  const {code, data, msg} = await fetchDailyArticleCount()
+  if (code === 2000) {
+    let dayList = []
+    let i = 365;
+    while (i >= 0) {
+      dayList.push([getBeforeDate(i)])
+      i--
+    }
+    for (let dayListElement of dayList) {
+      for (let activeListElement of data) {
+        if (dayListElement[0] === activeListElement["date"]) {
+          dayListElement.splice(1)
+          dayListElement.push(activeListElement["count"])
+        } else if (dayListElement.length === 1) {
+          dayListElement.push(0)
+        }
+      }
+    }
+    dailyArticleCountData.value = dayList
+    initHotMap()
+  }
+}
+
 
 const initHotMap = () => {
   let chartDom = document.getElementById('hot');
-  let myChart = echarts.init(chartDom);
+  let myChart = echarts.init(chartDom, null, {locale: 'ZH'});
   let option;
-
-  function getVirtualData(year) {
-    const date = +echarts.time.parse(year + '-01-01');
-    const end = +echarts.time.parse(+year + 1 + '-01-01');
-    const dayTime = 3600 * 24 * 1000;
-    const data = [];
-    for (let time = date; time < end; time += dayTime) {
-      data.push([
-        echarts.time.format(time, '{yyyy}-{MM}-{dd}', false),
-        Math.floor(Math.random() * 10000)
-      ]);
-    }
-    return data;
-  }
 
   option = {
     title: {
@@ -52,19 +80,23 @@ const initHotMap = () => {
     },
     tooltip: {},
     visualMap: {
-      min: 0,
-      max: 10000,
       type: 'piecewise',
       orient: 'horizontal',
       left: 'center',
-      top: 65
+      top: 65,
+      pieces: [
+        // {gte: 15, color: 'blue'}, // 不指定 max，表示 max 为无限大（Infinity）。
+        {gte: 1, color: 'rgb(98,155,223)'},
+        // {gte: 5, lte: 10, color: 'rgb(167,213,255)'},
+        // {gte: 1, lte: 5, color: 'rgb(214,233,250)'},
+        {lte: 0, color: 'rgb(238,238,238)'}],
     },
     calendar: {
       top: 120,
       left: 30,
       right: 30,
       cellSize: ['auto', 13],
-      range: '2023',
+      range: [getBeforeDate(365), getBeforeDate(0)],
       itemStyle: {
         borderWidth: 0.5
       },
@@ -73,15 +105,22 @@ const initHotMap = () => {
     series: {
       type: 'heatmap',
       coordinateSystem: 'calendar',
-      data: getVirtualData('2023')
+      data: dailyArticleCountData.value
     }
   };
-
+  console.log(option);
   option && myChart.setOption(option);
 }
 
 onMounted(() => {
-  initHotMap()
+  initDailyArticleCount()
 })
 
 </script>
+
+<style lang="scss" scoped>
+#main-inner {
+  display: flex;
+  justify-content: center;
+}
+</style>

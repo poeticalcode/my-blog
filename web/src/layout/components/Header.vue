@@ -4,7 +4,7 @@
       <a class="navbar-brand" href="/">He'Blog</a>
       <div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse right" id="navbarSupportedContent">
@@ -30,15 +30,35 @@
 
 <script setup>
 
-import { useRouter } from 'vue-router'
+import {useRouter} from 'vue-router'
+
 const router = useRouter()
 </script>
 
 <style lang="scss" scoped>
 .navbar {
   height: 6rem;
-  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
   font-size: 1.4rem;
+
+
+  .nav-item {
+    margin-right: 0.5rem;
+  }
+
+  .navbar-nav {
+
+    .nav-item {
+      margin-right: 0.5rem;
+    }
+
+    .nav-link {
+      padding: .75rem 1rem;
+      border-radius: .375rem;
+      transition: all 0.15s linear;
+    }
+  }
 }
+
 
 </style>
