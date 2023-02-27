@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/he-wen-yao/my-blog/server/db"
@@ -77,4 +78,19 @@ func (articleService) StickyArticleById(id int64) (bool, error) {
 	// 根据主键置顶文章
 	// todo
 	return false, nil
+}
+
+// GetRecordsCountByCreateAt 统计每天发布文章数量
+func (articleService) GetRecordsCountByCreateAt() ([]map[string]interface{}, error) {
+	var result []map[string]interface{}
+	groupBy := "DATE_FORMAT(created_at,\"%Y-%m-%d\")"
+	article := entity.Article{}
+	err := db.DB.Table(article.TableName()).
+		Select(fmt.Sprintf("%s as date", groupBy), "count(*) as count").
+		Group(groupBy).
+		Find(&result).Error
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }

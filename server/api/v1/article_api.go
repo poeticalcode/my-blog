@@ -16,7 +16,6 @@ import (
 // ArticleApi 文章相关 api 集合
 type ArticleApi struct{}
 
-
 // CreateArticle 添加文章
 // @Summary  接口描述
 // 一个大类别的名称
@@ -124,4 +123,13 @@ func (ArticleApi) DeleteArticleById(c *gin.Context) {
 		return
 	}
 	res.ResponseGen.FailWithMessage("文章 ID 填写有误", c)
+}
+
+// FetchDailyArticleCount  获取每日发布文章数据
+func (ArticleApi) FetchDailyArticleCount(c *gin.Context) {
+	if result, err := service.ArticleService.GetRecordsCountByCreateAt(); err == nil {
+		res.ResponseGen.OkWithData(result, c)
+		return
+	}
+	res.ResponseGen.FailWithMessage("获取统计数据失败", c)
 }

@@ -23,5 +23,7 @@ func (a articleRouter) InitArticleRouter(router *gin.RouterGroup) {
 		group.POST("", articleApi.CreateArticle)
 		// 注册更新文章的路由
 		group.PUT("", articleApi.UpdateArticle)
+		// 获取每日发布文章数量
+		group.GET("/count/daily-public", articleApi.FetchDailyArticleCount)
 	}
 }

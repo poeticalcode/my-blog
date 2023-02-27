@@ -2,6 +2,8 @@ package test
 
 import (
 	"fmt"
+	"github.com/he-wen-yao/my-blog/server/db"
+	"log"
 	"testing"
 
 	"github.com/he-wen-yao/my-blog/server/model/entity"
@@ -34,4 +36,10 @@ func TestArticleService_CreateArticle(t *testing.T) {
 	article := &entity.Article{Title: "测试"}
 	s.CreateArticle(article)
 	fmt.Println(article)
+}
+
+func TestArticleService_GetRecordsCountByCreateAt(t *testing.T) {
+	db.DB = db.InitDB()
+	s := service.ArticleService
+	log.Println(s.GetRecordsCountByCreateAt())
 }
