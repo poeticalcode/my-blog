@@ -57,6 +57,7 @@
     </div>
     <!-- 左侧功能列表 -->
     <div class="col-hidden-down-xll col-lg-3 col-xl-3">
+
     </div>
   </div>
 </template>
@@ -109,7 +110,9 @@ const toArticleDetail = (id) => {
 <style lang="scss" scoped>
 .card {
   cursor: pointer;
-  box-shadow: 0px 0px 10px 0px #e9e7e7;
+  border: none;
+  box-shadow: 0px 0px 10px 0px #ebebeb;
+
 
   .card-body {
     height: 100%;
@@ -120,7 +123,6 @@ const toArticleDetail = (id) => {
 
   .card-title {
     font-size: 2rem;
-    font-size: bold;
     margin-bottom: 0.8rem;
   }
 
