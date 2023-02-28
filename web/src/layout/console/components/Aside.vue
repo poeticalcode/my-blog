@@ -8,22 +8,22 @@
       :collapse="layoutConfig.isCollapse"
   >
 
-    <el-menu-item index="/admin">
+    <el-menu-item index="/console">
       <el-icon>
         <HomeFilled/>
       </el-icon>
       <template #title>首页</template>
     </el-menu-item>
 
-    <el-sub-menu index="/admin/article">
+    <el-sub-menu index="/console/article">
       <template #title>
         <el-icon>
           <Document/>
         </el-icon>
         <span>博文管理</span>
       </template>
-      <el-menu-item index="/admin/article/list">博文列表</el-menu-item>
-      <el-menu-item index="/admin/article/post">发表文章</el-menu-item>
+      <el-menu-item index="/console/article/list">博文列表</el-menu-item>
+      <el-menu-item index="/console/article/post">发表文章</el-menu-item>
     </el-sub-menu>
 
     <el-menu-item index="3">

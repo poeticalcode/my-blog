@@ -5,7 +5,9 @@ import (
 
 	"github.com/he-wen-yao/my-blog/server/config"
 	"github.com/he-wen-yao/my-blog/server/db"
+	"github.com/he-wen-yao/my-blog/server/global"
 	"github.com/he-wen-yao/my-blog/server/initialize"
+	"github.com/he-wen-yao/my-blog/server/util/snowflake"
 )
 
 //go:generate go env -w GO111MODULE=on
@@ -35,6 +37,8 @@ import (
 func main() {
 	c := config.GlobalConfig
 	db.DB = db.InitDB()
+	global.DB = db.DB
+	global.Snowflake = snowflake.NewSnowflake(0, 0)
 	app := initialize.RouterInit()
 	err := app.Run(fmt.Sprintf(":%s", c.Port))
 	if err != nil {

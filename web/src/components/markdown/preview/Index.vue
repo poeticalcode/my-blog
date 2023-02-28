@@ -95,13 +95,13 @@ const appendToolBar = () => {
   markdown.querySelectorAll("pre").forEach(pre => {
     // 获取最终的代码块样式
     let preComputedStyle = window.getComputedStyle(pre)
-    const {padding} = preComputedStyle
+    let {padding} = preComputedStyle
     let codeDom = pre.querySelector("code")
     const code = codeDom.innerText
     let codeVNode = dom2VNode(codeDom)
     let mountDom = document.createElement("div")
     let paddingSize = padding.slice(0, -2)
-    let halfPadding = (paddingSize * 2) / 3 + "px"
+    let halfPadding = paddingSize / 3 + "px"
     const lang = pre.lang
     render(h('pre', {
       lang,
@@ -109,6 +109,7 @@ const appendToolBar = () => {
         padding: "unset",
         border: "unset",
         boxShadow: "#ddd 0px 2px 10px",
+        overflowX: "hidden"
       }
     }, [
       h(ToolBar, {
@@ -118,15 +119,14 @@ const appendToolBar = () => {
           padding: padding,
           paddingTop: halfPadding,
           paddingBottom: halfPadding,
-          paddingRight: paddingSize,
           borderBottom: "1px solid rgb(221 221 221)"
         }
       }),
       h(codeVNode, {
         style: {
           padding: padding,
-          paddingTop: halfPadding,
-          display: "block"
+          display: "block",
+          overflowX: "auto"
         }
       })
     ]), mountDom)

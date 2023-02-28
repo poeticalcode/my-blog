@@ -1,9 +1,10 @@
 package entity
 
 import (
-	"github.com/he-wen-yao/my-blog/server/util/snowflake"
-	"gorm.io/gorm"
 	"log"
+
+	"github.com/he-wen-yao/my-blog/server/global"
+	"gorm.io/gorm"
 )
 
 // BaseModel 基础模型 [公共部分]
@@ -26,7 +27,7 @@ type Article struct {
 }
 
 func (a *Article) BeforeCreate(tx *gorm.DB) (err error) {
-	a.ID = DbUInt64(snowflake.Snowflake.NextVal())
+	a.ID = DbUInt64(global.Snowflake.NextVal())
 	log.Println(a)
 	return
 }

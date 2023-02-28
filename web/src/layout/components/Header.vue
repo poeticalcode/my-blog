@@ -13,13 +13,13 @@
               <a class="nav-link active" aria-current="page" href="/">首页</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="archive">归档</a>
+              <a class="nav-link" href="/archive">归档</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="tags">标签</a>
+              <a class="nav-link" href="/tags">标签</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about">关于我</a>
+              <a class="nav-link" href="/about">关于我</a>
             </li>
           </ul>
         </div>
@@ -40,7 +40,6 @@ const router = useRouter()
   height: 6rem;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
   font-size: 1.4rem;
-
 
   .nav-item {
     margin-right: 0.5rem;
