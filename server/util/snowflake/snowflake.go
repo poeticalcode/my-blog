@@ -7,11 +7,14 @@ import (
 )
 
 const (
-	epoch             = int64(1577808000000)                           // 设置起始时间(时间戳/毫秒)：2020-01-01 00:00:00，有效期 69 年
-	timestampBits     = uint(41)                                       // 时间戳占用位数
-	dataCenterIdBits  = uint(5)                                        // 数据中心 id 所占位数
-	workerIdBits      = uint(5)                                        // 机器 id 所占位数
-	sequenceBits      = uint(12)                                       // 序列所占的位数
+	epoch            = int64(1672502400) // 设置起始时间(时间戳/毫秒)：2023-01-01 00:00:00，有效期 69 年
+	timestampBits    = uint(41)          // 时间戳占用位数
+	dataCenterIdBits = uint(5)           // 数据中心 id 所占位数
+	workerIdBits     = uint(5)           // 机器 id 所占位数
+	sequenceBits     = uint(12)          // 序列所占的位数
+	//11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111 = -1
+	//11111111 11111111 11111111 11111111 11111111 11111111 11110000 00000000 = -1 << 12
+	//00000000 00000000 00000000 00000000 00000000 00000000 00001111 11111111 = -1 ^ (-1 << 12) 4095
 	timestampMax      = int64(-1 ^ (-1 << timestampBits))              // 时间戳最大值
 	dataCenterIdMax   = int64(-1 ^ (-1 << dataCenterIdBits))           // 支持的最大数据中心 id 数量
 	workerIdMax       = int64(-1 ^ (-1 << workerIdBits))               // 支持的最大机器 id 数量
@@ -41,9 +44,11 @@ func NewSnowflake(dataCenterId, workerId int64) *Snowflake {
 }
 
 // NextVal 下一个 ID 值
-func (s *Snowflake) NextVal() uint64 {
+func (s *Snowflake) NextVal() int64 {
 	s.Lock()                               // 上锁
 	now := time.Now().UnixNano() / 1000000 // 转毫秒
+
+	log.Println(now)
 	if s.timestamp == now {
 		// 当同一时间戳（精度：毫秒）下多次生成id会增加序列号
 		s.sequence = (s.sequence + 1) & sequenceMask
@@ -65,7 +70,7 @@ func (s *Snowflake) NextVal() uint64 {
 		return 0
 	}
 	s.timestamp = now
-	r := uint64((t)<<timestampShift | (s.dataCenterId << dataCenterIdShift) | (s.workerId << workerIdShift) | (s.sequence))
+	r := (t << timestampShift) | (s.dataCenterId << dataCenterIdShift) | (s.workerId << workerIdShift) | (s.sequence)
 	s.Unlock()
 	return r
 }
