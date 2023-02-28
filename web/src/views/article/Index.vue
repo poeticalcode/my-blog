@@ -48,6 +48,10 @@ initTableData()
 
 
 <style lang="scss">
+
+nav.navbar{
+  margin-bottom: 0 !important;
+}
 #main-inner {
   max-width: 960px !important;
 }
