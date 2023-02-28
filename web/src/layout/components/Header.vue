@@ -41,7 +41,6 @@ const router = useRouter()
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
   font-size: 1.4rem;
 
-
   .nav-item {
     margin-right: 0.5rem;
   }

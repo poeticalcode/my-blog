@@ -1,26 +1,28 @@
 <template>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card article" v-if="articleDetail">
-        <div class="card-header bg-transparent ">
-          {{ articleDetail.title }}
+  <header :style="{position: 'relative',height:'400px', background:'url('+articleDetail.cover+')'}"
+          v-if="articleDetail">
+    <p> {{ articleDetail.title }}</p>
+  </header>
+  <article id="main-inner" class="container" style="margin-top: 1.8rem;max-width: 1140px;" v-if="articleDetail">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card article">
+          <div class="card-body">
+            <MarkdownPreview v-viewer v-target="'_blank'" :value="articleDetail.md_text" toc="toc"/>
+          </div>
+          <div class="card-footer bg-transparent">
+            <small class="text-muted" style="font-size: 1.2rem;text-align: right;padding: 0.4rem;">发布于:
+              {{ articleDetail.created_at }}</small>
+          </div>
         </div>
-        <div class="card-body">
-          <MarkdownPreview v-viewer v-target="'_blank'" :value="articleDetail.md_text" toc="toc"/>
-        </div>
-        <div class="card-footer bg-transparent">
-          <small class="text-muted" style="font-size: 1.2rem;text-align: right;padding: 0.4rem;">发布于: {{
-              articleDetail.created_at
-            }}</small>
+      </div>
+      <div class="col-hidden-down-xll col-xl-3">
+        <div v-if="articleDetail">
+          <div class="card" id="toc"></div>
         </div>
       </div>
     </div>
-    <div class="col-hidden-down-xll col-xl-3">
-      <div v-if="articleDetail">
-        <div class="card" id="toc"></div>
-      </div>
-    </div>
-  </div>
+  </article>
 </template>
 
 
@@ -46,8 +48,26 @@ initTableData()
 
 
 <style lang="scss">
-#main {
+#main-inner {
   max-width: 960px !important;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.8rem;
+  color: #41464b;
+  font-weight: bold;
+}
+
+header p {
+  letter-spacing: 1.6rem;
+}
+
+article{
+  position: relative;
+  top: -10rem;
 }
 
 .card.article {

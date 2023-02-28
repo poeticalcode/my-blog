@@ -1,63 +1,65 @@
 <template>
-  <div class="row">
-    <div class="col-md-12 col-lg-9 col-xl-9">
-      <!-- 没有数据就显示骨架屏 -->
-      <div class="card" aria-hidden="true" v-for="i in 3" :key="'c' + i" v-if="!articleData">
-        <div class="row g-0">
-          <div class="col-md-5">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg"
-                 role="img" aria-label="占 位 符" preserveAspectRatio="xMidYMid slice" focusable="false"
-                 _mstaria-label="177515"
-                 _mstHash="178">
-              <title _mstTextHash="7742150" _mstHash="179">占 位 符</title>
-              <rect width="100%" height="100%" fill="#868e96"></rect>
-            </svg>
-          </div>
-          <div class="col-md-7">
-            <div class="card-body">
-              <h5 class="card-title text-truncate placeholder-glow"></h5>
-              <p class="card-text text-truncate placeholder-glow"></p>
-              <p class="card-text placeholder-glow"><small class="text-muted">发布时间：
-              </small><small class="text-muted">
-                阅读数量：</small></p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-9 col-xl-9">
+        <!-- 没有数据就显示骨架屏 -->
+        <div class="card" aria-hidden="true" v-for="i in 3" :key="'c' + i" v-if="!articleData">
+          <div class="row g-0">
+            <div class="col-md-5">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg"
+                   role="img" aria-label="占 位 符" preserveAspectRatio="xMidYMid slice" focusable="false"
+                   _mstaria-label="177515"
+                   _mstHash="178">
+                <title _mstTextHash="7742150" _mstHash="179">占 位 符</title>
+                <rect width="100%" height="100%" fill="#868e96"></rect>
+              </svg>
             </div>
-          </div>
-        </div>
-      </div>
-      <!-- 渲染文章 -->
-      <div v-else class="card mb-3" v-for="item in articleData" :key="item.id" @click="toArticleDetail(item.id)">
-        <div class="row g-0">
-          <div class="col-md-5">
-            <img :src="item.cover" class="card-img-top" alt="...">
-          </div>
-          <div class="col-md-7">
-            <div class="card-body">
-              <div>
-                <p class="card-title">{{ item.title }}</p>
-                <p class="card-desc">{{ item.description }}</p>
+            <div class="col-md-7">
+              <div class="card-body">
+                <h5 class="card-title text-truncate placeholder-glow"></h5>
+                <p class="card-text text-truncate placeholder-glow"></p>
+                <p class="card-text placeholder-glow"><small class="text-muted">发布时间：
+                </small><small class="text-muted">
+                  阅读数量：</small></p>
               </div>
-              <p class="card-text">
-                <small class="text-muted">
-                  发布时间：{{ item.created_at }}
-                </small>
-                <small class="text-muted">
-                  阅读数量：{{ item.view_num }}
-                </small>
-              </p>
             </div>
           </div>
         </div>
-      </div>
+        <!-- 渲染文章 -->
+        <div v-else class="card mb-3" v-for="item in articleData" :key="item.id" @click="toArticleDetail(item.id)">
+          <div class="row g-0">
+            <div class="col-md-5">
+              <img :src="item.cover" class="card-img-top" alt="...">
+            </div>
+            <div class="col-md-7">
+              <div class="card-body">
+                <div>
+                  <p class="card-title">{{ item.title }}</p>
+                  <p class="card-desc">{{ item.description }}</p>
+                </div>
+                <p class="card-text">
+                  <small class="text-muted">
+                    发布时间：{{ item.created_at }}
+                  </small>
+                  <small class="text-muted">
+                    阅读数量：{{ item.view_num }}
+                  </small>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <!-- 加载更多文章按钮-->
-      <div style="display: flex;justify-content: center;margin-bottom: 1.8rem">
-        <div v-if="haveMore" class="btn btn-primary" @click="loadMore">加载更多</div>
-        <div v-else>暂无更多</div>
+        <!-- 加载更多文章按钮-->
+        <div style="display: flex;justify-content: center;margin-bottom: 1.8rem">
+          <div v-if="haveMore" class="btn btn-primary" @click="loadMore">加载更多</div>
+          <div v-else>暂无更多</div>
+        </div>
       </div>
-    </div>
-    <!-- 左侧功能列表 -->
-    <div class="col-hidden-down-xll col-lg-3 col-xl-3">
+      <!-- 左侧功能列表 -->
+      <div class="col-hidden-down-xll col-lg-3 col-xl-3">
 
+      </div>
     </div>
   </div>
 </template>
