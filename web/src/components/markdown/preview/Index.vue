@@ -109,6 +109,7 @@ const appendToolBar = () => {
         padding: "unset",
         border: "unset",
         boxShadow: "#ddd 0px 2px 10px",
+        overflowX: "hidden"
       }
     }, [
       h(ToolBar, {
@@ -126,7 +127,8 @@ const appendToolBar = () => {
         style: {
           padding: padding,
           paddingTop: halfPadding,
-          display: "block"
+          display: "block",
+          overflowX: "auto"
         }
       })
     ]), mountDom)

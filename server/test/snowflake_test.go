@@ -1,12 +1,13 @@
 package test
 
 import (
-	"github.com/he-wen-yao/my-blog/server/util/snowflake"
 	"testing"
+
+	"github.com/he-wen-yao/my-blog/server/util/snowflake"
 )
 
 func Test_Snowflake(t *testing.T) {
-	snowflakeId := snowflake.Snowflake.NextVal()
-
+	snow := snowflake.NewSnowflake(0, 0)
+	snowflakeId := snow.NextVal()
 	t.Log(snowflakeId)
 }
