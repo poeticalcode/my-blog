@@ -13,13 +13,13 @@
               <a class="nav-link active" aria-current="page" href="/">首页</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="archive">归档</a>
+              <a class="nav-link" href="/archive">归档</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="tags">标签</a>
+              <a class="nav-link" href="/tags">标签</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about">关于我</a>
+              <a class="nav-link" href="/about">关于我</a>
             </li>
           </ul>
         </div>
