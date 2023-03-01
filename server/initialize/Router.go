@@ -7,10 +7,10 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	_ "github.com/he-wen-yao/my-blog/server/docs"
 	"github.com/he-wen-yao/my-blog/server/router"
 	"github.com/he-wen-yao/my-blog/server/util/path"
-
-	_ "github.com/he-wen-yao/my-blog/server/docs"
+	"github.com/he-wen-yao/my-blog/server/middleware"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -18,7 +18,10 @@ import (
 // RouterInit 初始化一个 gin 的路由
 func RouterInit() *gin.Engine {
 
-	app := gin.Default()
+	app := gin.New()
+	// 注册中间件
+	app.Use(middleware.GinLogger())
+	app.Use(gin.Recovery())
 	// 解决跨域问题
 	app.Use(cors.Default())
 	// 定义路由日志的格式
