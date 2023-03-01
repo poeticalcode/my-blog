@@ -11,14 +11,14 @@ ENV GOPROXY=https://goproxy.cn,direct \
 WORKDIR /build
 
 # 复制项目中的 go.mod 和 go.sum文件并下载依赖信息
-COPY ../go.mod .
-COPY ../go.sum .
+COPY go.mod .
+COPY go.sum .
 RUN go mod download
 
 # 将代码复制到容器中
-COPY ../ .
+COPY . .
 # 将我们的代码编译成二进制可执行文件 app
-RUN go build -o main ../cmd/main.go
+RUN go build -o main ./cmd/main.go
 
 EXPOSE 9090
 
