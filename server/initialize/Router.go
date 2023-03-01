@@ -19,6 +19,8 @@ import (
 func RouterInit() *gin.Engine {
 
 	app := gin.New()
+
+	middleware.InitZap()
 	// 注册中间件
 	app.Use(middleware.GinLogger())
 	app.Use(gin.Recovery())
