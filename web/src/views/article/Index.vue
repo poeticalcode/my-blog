@@ -76,7 +76,7 @@ article{
 
 .card.article {
   user-select: text;
-  padding: 3rem;
+  padding: 0 1.6rem;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, .09);
   margin-bottom: 18px;
   border: none;
