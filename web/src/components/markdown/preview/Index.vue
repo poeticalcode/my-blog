@@ -108,7 +108,6 @@ const appendToolBar = () => {
       style: {
         padding: "unset",
         border: "unset",
-        boxShadow: "#ddd 0px 2px 10px",
         overflowX: "hidden"
       }
     }, [
