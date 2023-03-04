@@ -8,9 +8,9 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/he-wen-yao/my-blog/server/docs"
+	"github.com/he-wen-yao/my-blog/server/middleware"
 	"github.com/he-wen-yao/my-blog/server/router"
 	"github.com/he-wen-yao/my-blog/server/util/path"
-	"github.com/he-wen-yao/my-blog/server/middleware"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -24,14 +24,15 @@ func RouterInit() *gin.Engine {
 	// 注册中间件
 	app.Use(middleware.GinLogger())
 	app.Use(gin.Recovery())
+	
 	// 解决跨域问题
 	app.Use(cors.Default())
 	// 定义路由日志的格式
 	gin.DebugPrintRouteFunc = func(httpMethod, absolutePath, handlerName string, nuHandlers int) {
 		log.Printf("my-blog-server %v %v %v %v\n", httpMethod, absolutePath, handlerName, nuHandlers)
 	}
-	path := path.GetProjectRootPath()
-	app.Static("/static", fmt.Sprintf("%s/static", path))
+	path_ := path.GetProjectRootPath()
+	app.Static("/static", fmt.Sprintf("%s/static", path_))
 
 	// Swagger 配置
 	app.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))

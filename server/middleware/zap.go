@@ -9,10 +9,11 @@ import (
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 
+// InitZap
 // 此处用到另外一个第三方库lumberjack，可以实现日志切割等功能，具体的配置项可自行配置，此处是输出json格式的日志
 func InitZap() {
 	encoderConfig := zapcore.EncoderConfig{
-		TimeKey:        "request-time",
+		TimeKey:        "req-time",
 		LevelKey:       "level",
 		NameKey:        "Logger",
 		CallerKey:      "caller",
@@ -23,7 +24,8 @@ func InitZap() {
 		EncodeLevel:    zapcore.LowercaseLevelEncoder,
 		EncodeTime:     zapcore.ISO8601TimeEncoder,
 		EncodeDuration: zapcore.SecondsDurationEncoder,
-		EncodeCaller:   zapcore.FullCallerEncoder,
+		// 调用者
+		EncodeCaller: zapcore.ShortCallerEncoder,
 	}
 	encoder := zapcore.NewJSONEncoder(encoderConfig)
 	// 日志切割

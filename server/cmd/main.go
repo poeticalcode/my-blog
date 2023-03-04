@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"go.uber.org/zap"
 	"log"
 	"net/http"
 	"os"
@@ -46,13 +47,14 @@ func main() {
 	global.DB = db.DB
 	global.Snowflake = snowflake.NewSnowflake(0, 0)
 	app := initialize.RouterInit()
-    // 定义一个 http 服务
+	// 定义一个 http 服务
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%s", c.Port),
 		Handler: app,
 	}
-    // 用协程启动 http 服务
+	// 用协程启动 http 服务
 	go func() {
+		zap.L().Info("start server ...")
 		// 服务连接
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("listen: %s\n", err)
@@ -63,10 +65,10 @@ func main() {
 	signal.Notify(quit, os.Interrupt)
 	<-quit
 	log.Println("Shutdown Server ...")
-    //（设置 5 秒的超时时间）
+	//（设置 5 秒的超时时间）
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-    // 关闭 http 服务，停止接收请求，等待 5s，处理剩余请求
+	// 关闭 http 服务，停止接收请求，等待 5s，处理剩余请求
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Fatal("Server Shutdown: ", err)
 	}
