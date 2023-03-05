@@ -34,7 +34,7 @@ const routes = [
         meta: { title: '发布文章' }
     },
     {
-        path: '/console/article/edit',
+      path: '/console/article/edit/:articleId(\\d+)',
         component: () => import(/*webpackChunkName:"console-article"*/ "@/views/console/aritcle/EditArticle.vue"),
         // 任何人都可以阅读文章
         meta: { title: '编辑文章' }

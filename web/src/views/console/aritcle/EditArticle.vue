@@ -28,17 +28,18 @@ import { updateArticle, fetchArticleDetail } from "@/api/aritcleApi";
 
 const router = useRouter()
 const route = useRoute()
-const { id: id } = route.query
+
+const {articleId} = route.params
 
 const articleDetail = ref({})
 const initTableData = async () => {
-  const res = await fetchArticleDetail(id);
+  const res = await fetchArticleDetail(articleId);
   if (res.code === 2000) {
     articleDetail.value = res.data
   }
 };
 
-if (id == undefined) {
+if (articleId == undefined) {
   ElMessage({
     message: '传入 ID 错误，跳转至发布页面',
     type: 'error',

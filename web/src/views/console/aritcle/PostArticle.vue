@@ -31,7 +31,7 @@ import Editor from "@/components/markdown/editor/Index.vue";
 
 import {addArticle} from "@/api/aritcleApi";
 
-import {ref, reactive, watch, onMounted} from "vue";
+import {reactive} from "vue";
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
@@ -48,7 +48,7 @@ const handleAddArticle = async () => {
   if (code === 2000) {
     ElMessage.success(msg)
     setTimeout(() => {
-      router.push("/console/article/edit?id=" + data.id)
+      router.push("/console/article/edit/" + data.id)
     }, 1000)
     return
   }
