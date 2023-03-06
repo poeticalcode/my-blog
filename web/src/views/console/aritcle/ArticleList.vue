@@ -170,7 +170,7 @@ const handleCancelPublic = (id) => {
 
 
 const handlePreview = (id) => {
-  window.open("/article?id=" + id + "&action=preview")
+  window.open("/article/" + id + "?action=preview")
 };
 
 
