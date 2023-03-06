@@ -143,7 +143,7 @@ initTableData();
 
 // 编辑
 const handleEdit = (id) => {
-  window.open("/console/article/edit?id=" + id)
+  window.open("/console/article/edit/" + id)
 };
 
 // 删除
