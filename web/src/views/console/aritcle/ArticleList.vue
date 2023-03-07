@@ -143,7 +143,7 @@ initTableData();
 
 // 编辑
 const handleEdit = (id) => {
-  window.open("/console/article/edit?id=" + id)
+  window.open("/console/article/edit/" + id)
 };
 
 // 删除
@@ -170,7 +170,7 @@ const handleCancelPublic = (id) => {
 
 
 const handlePreview = (id) => {
-  window.open("/article?id=" + id + "&action=preview")
+  window.open("/article/" + id + "?action=preview")
 };
 
 
